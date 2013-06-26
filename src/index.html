@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<script src="lib/jquery-2.0.2.min.js"></script>
+	<script src="lib/easeljs-0.6.1.min"></script>
+    <script src="ImgLoader.js"></script>
+    <script src="Bullet.js"></script>
+    <script src="Planet.js"></script>
+    <script src="Explosion.js"></script>
+    <script src="main.js"></script>
+	<style type="text/css">
+		body {
+			background: #112;
+		}
+		#main_wrapper {
+			position:fixed; left:0; top:0; right:0; bottom:0;
+		}
+		#main_canvas {
+			width: 100%; height: 100%;
+		}
+	</style>
+</head>
+<body>
+<div id=main_wrapper>
+	<canvas id=main_canvas></canvas>
+</div>
+
+<script>
+	sb.start();
+</script>
+</body>
+</html>
