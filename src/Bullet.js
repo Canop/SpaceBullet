@@ -74,7 +74,6 @@ var sb = sb || {};
 		this.x += this.vx; this.y += this.vy;
 		var node = sb.net.testHitCircle(this.x, this.y, this.radius);
 		if (node) {
-			console.log('bullet hit node', node);
 			this.dest = node;
 		}
 	}

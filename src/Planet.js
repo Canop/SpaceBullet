@@ -1,6 +1,12 @@
 var sb = sb || {};
 (function(){
 
+	var NB_PLANET_IMAGES = 5;
+	for (var i=0; i<NB_PLANET_IMAGES; i++) {
+		ImgLoader.add('planet-'+i, 'img/planet-'+i+'.png');
+	}
+	var imgindex = 0;
+
 	function Planet(r){
 		this.radius = r;
 		this.density = 1;
@@ -13,11 +19,13 @@ var sb = sb || {};
 	proto.initialize = function(){
 		var p = this;
 		p.Container_initialize();
-		var circle = new createjs.Shape();
-		circle.graphics.beginFill("#FFE4B5").drawCircle(0, 0, p.radius);
-		circle.y = p.radius;
-		p.addChild(circle);
-		this.regY = p.radius;
+		
+		var img = ImgLoader.get('planet-'+((imgindex++)%NB_PLANET_IMAGES));
+		var bmp = new createjs.Bitmap(img);
+		bmp.scaleX = bmp.scaleY = 2 * p.radius / img.height;
+		bmp.x = -p.radius;
+		bmp.y = -p.radius;
+		this.addChild(bmp);
 		
 		p.addEventListener("mousedown", function(evt) {
 			var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
