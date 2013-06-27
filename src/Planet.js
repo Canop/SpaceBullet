@@ -11,17 +11,24 @@ var sb = sb || {};
 	
 	proto.Container_initialize = proto.initialize;
 	proto.initialize = function(){
-		this.Container_initialize();
+		var p = this;
+		p.Container_initialize();
 		var circle = new createjs.Shape();
-		circle.graphics.beginFill("#FFE4B5").drawCircle(0, 0, this.radius);
-		circle.y = this.radius;
-		this.addChild(circle);
+		circle.graphics.beginFill("#FFE4B5").drawCircle(0, 0, p.radius);
+		circle.y = p.radius;
+		p.addChild(circle);
+		this.regY = p.radius;
 		
-		this.addEventListener("mousedown", function(evt) {
+		p.addEventListener("mousedown", function(evt) {
 			var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
 			evt.addEventListener("mousemove",function(ev) {
-				ev.target.x = ev.stageX+offset.x;
-				ev.target.y = ev.stageY+offset.y;
+				var x = ev.stageX+offset.x;
+				var y = ev.stageY+offset.y;
+				if (sb.net.testHitCircle(x, y, p.radius+2)) {
+					console.log('collision with rails');
+				} else {
+					p.x = x; p.y = y;
+				}
 			});
 		});
 	}

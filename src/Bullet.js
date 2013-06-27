@@ -6,7 +6,7 @@ var sb = sb || {};
 
 	function Bullet(){
 		this.initialize();
-		this.vx = 0; this.vy = -3;
+		this.vx = 0; this.vy = 0;
 		this.ax = 0; this.ay = 0;
 		this.alive = true;
 	}
@@ -16,14 +16,14 @@ var sb = sb || {};
 	proto.initialize = function(){
 		this.Container_initialize();
 		this.size = 80;
-		this.radius = this.size/10; // collision detection
+		this.radius = this.size/10 - 2; // collision detection
 		var img = ImgLoader.get('bullet');
 		var bmp = new createjs.Bitmap(img);
 		bmp.regX = img.width*.3; bmp.regY = img.height/2;
+		bmp.scaleX = bmp.scaleY = this.size / img.height;
 		this.addChild(bmp);
 
 		this.x = sb.xc; this.y = sb.h;
-		this.scaleX = this.scaleY = this.size / img.height;
 
 		if (showCollisionRadius) {
 			var circle = new createjs.Shape();
@@ -33,6 +33,14 @@ var sb = sb || {};
 		}
 		
 		this.addEventListener('tick', this.tick.bind(this));
+	}
+	
+	// be fired from the gun
+	proto.launch = function() {
+		this.x = sb.gun.x; this.y = sb.gun.y;
+		this.v = 7;
+		this.vx = Math.cos(sb.gun.rotation*Math.PI/180)*this.v;
+		this.vy = Math.sin(sb.gun.rotation*Math.PI/180)*this.v;
 	}
 	
 	// calcule l'accéleration en fonction des masses, vérifie aussi la non collision
@@ -45,7 +53,7 @@ var sb = sb || {};
 			var d = Math.sqrt(d2);
 			if (d<p.radius+this.radius) {
 				sb.stage.addChild(new sb.Explosion(
-					this.x+this.radius*(p.x-this.x)/d, this.y+this.radius*(p.y-this.y)/d
+					this.x, this.y
 				));
 				this.die();
 				return;
