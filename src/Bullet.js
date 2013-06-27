@@ -9,6 +9,7 @@ var sb = sb || {};
 		this.vx = 0; this.vy = 0;
 		this.ax = 0; this.ay = 0;
 		this.alive = true;
+		this.flying = false;
 	}
 	var proto = Bullet.prototype = new createjs.Container();
 	
@@ -41,10 +42,12 @@ var sb = sb || {};
 		this.v = 7;
 		this.vx = Math.cos(sb.gun.rotation*Math.PI/180)*this.v;
 		this.vy = Math.sin(sb.gun.rotation*Math.PI/180)*this.v;
+		this.flying = true;
+		this.dest = null;
 	}
 	
 	// calcule l'accéleration en fonction des masses, vérifie aussi la non collision
-	proto.updateAcceleration = function() {
+	proto.updateFlyAcceleration = function() {
 		this.ax = 0; this.ay = 0;
 		for (var i=sb.planets.length; i-->0;) {
 			var p = sb.planets[i];
@@ -62,14 +65,18 @@ var sb = sb || {};
 		}
 		this.ax *= sb.G; this.ay *= sb.G;
 	}
-	proto.updateSpeed = function() {
+	proto.updateFlySpeed = function() {
 		this.vx += this.ax;
 		this.vy += this.ay;		
 		this.v = Math.sqrt(this.vx*this.vx+this.vy*this.vy);
 	}
-	proto.updatePos = function() {
-		this.x += this.vx;
-		this.y += this.vy;
+	proto.updateFlyPos = function() {
+		this.x += this.vx; this.y += this.vy;
+		var node = sb.net.testHitCircle(this.x, this.y, this.radius);
+		if (node) {
+			console.log('bullet hit node', node);
+			this.dest = node;
+		}
 	}
 	proto.updateDirection = function() {
 		if (this.vx==0) {
@@ -79,6 +86,20 @@ var sb = sb || {};
 			else this.rotation = Math.acos(this.vx/this.v)*180/Math.PI+ 90;
 		}
 	}
+	proto.moveOnRails = function() {
+		var dx = this.dest.x - this.x, dy = this.dest.y - this.y;
+		var d = Math.sqrt(dx*dx + dy*dy);
+		if (d<5) {
+			if (!(this.dest = this.dest.dest)) {
+				this.launch();
+				return;
+			}			
+		}
+		this.v = 3;
+		this.vx = this.v * dx / d; this.vy = this.v * dy / d;
+		this.x += this.vx; this.y += this.vy;
+	}
+	
 	proto.die = function() {
 		console.log('BOUM');
 		this.alive = false;
@@ -86,9 +107,13 @@ var sb = sb || {};
 	}
 	
 	proto.tick = function(e) {
-		this.updateAcceleration();
-		this.updateSpeed();
-		this.updatePos();
+		if (this.dest) { // on rails
+			this.moveOnRails();
+		} else { // free flight
+			this.updateFlyAcceleration();
+			this.updateFlySpeed();
+			this.updateFlyPos();			
+		}
 		this.updateDirection();
 	}
 
