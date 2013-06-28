@@ -4,7 +4,7 @@ var sb = sb || {};
 	function Net(data){
 		this.x = 0; this.y = 0;
 		this.data = data;
-		this.lines = data.lines;
+		this.lines = data.lines || [];
 		this.initialize();
 	}
 	var proto = Net.prototype = new createjs.Container();

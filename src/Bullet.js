@@ -2,14 +2,15 @@ var sb = sb || {};
 (function(){
 	ImgLoader.add('bullet', 'img/bullet.svg');
 	
+	var IDLE = 0, FLYING = 1, DOCKED = 2, ONRAIL = 3, DEAD = 4;
+	
 	var showCollisionRadius = false;
 
 	function Bullet(){
 		this.initialize();
 		this.vx = 0; this.vy = 0;
 		this.ax = 0; this.ay = 0;
-		this.alive = true;
-		this.flying = false;
+		this.state = IDLE;
 	}
 	var proto = Bullet.prototype = new createjs.Container();
 	
@@ -23,8 +24,6 @@ var sb = sb || {};
 		bmp.regX = img.width*.3; bmp.regY = img.height/2;
 		bmp.scaleX = bmp.scaleY = this.size / img.height;
 		this.addChild(bmp);
-
-		this.x = sb.xc; this.y = sb.h;
 
 		if (showCollisionRadius) {
 			var circle = new createjs.Shape();
@@ -42,7 +41,7 @@ var sb = sb || {};
 		this.v = 7;
 		this.vx = Math.cos(sb.gun.rotation*Math.PI/180)*this.v;
 		this.vy = Math.sin(sb.gun.rotation*Math.PI/180)*this.v;
-		this.flying = true;
+		this.state = FLYING;
 		this.dest = null;
 	}
 	
@@ -72,9 +71,14 @@ var sb = sb || {};
 	}
 	proto.updateFlyPos = function() {
 		this.x += this.vx; this.y += this.vy;
-		var node = sb.net.testHitCircle(this.x, this.y, this.radius);
-		if (node) {
-			this.dest = node;
+		if (this.x*this.x+this.y*this.y > 1000*1000) {
+			this.die();
+		} else {
+			var node = sb.net.testHitCircle(this.x, this.y, this.radius);
+			if (node) {
+				this.dest = node;
+				this.state = ONRAIL;
+			}
 		}
 	}
 	proto.updateDirection = function() {
@@ -94,26 +98,45 @@ var sb = sb || {};
 				return;
 			}			
 		}
-		this.v = 3;
+		this.v = 4;
 		this.vx = this.v * dx / d; this.vy = this.v * dy / d;
 		this.x += this.vx; this.y += this.vy;
 	}
 	
+	proto.reach = function(station) {
+		this.state = DOCKED;
+		this.rotation = 180 + station.rotation;
+		this.x = station.x; this.y = station.y;
+		sb.mission.win();
+	}
+	
 	proto.die = function() {
 		console.log('BOUM');
-		this.alive = false;
+		this.state = DEAD;
 		sb.stage.removeChild(this);
+		sb.nbBullets--;
+		if (sb.nbBullets==0) sb.mission.lose();
 	}
 	
 	proto.tick = function(e) {
-		if (this.dest) { // on rails
-			this.moveOnRails();
-		} else { // free flight
+		switch (this.state) {
+		case FLYING :
 			this.updateFlyAcceleration();
 			this.updateFlySpeed();
 			this.updateFlyPos();			
+			this.updateDirection();
+			break;
+		case ONRAIL :
+			this.moveOnRails();
+			this.updateDirection();
+			break;
+		default :
+		
 		}
-		this.updateDirection();
+	}
+	
+	proto.isFlying = function() {
+		return this.state == FLYING;
 	}
 
 	sb.Bullet = Bullet;	

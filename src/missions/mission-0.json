@@ -1,0 +1,12 @@
+{
+	offgame: true,
+	gun : {x:-100, y: 20, r:-10, invisible: true},
+	planets : [
+		{r:24, x:-20, y:-150, fixed:true},
+		{r:15, x:100, y:30, fixed:true},
+		{r:22, x:180, y:180, fixed:true},
+		{r:13, x:-580, y:-10, fixed:true},
+		{r:25, x:-120, y:200, fixed:true},
+		{r:19, x:240, y:-350, fixed:true}
+	]
+}

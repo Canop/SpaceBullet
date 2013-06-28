@@ -1,13 +1,16 @@
 {
-	gun : {x:-100, y: 20, r:-10},
+	gun : {x:-150, y: 0, r:0},
 	planets : [
-		{r:24, x:-20, y:-150},
-		{r:15, x:100, y:30},
-		{r:22, x:180, y:180},
-		{r:25, x:-120, y:200}
+		{r:25, x:50, y:-100}
 	],
 	lines : [
-		[{x:-200, y:0}, {x:-300, y:-100}, {x:-310, y:-200}, {x:-290, y:-260}],
-		[{x:-220, y:30}, {x:-260, y:50}]
-	]
+		[{x:-200, y: 0},{x:-250, y:-50}, {x:-250, y:-200}, {x:-200, y:-250}, {x:250, y:-250}, {x:300, y:-200}, {x:300, y:50}]
+	],
+	stations : [
+		{x:210, y:-80}
+	],
+	description:
+		"<img align=right src=img/station.svg height=160>" + 
+		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> rocket reach its destination station :</p>" +
+		"<p>Using the mouse, gently move the planet so that the bullet reach the station.</p>"
 }

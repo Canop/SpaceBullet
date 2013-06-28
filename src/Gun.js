@@ -10,7 +10,7 @@ var sb = sb || {};
 	proto.Container_initialize = proto.initialize;
 	proto.initialize = function(){
 		this.Container_initialize();
-		
+		this.radius = 40;
 		var barrel = new createjs.Shape();
 		barrel.graphics.beginFill("#aaa").drawRect(0, 0, 70, 34);
 		barrel.regX = 40; barrel.regY = 20;

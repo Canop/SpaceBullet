@@ -20,6 +20,7 @@ var ImgLoader = (function(){
 		},
 		done: function(callback) {
 			callbacks.push(callback);
+			checkAll();
 		}
 	}
 })();

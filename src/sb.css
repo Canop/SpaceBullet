@@ -1,0 +1,64 @@
+body {
+	background: #112;
+	color: #3c9dd0;
+	font-family: 'Raleway', sans-serif;
+	font-size: 18px;
+}
+h1 {
+	margin-bottom: 30px;
+}
+#main_wrapper {
+	position:fixed; left:0; top:0; right:0; bottom:0;
+}
+#main_canvas {
+	width: 100%; height: 100%;
+}
+
+#dialog {
+	z-index:20;
+	margin:auto; width: 500px;
+	background-color: #034569;
+	border-radius: 15px;
+	opacity: 0.92;
+	margin-top: 10%; 
+}
+#dialog.big {
+	width: 1000px;
+}
+#dialog_title {
+	padding-top: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-size : 130%;
+}
+#dialog_content {
+	padding: 20px;
+}
+#dialog_buttons {
+	text-align: right;
+	padding: 20px;
+}
+#dialog_buttons span {
+	margin-left: 10px;
+	padding: 5px;
+	background-color: #3c9dd0;
+	color: #112;
+	border-radius: 5px;
+	font-size : 110%;
+	opacity: 0.8;
+	cursor: pointer;
+}
+#dialog_buttons span:hover {
+	opacity: 1;
+}
+.sbname {
+	font-weight: bold;
+}
+p.lose {
+	font-weight: bold;
+	color: #a33;
+}
+p.win {
+	font-weight: bold;
+	color: #3a3;
+}

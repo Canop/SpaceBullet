@@ -6,11 +6,18 @@ var sb = sb || {};
 	}
 	var proto = Mission.prototype;
 		
-	function addPlanet(r, x, y) {
-		var planet = new sb.Planet(r);
+	function addPlanet(r, x, y, fixed) {
+		var planet = new sb.Planet(r, !!fixed);
 		planet.x = x; planet.y = y;
 		stage.addChild(planet);
 		sb.planets.push(planet);
+		sb.roundThings.push(planet);
+	}
+	function addStation(x, y) {
+		var station = new sb.Station(x,y);
+		stage.addChild(station);
+		sb.stations.push(station);
+		sb.roundThings.push(station);
 	}
 	
 	proto.load = function(){
@@ -19,28 +26,87 @@ var sb = sb || {};
 		httpRequest.onreadystatechange = function() {
 			if (httpRequest.readyState === 4) {
 				if (httpRequest.status === 200) {
-					var data = eval('('+httpRequest.responseText+')');
-					sb.stage.removeAllChildren();
-					sb.net = new sb.Net(data);
-					sb.stage.addChild(sb.net);
-					sb.planets = [];
-					for (var i=data.planets.length; i-->0;) {
-						var p = data.planets[i];
-						addPlanet(p.r, p.x, p.y);
+					m.data = eval('('+httpRequest.responseText+')');
+					if (m.data.description) {
+						sb.dialog({
+							title: "Mission "+m.id,
+							html: m.data.description,
+							buttons: {"Start": m.start.bind(m)}
+						});
+					} else {
+						m.start();
 					}
-					sb.bullet = new sb.Bullet();
-					stage.addChild(sb.bullet);
-					sb.gun = new sb.Gun(-100, 20);
-					sb.gun.rotation = -10;
-					stage.addChild(sb.gun);
-					sb.bullet.launch();
-					console.log('Mission '+m.id+' started');
 				}
 			}
 		};
 		httpRequest.open('GET', 'missions/mission-'+this.id+'.json?time='+(new Date().getTime()));
-		httpRequest.send();	
+		httpRequest.send();
 	}
+
+	proto.start = function() {
+		var m = this;
+		var data = m.data;
+		sb.stage.removeAllChildren();
+		sb.net = new sb.Net(data);
+		sb.stage.addChild(sb.net);
+		sb.roundThings = [];
+		sb.planets = [];
+		if (data.planets) {
+			for (var i=data.planets.length; i-->0;) {
+				var p = data.planets[i];
+				addPlanet(p.r, p.x, p.y, p.fixed);
+			}
+		}
+		sb.bullet = new sb.Bullet();
+		sb.nbBullets = 1;
+		stage.addChild(sb.bullet);
+		sb.stations = [];
+		if (data.stations) {
+			for (var i=data.stations.length; i-->0;) {
+				var s = data.stations[i];
+				addStation(s.x, s.y);
+			}
+		}
+		sb.gun = new sb.Gun(data.gun.x, data.gun.y);
+		sb.gun.rotation = data.gun.r;
+		sb.gun.visible = !data.gun.invisible;
+		stage.addChild(sb.gun);
+		sb.roundThings.push(sb.gun);
+		sb.bullet.launch();
+		console.log('Mission '+m.id+' started');		
+	}
+	proto.remove = function() {
+		sb.stage.removeAllChildren();		
+	}
+	proto.lose = function(){
+		var m = this;
+		if (m.data.offgame) return; // this isn't a gaming mission
+		sb.dialog({
+			title: "Mission "+m.id,
+			html:
+				"<p class=lose>You lose.</p>" +
+				"<p>You lost the bullet. Travelers died. That's very unfortunate.</p>",
+			buttons: {
+				"Retry": m.start.bind(m)
+			}
+		});
+	}
+	proto.win = function(){
+		var m = this;
+		if (m.data.offgame) return; // this isn't a gaming mission
+		sb.dialog({
+			title: "Mission "+m.id,
+			html:
+				"<p class=win>You win !</p>" +
+				"<p>All travelers reached their destination.</p>",
+			buttons: {
+				"Retry": m.start.bind(m),
+				"Go to next mission": function(){ sb.startMission(m.id+1) }				
+			}
+		});
+		
+	}
+
 
 	sb.Mission = Mission;	
 })();
