@@ -20,11 +20,9 @@ var sb = sb || {};
 		var bmp = new createjs.Bitmap(img);
 		bmp.scaleX = bmp.scaleY = 2 * s.radius / img.width;
 		s.regX = s.radius; s.regY = s.radius;
-		s.addChild(bmp);
-		
+		s.addChild(bmp);		
 		s.addEventListener('tick', s.tick.bind(s));
 	}
-
 	
 	proto.tick = function(e) {
 		var b = sb.bullet;
