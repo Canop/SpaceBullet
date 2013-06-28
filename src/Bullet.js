@@ -93,13 +93,13 @@ var sb = sb || {};
 	proto.moveOnRails = function() {
 		var dx = this.dest.x - this.x, dy = this.dest.y - this.y;
 		var d = Math.sqrt(dx*dx + dy*dy);
-		if (d<5) {
+		if (d<10) {
 			if (!(this.dest = this.dest.dest)) {
 				this.launch();
 				return;
 			}			
 		}
-		this.v = 4;
+		this.v = 9;
 		this.vx = this.v * dx / d; this.vy = this.v * dy / d;
 		this.x += this.vx; this.y += this.vy;
 	}

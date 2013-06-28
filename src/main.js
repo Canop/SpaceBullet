@@ -2,7 +2,7 @@ var sb = sb || {};
 (function(){
 
 	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
-	var NB_MISSIONS = 2; // mission-0 isn't counted
+	var NB_MISSIONS = 3; // mission-0 isn't counted
 
 	function tick(event) {
 		stage.update(event);

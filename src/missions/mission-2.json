@@ -1,18 +1,15 @@
 {
-	gun: {x:-100, y: 20, r:-10},
+	gun: {x:250, y: 0, r:180},
 	planets : [
-		{r:24, x:-20, y:-150},
-		{r:15, x:100, y:30},
-		{r:22, x:180, y:180},
-		{r:25, x:-120, y:200}
+		{r:20, x:-280, y:-30},
+		{r:18, x:-270, y:30},
 	],
 	lines: [
-		[{x:-200, y:0}, {x:-300, y:-100}, {x:-310, y:-200}, {x:-290, y:-260}],
-		[{x:-220, y:30}, {x:-260, y:50}]
+		[{x:300, y:0}, {x:300, y:-50}, {x:-100, y:-50}, {x:-500, y:-300}, {x:-600, y:-300}, {x:-600, y:100}],
 	],
 	stations: [
-		{x:-400, y:-20}
+		{x:-450, y:-150}
 	],
 	description:
-		"<p>This mission is much harder. It's all about dexterity, try not to crash the bullet and not to send it in deep space.</p>"
+		"<p>Now you have two planets. That's twice more power. And twice more obstacles.</p>"
 }
