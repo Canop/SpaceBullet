@@ -30,7 +30,7 @@ var sb = sb || {};
 		var dx = b.x-this.x, dy = b.y-this.y;
 		var d = Math.sqrt(dx*dx + dy*dy);
 		if (d<500) {
-			if (d<40) {
+			if (d<37) {
 				b.reach(this);
 			} else {
 				if (dx==0) {

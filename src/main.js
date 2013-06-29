@@ -2,7 +2,8 @@ var sb = sb || {};
 (function(){
 
 	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
-	var NB_MISSIONS = 3; // mission-0 isn't counted
+	sb.paused = false;
+	var NB_MISSIONS = 4; // mission-0 isn't counted
 
 	function tick(event) {
 		stage.update(event);
@@ -57,8 +58,12 @@ var sb = sb || {};
 		stage.regX = -sb.w/2; stage.regY = -sb.h/2; 
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
-		sb.startMission(0);
+		sb.startMission(4);
 		intro();
+	}
+	
+	sb.togglePause = function() {
+		sb.paused = !sb.paused;
 	}
 	
 })();

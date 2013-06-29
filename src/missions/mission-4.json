@@ -1,0 +1,17 @@
+{
+	gun: {x:300, y:0, r:180},
+	planets : [
+		{r:25, x:100, y:-110, fixed:true},
+		{r:20, x:231, y:184},
+		{r:20, x:195, y:-157},
+	],
+	lines: [
+		[{x:300,y:40},{x:100, y:40},{x:0, y:-140},{x:0, y:-240},{x:200, y:-440},{x:400, y:-450}],
+		[{x:300,y:40},{x:-100, y:40},{x:-200, y:140}]
+	],
+	stations: [
+		{x:-400, y:0}
+	],
+	description:
+		"<p>You may stop the bullet at any time using the <kbd>P</kbd> key. You can still move the planets when in pause.</p>"
+}

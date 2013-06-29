@@ -66,8 +66,7 @@ var sb = sb || {};
 		this.ax *= sb.G; this.ay *= sb.G;
 	}
 	proto.updateFlySpeed = function() {
-		this.vx += this.ax;
-		this.vy += this.ay;		
+		this.vx += this.ax; this.vy += this.ay;		
 		this.v = Math.sqrt(this.vx*this.vx+this.vy*this.vy);
 	}
 	proto.updateFlyPos = function() {
@@ -120,6 +119,7 @@ var sb = sb || {};
 	}
 	
 	proto.tick = function(e) {
+		if (sb.paused) return;
 		switch (this.state) {
 		case FLYING :
 			this.updateFlyAcceleration();

@@ -12,17 +12,17 @@ var sb = sb || {};
 	proto.initialize = function(){
 		this.Container_initialize();
 		this.radius = 40;
+		this.path = new sb.Path(this);
 		
 		var img = ImgLoader.get('gun');
 		this.bmp = new createjs.Bitmap(img);
 		this.regX = 36; this.regY = 72;
 		this.stdscale = this.bmp.scaleX = this.bmp.scaleY = 110 / img.width;
 		this.addChild(this.bmp);
-		
-		//~ this.addEventListener('tick', this.tick.bind(this));
 	}
+	
 	proto.fire = function() {
-		//~ this.bmp.scaleX *= 1.5; this.bmp.scaleY *= 1.5;
+		// in the future this function might start a pretty "firing" effect
 	}
 
 	proto.tick = function(e) {
