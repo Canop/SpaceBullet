@@ -11,6 +11,6 @@
 	],
 	description:
 		"<img align=right src=img/station.svg height=160>" + 
-		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> rocket reach its destination station :</p>" +
-		"<p>Using the mouse, gently move the planet so that the bullet reach the station.</p>"
+		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> ship reach its destination station :</p>" +
+		"<p>Using the mouse, gently move the planet to change the gravity field.</p>"
 }

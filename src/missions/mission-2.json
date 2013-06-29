@@ -2,7 +2,7 @@
 	gun: {x:250, y: 0, r:180},
 	planets : [
 		{r:20, x:-280, y:-30},
-		{r:18, x:-270, y:30},
+		{r:18, x:-270, y:30, fixed:true},
 	],
 	lines: [
 		[{x:300, y:0}, {x:300, y:-50}, {x:-100, y:-50}, {x:-500, y:-300}, {x:-600, y:-300}, {x:-600, y:100}],
@@ -11,5 +11,7 @@
 		{x:-450, y:-150}
 	],
 	description:
-		"<p>Now you have two planets. That's twice more power. And twice more obstacles.</p>"
+		"<img src=img/blue-planet-1.png align=right hspace=10>" +
+		"<p>Some planets, the blue ones, are inhabited. You can't move those planets, that would be gross for the inhabitants.</p>" +
+		"<p>In this mission, one planet is movable, the other one isn't.</p>"
 }

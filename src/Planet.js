@@ -1,11 +1,12 @@
 var sb = sb || {};
 (function(){
 
-	var NB_PLANET_IMAGES = 5;
-	for (var i=0; i<NB_PLANET_IMAGES; i++) {
-		ImgLoader.add('planet-'+i, 'img/planet-'+i+'.png');
-	}
-	var imgindex = 0;
+	var NB_BLUE_PLANET_IMAGES = 6;
+	for (var i=0; i<NB_BLUE_PLANET_IMAGES; i++) ImgLoader.add('blue-planet-'+i, 'img/blue-planet-'+i+'.png');
+	var NB_DEAD_PLANET_IMAGES = 15;
+	for (var i=0; i<NB_DEAD_PLANET_IMAGES; i++) ImgLoader.add('dead-planet-'+i, 'img/dead-planet-'+i+'.png');
+	
+	var bpindex = 0, dpindex = 0;
 
 	function Planet(r, fixed){
 		this.radius = r;
@@ -21,7 +22,7 @@ var sb = sb || {};
 		var p = this;
 		p.Container_initialize();
 		
-		var img = ImgLoader.get('planet-'+((imgindex++)%NB_PLANET_IMAGES));
+		var img = this.fixed ? ImgLoader.get('blue-planet-'+((bpindex++)%NB_BLUE_PLANET_IMAGES)) : ImgLoader.get('dead-planet-'+((dpindex++)%NB_DEAD_PLANET_IMAGES));
 		var bmp = new createjs.Bitmap(img);
 		bmp.scaleX = bmp.scaleY = 2 * p.radius / img.height;
 		bmp.x = -p.radius;

@@ -19,14 +19,17 @@
   <defs
      id="defs3925">
     <linearGradient
-       inkscape:collect="always"
        id="linearGradient4442">
       <stop
-         style="stop-color:#423232;stop-opacity:1"
+         style="stop-color:#291f1f;stop-opacity:1;"
          offset="0"
          id="stop4444" />
       <stop
-         style="stop-color:#c6b4b4;stop-opacity:1"
+         id="stop3006"
+         offset="0.5"
+         style="stop-color:#847373;stop-opacity:1;" />
+      <stop
+         style="stop-color:#dbd0d0;stop-opacity:1;"
          offset="1"
          id="stop4446" />
     </linearGradient>
@@ -34,10 +37,10 @@
        inkscape:collect="always"
        xlink:href="#linearGradient4442"
        id="linearGradient4448"
-       x1="560.30035"
-       y1="553.45917"
-       x2="20.878798"
-       y2="373.82391"
+       x1="358.77673"
+       y1="621.38849"
+       x2="357.50623"
+       y2="392.69315"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -66,7 +69,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
