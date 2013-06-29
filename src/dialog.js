@@ -7,11 +7,11 @@ var sb = sb || {};
 	//  title (optional)
 	//  html
 	//  buttons ( map name->func )
-	//  class (optional)
+	//  cssClass (optional)
 	sb.dialog = function(d){
 		if ($d) $d.remove();
 		$d = $('<div id=dialog/>').hide();
-		if (d.class) $d.addClass(d.class);
+		if (d.cssClass) $d.addClass(d.cssClass);
 		$d.append($('<div id=dialog_title/>').text(d.title||''));
 		$d.append($('<div id=dialog_content/>').html(d.html));
 		var $buttons = $('<div id=dialog_buttons/>').appendTo($d);

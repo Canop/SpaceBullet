@@ -27,10 +27,10 @@ var sb = sb || {};
 			if (httpRequest.readyState === 4) {
 				if (httpRequest.status === 200) {
 					m.data = eval('('+httpRequest.responseText+')');
-					if (m.data.description) {
+					if (m.data['description']) {
 						sb.dialog({
 							title: "Mission "+m.id,
-							html: m.data.description,
+							html: m.data['description'],
 							buttons: {"Start": m.start.bind(m)}
 						});
 					} else {
@@ -51,25 +51,25 @@ var sb = sb || {};
 		sb.stage.addChild(sb.net);
 		sb.roundThings = [];
 		sb.planets = [];
-		if (data.planets) {
-			for (var i=data.planets.length; i-->0;) {
-				var p = data.planets[i];
-				addPlanet(p.r, p.x, p.y, p.fixed);
+		if (data['planets']) {
+			for (var i=data['planets'].length; i-->0;) {
+				var p = data['planets'][i];
+				addPlanet(p['r'], p['x'], p['y'], p['fixed']);
 			}
 		}
 		sb.bullet = new sb.Bullet();
 		sb.nbBullets = 1;
 		stage.addChild(sb.bullet);
 		sb.stations = [];
-		if (data.stations) {
-			for (var i=data.stations.length; i-->0;) {
-				var s = data.stations[i];
-				addStation(s.x, s.y);
+		if (data['stations']) {
+			for (var i=data['stations'].length; i-->0;) {
+				var s = data['stations'][i];
+				addStation(s['x'], s['y']);
 			}
 		}
-		sb.gun = new sb.Gun(data.gun.x, data.gun.y);
-		sb.gun.rotation = data.gun.r;
-		sb.gun.visible = !data.gun.invisible;
+		sb.gun = new sb.Gun(data['gun']['x'], data['gun']['y']);
+		sb.gun.rotation = data['gun']['r'];
+		sb.gun.visible = !data['gun']['invisible'];
 		stage.addChild(sb.gun);
 		sb.roundThings.push(sb.gun);
 		sb.bullet.launch();
@@ -80,7 +80,7 @@ var sb = sb || {};
 	}
 	proto.lose = function(){
 		var m = this;
-		if (m.data.offgame) return; // this isn't a gaming mission
+		if (m.data['offgame']) return; // this isn't a gaming mission
 		sb.dialog({
 			title: "Mission "+m.id,
 			html:
@@ -93,7 +93,7 @@ var sb = sb || {};
 	}
 	proto.win = function(){
 		var m = this;
-		if (m.data.offgame) return; // this isn't a gaming mission
+		if (m.data['offgame']) return; // this isn't a gaming mission
 		sb.dialog({
 			title: "Mission "+m.id,
 			html:

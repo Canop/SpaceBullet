@@ -1,9 +1,10 @@
 var sb = sb || {};
+window['sb']=sb; // so that minification doesn't prevent the not minified files to find sb
 (function(){
 
 	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
 	sb.paused = false;
-	var NB_MISSIONS = 4; // mission-0 isn't counted
+	var NB_MISSIONS = 5; // mission-0 isn't counted
 
 	function tick(event) {
 		stage.update(event);
@@ -19,7 +20,7 @@ var sb = sb || {};
 				"<p>But the <span class=sbname>SpaceBullet</span> space travel company has the solution !</p>" +
 				"<p>Instead of carrying fuel, our ships are simply put into a big gun, fired, and then diriged using the gravity of nearby planets.</p>" +
 				"<p>Your task is to move planets around so that SpaceBullet ships reach their destination.</p>",
-			class: "big",
+			cssClass: "big",
 			buttons : {
 				"Start" : function() {
 					sb.startMission(1);
@@ -58,7 +59,7 @@ var sb = sb || {};
 		stage.regX = -sb.w/2; stage.regY = -sb.h/2; 
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
-		sb.startMission(4);
+		sb.startMission(0);
 		intro();
 	}
 	

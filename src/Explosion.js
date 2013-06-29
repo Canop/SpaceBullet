@@ -10,21 +10,20 @@ var sb = sb || {};
 	
 	proto.Container_initialize = proto.initialize;
 	proto.initialize = function(){
+		var boum = this;
 		this.Container_initialize();
 		var star = new createjs.Shape();
 		star.graphics.beginFill("#ff0000").beginStroke("#FF0").setStrokeStyle(5).drawPolyStar(0,0,20,5,0.6).closePath();
-		this.addChild(star);
-		this.addEventListener('tick', this.tick.bind(this));
-	}
-	
-	proto.tick = function(e) {
-		this.scale += 0.03;
-		this.scaleX = this.scaleY = this.scale;
-		this.alpha -= 0.05;
-		this.rotation ++;
-		if (this.alpha <=0.05) {
-			sb.stage.removeChild(this);
-		}
+		boum.addChild(star);
+		boum.addEventListener('tick', function(e) {
+			boum.scale += 0.03;
+			boum.scaleX = boum.scaleY = boum.scale;
+			boum.alpha -= 0.05;
+			boum.rotation ++;
+			if (boum.alpha <=0.05) {
+				sb.stage.removeChild(boum);
+			}
+		});
 	}
 
 	sb.Explosion = Explosion;	
