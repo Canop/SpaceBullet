@@ -29,27 +29,33 @@ var sb = sb || {};
 		bmp.y = -p.radius;
 		this.addChild(bmp);
 		if (!p.fixed) {
+			var sq_max_step = (1.5*p.radius)*(1.5*p.radius);
 			p.addEventListener("mousedown", function(evt) {
 				var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
 				evt.addEventListener("mousemove",function(ev) {
 					var x = ev.stageX+offset.x;
 					var y = ev.stageY+offset.y;
-					var collision = false;
+					if ((x-p.x)*(x-p.x)+(y-p.y)*(y-p.y)>sq_max_step) return; // too big step, might be some kind of crossing
 					for (var i=sb.roundThings.length; i-->0;) {
 						var pi = sb.roundThings[i];
 						if (pi==p) continue;
 						if ((pi.x-x)*(pi.x-x)+(pi.y-y)*(pi.y-y) <= (pi.radius+p.radius)*(pi.radius+p.radius)) {
-							collision = true;
-							break;
+							console.log('collision with another round thing');
+							return
 						}
 					}
-					if (collision) {
-						console.log('collision with another round thing');
-					} else if (sb.net.testHitCircle(x, y, p.radius+2)) {
-						console.log('collision with rails');
-					} else {
-						p.x = x; p.y = y;
+					for (var i=sb.nets.length; i-->0;) {
+						if (sb.nets[i].testHitCircle(x, y, p.radius)) {
+							console.log('collision with a rail');
+							return;
+						}
+						/*
+						if (sb.nets[i].testCrossSeg(p.x, p.y, x, y)) {
+							console.log('rail crossing');
+							return;
+						}*/
 					}
+					p.x = x; p.y = y;
 				});
 			});
 		}

@@ -1,16 +1,20 @@
 {
-	gun: {x:-350, y:100, r:-50},
+	guns: [
+		{
+			x:-350, y:100, r:-50,
+			lines: [
+				[{x:-600,y:100},{x:-600,y:-250},{x:100,y:-250}]
+			]
+		},
+	],
 	planets : [
 		{r:35, x:-255, y:-116, fixed:true},
 		{r:14, x:-252, y:19},
 		{r:20, x:47, y:53},
 	],
-	lines: [
-		[{x:-600,y:100},{x:-600,y:-250},{x:100,y:-250}]
-	],
 	stations: [
-		{x:500, y:0}
+		{x:350, y:0}
 	],
 	description:
-		"<p>Remember last hint? You didn't really need the <kbd>P</kbd> for last mission but now it will probably be useful.</p>"
+		"<p>Remember last hint? Maybe you didn't really need the pause the bullet using the <kbd>P</kbd> for last mission but now it will certainly be useful.</p>"
 }

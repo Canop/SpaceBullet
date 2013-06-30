@@ -47,7 +47,6 @@ var sb = sb || {};
 		var m = this;
 		var data = m.data;
 		sb.stage.removeAllChildren();
-		sb.net = new sb.Net(data);
 		sb.stage.addChild(sb.net);
 		sb.roundThings = [];
 		sb.planets = [];
@@ -67,11 +66,24 @@ var sb = sb || {};
 				addStation(s['x'], s['y']);
 			}
 		}
-		sb.gun = new sb.Gun(data['gun']['x'], data['gun']['y']);
-		sb.gun.rotation = data['gun']['r'];
-		sb.gun.visible = !data['gun']['invisible'];
-		stage.addChild(sb.gun);
-		sb.roundThings.push(sb.gun);
+		sb.nets = [];
+		sb.guns = [];
+		for (var i=0; i<data['guns'].length; i++) {
+			var dg = data['guns'][i];
+			var g = new sb.Gun(dg['x'], dg['y'], dg['showPath']);
+			g.rotation = dg['r'];
+			g.visible = !dg['invisible'];
+			sb.stage.addChild(g.path);
+			if (dg['lines']) {
+				var net = new sb.Net(g, dg['lines']);
+				sb.nets.push(net);
+				stage.addChild(net);
+			}
+			stage.addChild(g);
+			sb.roundThings.push(g);
+			sb.guns.push(g);
+		}
+		sb.gun = sb.guns[0];
 		sb.bullet.launch();
 		console.log('Mission '+m.id+' started');		
 	}

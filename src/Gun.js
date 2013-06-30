@@ -2,8 +2,9 @@ var sb = sb || {};
 (function(){
 	ImgLoader.add('gun', 'img/gun.svg');
 
-	function Gun(x,y){
+	function Gun(x,y, showPath){
 		this.x = x; this.y = y;
+		this.showPath = showPath;
 		this.initialize();
 	}
 	var proto = Gun.prototype = new createjs.Container();
@@ -11,8 +12,9 @@ var sb = sb || {};
 	proto.Container_initialize = proto.initialize;
 	proto.initialize = function(){
 		this.Container_initialize();
-		this.radius = 40;
+		this.radius = 20;
 		this.path = new sb.Path(this);
+		if (this.showPath) this.path.on();
 		
 		var img = ImgLoader.get('gun');
 		this.bmp = new createjs.Bitmap(img);

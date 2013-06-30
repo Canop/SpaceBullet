@@ -13,9 +13,13 @@ var sb = sb || {};
 				key = 0;
 				devMode = !devMode;
 				if (devMode) {
-					sb.gun.path.on();
+					sb.guns.forEach(function(gun){
+						gun.path.on();
+					});
 				} else {
-					sb.gun.path.off();					
+					sb.guns.forEach(function(gun){
+						gun.path.off();
+					});
 				}
 			}
 			break;

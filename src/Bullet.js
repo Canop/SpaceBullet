@@ -3,7 +3,6 @@ var sb = sb || {};
 	ImgLoader.add('bullet', 'img/bullet.svg');
 	
 	var IDLE = 0, FLYING = 1, DOCKED = 2, ONRAIL = 3, DEAD = 4;
-	
 	var showCollisionRadius = false;
 
 	function Bullet(){
@@ -35,12 +34,13 @@ var sb = sb || {};
 		this.addEventListener('tick', this.tick.bind(this));
 	}
 	
-	// be fired from the gun
-	proto.launch = function() {
-		this.x = sb.gun.x; this.y = sb.gun.y;
+	// be fired from a gun
+	proto.launch = function(gun) {
+		gun = gun || sb.gun;
+		this.x = gun.x; this.y = gun.y;
 		this.v = 7;
-		this.vx = Math.cos(sb.gun.rotation*Math.PI/180)*this.v;
-		this.vy = Math.sin(sb.gun.rotation*Math.PI/180)*this.v;
+		this.vx = Math.cos(gun.rotation*Math.PI/180)*this.v;
+		this.vy = Math.sin(gun.rotation*Math.PI/180)*this.v;
 		this.state = FLYING;
 		this.dest = null;
 		sb.gun.fire();
@@ -73,11 +73,14 @@ var sb = sb || {};
 		this.x += this.vx; this.y += this.vy;
 		if (this.x*this.x+this.y*this.y > 1000*1000) {
 			this.die();
-		} else {
-			var node = sb.net.testHitCircle(this.x, this.y, this.radius);
+			return;
+		}
+		for (var i=sb.nets.length; i-->0;) {
+			var node = sb.nets[i].testHitCircle(this.x, this.y, this.radius);
 			if (node) {
 				this.dest = node;
 				this.state = ONRAIL;
+				return;
 			}
 		}
 	}
@@ -93,10 +96,12 @@ var sb = sb || {};
 		var dx = this.dest.x - this.x, dy = this.dest.y - this.y;
 		var d = Math.sqrt(dx*dx + dy*dy);
 		if (d<10) {
-			if (!(this.dest = this.dest.dest)) {
-				this.launch();
+			if (this.dest.dest) {
+				this.dest = this.dest.dest;
+			} else { // means that this.dest is a gun
+				this.launch(this.dest);				
 				return;
-			}			
+			}
 		}
 		this.v = 9;
 		this.vx = this.v * dx / d; this.vy = this.v * dy / d;
@@ -132,7 +137,6 @@ var sb = sb || {};
 			this.updateDirection();
 			break;
 		default :
-		
 		}
 	}
 	

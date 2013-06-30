@@ -14,6 +14,8 @@ var sb = sb || {};
 		this.Container_initialize();
 		this.shape = new createjs.Shape();
 		this.addChild(this.shape);
+		this.alpha = 0.5;
+		this.visible = false;
 		
 		this.tick = function(e) {
 			var g = path.shape.graphics;
@@ -46,9 +48,12 @@ var sb = sb || {};
 				if (x*x+y*y > 1000*1000) {
 					finished = true;
 				} else {
-					var node = sb.net.testHitCircle(x, y, radius);
-					if (node) {
-						finished = true;
+					for (var i=sb.nets.length; i-->0;) {
+						var node = sb.nets[i].testHitCircle(x, y, radius);
+						if (node) {
+							finished = true;
+							break;
+						}
 					}
 				}
 				g.lineTo(x,y);
@@ -57,11 +62,11 @@ var sb = sb || {};
 	}
 	
 	proto.on = function(){
-		sb.stage.addChild(this);
+		this.visible = true;
 		this.addEventListener('tick', this.tick);
 	}
 	proto.off = function(){
-		sb.stage.removeChild(this);
+		this.visible = false;
 		this.removeEventListener('tick', this.tick);
 	}
 
