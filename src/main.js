@@ -22,7 +22,10 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 				"<p>Your task is to move planets around so that SpaceBullet ships reach their destination.</p>",
 			cssClass: "big",
 			buttons : {
-				"Start" : function() {
+				"Go to project page" : function() {
+					location.href="project.html";
+				},				
+				"Start the game" : function() {
 					sb.startMission(1);
 				}
 			}

@@ -44,6 +44,7 @@ var sb = sb || {};
 	}
 
 	proto.start = function() {
+		// note that the order of stage addition is so for the display order
 		var m = this;
 		var data = m.data;
 		sb.stage.removeAllChildren();
@@ -54,16 +55,6 @@ var sb = sb || {};
 			for (var i=data['planets'].length; i-->0;) {
 				var p = data['planets'][i];
 				addPlanet(p['r'], p['x'], p['y'], p['fixed']);
-			}
-		}
-		sb.bullet = new sb.Bullet();
-		sb.nbBullets = 1;
-		stage.addChild(sb.bullet);
-		sb.stations = [];
-		if (data['stations']) {
-			for (var i=data['stations'].length; i-->0;) {
-				var s = data['stations'][i];
-				addStation(s['x'], s['y']);
 			}
 		}
 		sb.nets = [];
@@ -79,10 +70,20 @@ var sb = sb || {};
 				sb.nets.push(net);
 				stage.addChild(net);
 			}
-			stage.addChild(g);
 			sb.roundThings.push(g);
 			sb.guns.push(g);
 		}
+		sb.bullet = new sb.Bullet();
+		sb.nbBullets = 1;
+		stage.addChild(sb.bullet);
+		sb.stations = [];
+		if (data['stations']) {
+			for (var i=data['stations'].length; i-->0;) {
+				var s = data['stations'][i];
+				addStation(s['x'], s['y']);
+			}
+		}
+		for (var i=0; i<sb.guns.length; i++) stage.addChild(sb.guns[i]);
 		sb.gun = sb.guns[0];
 		sb.bullet.launch();
 		console.log('Mission '+m.id+' started');		

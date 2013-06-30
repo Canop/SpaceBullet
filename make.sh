@@ -24,6 +24,7 @@ java -jar $CLOSURE_PATH/compiler.jar --compilation_level ADVANCED_OPTIMIZATIONS 
 rm $BUILD_PATH/sb.concat.js
 
 cp $SRC_PATH/index.html $BUILD_PATH
+cp $SRC_PATH/project.html $BUILD_PATH
 cp $SRC_PATH/*.css $BUILD_PATH
 cp -r $SRC_PATH/lib $BUILD_PATH
 cp -r $SRC_PATH/missions $BUILD_PATH
