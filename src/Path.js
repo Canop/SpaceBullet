@@ -28,7 +28,7 @@ var sb = sb || {};
 			var vx = Math.cos(gun.rotation*Math.PI/180)*v;
 			var vy = Math.sin(gun.rotation*Math.PI/180)*v;
 			var finished = false;
-			for (var step=0; step<5000 && !finished; step++) {
+			for (var step=0; step<7000 && !finished; step++) {
 				var ax = 0, ay = 0;
 				for (var i=sb.planets.length; i-->0;) {
 					var p = sb.planets[i];

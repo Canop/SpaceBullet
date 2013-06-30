@@ -4,7 +4,7 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 
 	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
 	sb.paused = false;
-	var NB_MISSIONS = 6; // mission-0 isn't counted
+	var NB_MISSIONS = 7; // mission-0 isn't counted
 
 	function tick(event) {
 		stage.update(event);
@@ -32,6 +32,7 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 	sb.startMission = function(id) {
 		if (sb.mission) sb.mission.remove();
 		if (id>NB_MISSIONS) {
+			console.log(id + " > NB_MISSIONS");
 			sb.dialog({
 				html :
 					"<p>Damn. No more mission :(</p>" +

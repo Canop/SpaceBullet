@@ -29,7 +29,7 @@ var sb = sb || {};
 		bmp.y = -p.radius;
 		this.addChild(bmp);
 		if (!p.fixed) {
-			var sq_max_step = (1.5*p.radius)*(1.5*p.radius);
+			var sq_max_step = (1.8*p.radius)*(1.8*p.radius);
 			p.addEventListener("mousedown", function(evt) {
 				var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
 				evt.addEventListener("mousemove",function(ev) {

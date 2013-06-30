@@ -14,7 +14,6 @@ var sb = sb || {};
 		this.Container_initialize();
 		this.radius = 20;
 		this.path = new sb.Path(this);
-		if (this.showPath) this.path.on();
 		
 		var img = ImgLoader.get('gun');
 		this.bmp = new createjs.Bitmap(img);
@@ -24,6 +23,7 @@ var sb = sb || {};
 	}
 	
 	proto.fire = function() {
+		if (this.showPath) this.path.off();
 		// in the future this function might start a pretty "firing" effect
 	}
 
@@ -32,6 +32,10 @@ var sb = sb || {};
 			var ds = Math.min(0.02, this.bmp.scaleX-this.stdscale);
 			this.bmp.scaleX -= ds; this.bmp.scaleY -= ds;
 		}
+	}
+	
+	proto.bulletEntersNet = function() {
+		if (this.showPath) this.path.on();
 	}
 	
 	sb.Gun = Gun;	

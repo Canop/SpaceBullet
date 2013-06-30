@@ -43,7 +43,7 @@ var sb = sb || {};
 		this.vy = Math.sin(gun.rotation*Math.PI/180)*this.v;
 		this.state = FLYING;
 		this.dest = null;
-		sb.gun.fire();
+		gun.fire();
 	}
 	
 	// calcule l'accéleration en fonction des masses, vérifie aussi la non collision
@@ -80,6 +80,8 @@ var sb = sb || {};
 			if (node) {
 				this.dest = node;
 				this.state = ONRAIL;
+				while (node.dest) node = node.dest;
+				node.bulletEntersNet();
 				return;
 			}
 		}
