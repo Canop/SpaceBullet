@@ -28,6 +28,13 @@ var sb = sb || {};
 		bmp.x = -p.radius;
 		bmp.y = -p.radius;
 		this.addChild(bmp);
+		
+		this.collisionCircle = new createjs.Shape();
+		this.collisionCircle.graphics.beginFill("red").drawCircle(0, 0, this.radius);
+		this.collisionCircle.alpha = 0.4;
+		this.collisionCircle.visible = false;
+		this.addChild(this.collisionCircle);
+
 		if (!p.fixed) {
 			var sq_max_step = (1.8*p.radius)*(1.8*p.radius);
 			p.addEventListener("mousedown", function(evt) {
@@ -35,18 +42,23 @@ var sb = sb || {};
 				evt.addEventListener("mousemove",function(ev) {
 					var x = ev.stageX+offset.x;
 					var y = ev.stageY+offset.y;
-					if ((x-p.x)*(x-p.x)+(y-p.y)*(y-p.y)>sq_max_step) return; // too big step, might be some kind of crossing
+					if ((x-p.x)*(x-p.x)+(y-p.y)*(y-p.y)>sq_max_step) { // too big step, might be some kind of crossing
+						p.collisionCircle.visible = true;
+						return;
+					}
 					for (var i=sb.roundThings.length; i-->0;) {
 						var pi = sb.roundThings[i];
 						if (pi==p) continue;
 						if ((pi.x-x)*(pi.x-x)+(pi.y-y)*(pi.y-y) <= (pi.radius+p.radius)*(pi.radius+p.radius)) {
-							console.log('collision with another round thing');
+							//~ console.log('collision with another round thing');
+							p.collisionCircle.visible = true;
 							return
 						}
 					}
 					for (var i=sb.nets.length; i-->0;) {
 						if (sb.nets[i].testHitCircle(x, y, p.radius)) {
-							console.log('collision with a rail');
+							p.collisionCircle.visible = true;
+							//~ console.log('collision with a rail');
 							return;
 						}
 						/*
@@ -55,7 +67,11 @@ var sb = sb || {};
 							return;
 						}*/
 					}
+					p.collisionCircle.visible = false;
 					p.x = x; p.y = y;
+				});
+				evt.addEventListener("mouseup", function(evt) {
+					p.collisionCircle.visible = false;
 				});
 			});
 		}
