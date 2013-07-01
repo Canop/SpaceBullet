@@ -10,6 +10,19 @@
 	<script src="lib/jquery-2.0.2.min.js"></script>
 	<script src="lib/easeljs-0.6.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="sb.css"/>
+	<script>
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-15064357-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+		var ga = document.createElement('script'); ga.async = true;
+		ga.src = 'http://www.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	  function trackEvent(category, action) {
+		  _gaq.push(['_trackEvent', category, action]);
+	  }
+	</script>
 	<script src="sb.min.js"></script>
 	<title>SpaceBullet</title>
 </head>

@@ -19,5 +19,5 @@
 	],
 	description:
 		"<p>Some guns can compute the path the bullet will follow and they show it to you when you're on their rail network.</p>"
-		 + "<p>When you're lucky enough to find such a gun, you'd better hit <kbd>P</kbd> when you enter their rails.</p>"
+		 + "<p>When you're lucky enough to find such a gun, you'd better hit <kbd>P</kbd> when you enter their rails and try to move the planets.</p>"
 }

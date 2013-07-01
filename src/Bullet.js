@@ -112,7 +112,7 @@ var sb = sb || {};
 	
 	proto.reach = function(station) {
 		this.state = DOCKED;
-		this.rotation = 180 + station.rotation;
+		this.rotation = station.rotation;
 		this.x = station.x; this.y = station.y;
 		sb.mission.win();
 	}

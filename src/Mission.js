@@ -86,7 +86,6 @@ var sb = sb || {};
 		for (var i=0; i<sb.guns.length; i++) stage.addChild(sb.guns[i]);
 		sb.gun = sb.guns[0];
 		sb.bullet.launch();
-		console.log('Mission '+m.id+' started');		
 	}
 	proto.remove = function() {
 		sb.stage.removeAllChildren();		

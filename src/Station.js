@@ -34,10 +34,10 @@ var sb = sb || {};
 				b.reach(this);
 			} else {
 				if (dx==0) {
-					this.rotation = dy < 0 ? 0 : -180;
+					this.rotation = dy < 0 ? -180 : 0;
 				} else {
-					if (dy<0) this.rotation = 90 - Math.acos(dx/d)*180/Math.PI;
-					else this.rotation = Math.acos(dx/d)*180/Math.PI+ 90;
+					if (dy<0) this.rotation = 270 - Math.acos(dx/d)*180/Math.PI;
+					else this.rotation = Math.acos(dx/d)*180/Math.PI+ 270;
 				}
 			}
 		}

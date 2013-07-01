@@ -1,6 +1,9 @@
 var sb = sb || {};
 window['sb']=sb; // so that minification doesn't prevent the not minified files to find sb
 (function(){
+	
+	// a shim for the missing console.log in IE
+	if (!window.console) window.console = {log: function(){}};
 
 	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
 	sb.paused = false;
@@ -47,6 +50,7 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 				}
 			});			
 		} else {
+			trackEvent('Mission Start', 'Mission '+id);
 			ImgLoader.done(function(){
 				sb.mission = new sb.Mission(id);
 				sb.mission.load();
