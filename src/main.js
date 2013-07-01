@@ -70,8 +70,13 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 		window.addEventListener('resize', onresize);
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
-		sb.startMission(0);
-		intro();
+		var matches = location.search.match(/\bm=(\d+)/);
+		if (matches) {
+			sb.startMission(parseInt(matches[1],10));
+		} else {
+			sb.startMission(0);
+			intro();
+		}
 	}
 	
 	sb.togglePause = function() {
