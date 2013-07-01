@@ -25,20 +25,19 @@ var sb = sb || {};
 	}
 	
 	proto.tick = function(e) {
+		if (this.full) return;
 		var b = sb.bullet;
-		if (this.full || !b.isFlying()) return;
 		var dx = b.x-this.x, dy = b.y-this.y;
 		var d = Math.sqrt(dx*dx + dy*dy);
-		if (d<500) {
-			if (d<37) {
-				b.reach(this);
+		if (d<37) {
+			this.full = true;
+			b.reach(this);
+		} else {
+			if (dx==0) {
+				this.rotation = dy < 0 ? -180 : 0;
 			} else {
-				if (dx==0) {
-					this.rotation = dy < 0 ? -180 : 0;
-				} else {
-					if (dy<0) this.rotation = 270 - Math.acos(dx/d)*180/Math.PI;
-					else this.rotation = Math.acos(dx/d)*180/Math.PI+ 270;
-				}
+				if (dy<0) this.rotation = 270 - Math.acos(dx/d)*180/Math.PI;
+				else this.rotation = Math.acos(dx/d)*180/Math.PI+ 270;
 			}
 		}
 	}
