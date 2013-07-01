@@ -60,11 +60,14 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 
 	sb.start = function(){
 		var canvas = document.getElementById('main_canvas');
-		sb.w = canvas.width = canvas.clientWidth;
-		sb.h = canvas.height = canvas.clientHeight;
-		sb.xc = sb.w/2; sb.yc = sb.h/2;
 		sb.stage = stage = new createjs.Stage("main_canvas");
-		stage.regX = -sb.w/2; stage.regY = -sb.h/2; 
+		var onresize = function(){
+			sb.w = canvas.width = canvas.clientWidth;
+			sb.h = canvas.height = canvas.clientHeight;
+			stage.regX = -sb.w/2; stage.regY = -sb.h/2; 
+		}
+		onresize();
+		window.addEventListener('resize', onresize);
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
 		sb.startMission(0);
