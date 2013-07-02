@@ -118,7 +118,6 @@ var sb = sb || {};
 	}
 	
 	proto.die = function() {
-		console.log('BOUM');
 		this.state = DEAD;
 		sb.stage.removeChild(this);
 		sb.nbBullets--;

@@ -14,7 +14,7 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 	}
 	
 	sb.intro = function() {
-		if (sb.mission && sb.mission.id) sb.mission.remove();
+		if (sb.mission && sb.mission.id) sb.mission.remove(); // because rails under the intro make the text less readable
 		sb.dialog({
 			html :
 				"<img src=img/bullet.svg align=left height=400>" +

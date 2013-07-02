@@ -7,7 +7,7 @@ var sb = sb || {};
 
 	sb.openGrid = function() {
 		if ($d) $d.remove();
-		if (sb.mission && sb.mission.id) sb.mission.remove();
+		if (sb.mission && sb.mission.id) sb.mission.remove(); // this ensures the mission doesn't go on
 		$d = $('<div id=grid/>').hide();
 		var fnd = sb.getFirstNotDone();
 		$('<h1>Choose a mission</h1>').appendTo($d);

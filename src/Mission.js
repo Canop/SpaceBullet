@@ -46,6 +46,7 @@ var sb = sb || {};
 	proto.start = function() {
 		// note that the order of stage addition is so for the display order
 		var m = this;
+		sb.paused = false;
 		var data = m.data;
 		sb.stage.removeAllChildren();
 		sb.stage.addChild(sb.net);

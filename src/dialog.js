@@ -3,7 +3,8 @@ var sb = sb || {};
 	
 	var $d;
 	
-	// properties of the d object :
+	// opens a dialog
+	// Properties of the d object :
 	//  title (optional)
 	//  html
 	//  buttons ( map name->func )
