@@ -19,7 +19,7 @@ Use `make.sh` to build the minified production version.
 Licence
 -------
 
-This is a TODO point. For now consider the game mine. But you can ping me on the [mailing list](https://groups.google.com/forum/#!forum/spacebullet/) if you want this point to be solved.
+This is a TODO point. For now consider the game mine. But you can ping me on the [mailing list](https://groups.google.com/forum/#!forum/spacebullet/) if you want this point solved.
 
 Contribution
 ------------
