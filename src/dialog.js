@@ -16,9 +16,8 @@ var sb = sb || {};
 		$d.append($('<div id=dialog_content/>').html(d.html));
 		var $buttons = $('<div id=dialog_buttons/>').appendTo($d);
 		$.each(d.buttons, function(name, func){
-			$buttons.append($('<span>').text(name).click(function(){
-				$d.fadeOut();
-				func();
+			$buttons.append($('<span>').html(name).click(function(){
+				$d.fadeOut(func);
 			}));
 		});
 		$d.appendTo(document.body).fadeIn();

@@ -86,6 +86,7 @@ var sb = sb || {};
 		for (var i=0; i<sb.guns.length; i++) stage.addChild(sb.guns[i]);
 		sb.gun = sb.guns[0];
 		sb.bullet.launch();
+		trackEvent('Mission '+m.id, 'start');
 	}
 	proto.remove = function() {
 		sb.stage.removeAllChildren();		
@@ -93,12 +94,14 @@ var sb = sb || {};
 	proto.lose = function(){
 		var m = this;
 		if (m.data['offgame']) return; // this isn't a gaming mission
+		trackEvent('Mission '+m.id, 'lose');
 		sb.dialog({
 			title: "Mission "+m.id,
 			html:
 				"<p class=lose>You lose.</p>" +
 				"<p>You lost the bullet. Travelers died. That's very unfortunate.</p>",
 			buttons: {
+				"&#9650;": sb.openGrid,
 				"Retry": m.start.bind(m)
 			}
 		});
@@ -106,12 +109,15 @@ var sb = sb || {};
 	proto.win = function(){
 		var m = this;
 		if (m.data['offgame']) return; // this isn't a gaming mission
+		trackEvent('Mission '+m.id, 'win');
+		sb.saveMissionState(m.id, 'done');
 		sb.dialog({
 			title: "Mission "+m.id,
 			html:
 				"<p class=win>You win !</p>" +
 				"<p>All travelers reached their destination.</p>",
 			buttons: {
+				"&#9650;": sb.openGrid,
 				"Retry": m.start.bind(m),
 				"Go to next mission": function(){ sb.startMission(m.id+1) }				
 			}

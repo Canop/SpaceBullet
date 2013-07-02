@@ -49,7 +49,7 @@ var sb = sb || {};
         px -= x1;
         py -= y1;
         var ccw = px * y2 - py * x2;
-        if (ccw == 0.0) {
+        if (ccw == 0) {
             // The point is colinear, classify based on which side of
             // the segment the point falls on.  We can calculate a
             // relative value using the projection of px,py onto the
@@ -57,7 +57,7 @@ var sb = sb || {};
             // outside of the segment in the direction of the particular
             // endpoint used as the origin for the projection.
             ccw = px * x2 + py * y2;
-            if (ccw > 0.0) {
+            if (ccw > 0) {
                 // Reverse the projection to be relative to the original x2,y2
                 // x2 and y2 are simply negated.
                 // px and py need to have (x2 - x1) or (y2 - y1) subtracted
@@ -68,12 +68,10 @@ var sb = sb || {};
                 px -= x2;
                 py -= y2;
                 ccw = px * x2 + py * y2;
-                if (ccw < 0.0) {
-                    ccw = 0.0;
-                }
+                if (ccw < 0) ccw = 0;
             }
         }
-        return (ccw < 0.0) ? -1 : ((ccw > 0.0) ? 1 : 0);
+        return (ccw>0)-(ccw<0);
     }
     
  	// Adapted from Sun's java.awt.geom.Line2D code (which is GPL2)
@@ -96,11 +94,11 @@ var sb = sb || {};
 		py -= y1;
 		var dotprod = px * x2 + py * y2;
 		var projlenSq;
-		if (dotprod <= 0.0) {
+		if (dotprod <= 0) {
              // px,py is on the side of x1,y1 away from x2,y2
              // distance to segment is length of px,py vector
              // "length of its (clipped) projection" is now 0.0
-             projlenSq = 0.0;
+             projlenSq = 0;
         } else {
             // switch to backwards vectors relative to x2,y2
              // x2,y2 are already the negative of x1,y1=>x2,y2
@@ -110,11 +108,11 @@ var sb = sb || {};
              px = x2 - px;
              py = y2 - py;
              dotprod = px * x2 + py * y2;
-             if (dotprod <= 0.0) {
+             if (dotprod <= 0) {
                  // px,py is on the side of x2,y2 away from x1,y1
                  // distance to segment is length of (backwards) px,py vector
                  // "length of its (clipped) projection" is now 0.0
-                 projlenSq = 0.0;
+                 projlenSq = 0;
              } else {
                  // px,py is between x1,y1 and x2,y2
                  // dotprod is the length of the px,py vector
@@ -128,9 +126,7 @@ var sb = sb || {};
          // (which is zero if the projection falls outside the range
          //  of the line segment).
          var lenSq = px * px + py * py - projlenSq;
-         if (lenSq < 0) {
-             lenSq = 0;
-         }
+         if (lenSq < 0) lenSq = 0;
          return lenSq;
      }
 

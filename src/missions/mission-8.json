@@ -1,0 +1,26 @@
+{
+	guns: [
+		{
+			x:-350, y:100, r:-50, showPath: true,
+			lines: [
+				[{x:-600,y:100},{x:-600,y:-250},{x:100,y:-250}],
+				[{x:-320,y:130},{x:100,y:130},{x:100,y:-150}]
+			]
+		},{
+			x:-350, y:180, r:50, showPath: true,
+			lines: [
+				[{x:-320,y:150},{x:120,y:150},{x:120,y:-250}]
+			]
+		},
+	],
+	planets : [
+		{r:35, x:-255, y:-116, fixed:true},
+		{r:14, x:-252, y:19},
+		{r:20, x:47, y:53},
+	],
+	stations: [
+		{x:250, y:0}
+	],
+	description:
+		"<p>You might like to learn that all planets in this game have the same density so their mass is proportional to the cube of their radius.</p>"
+}

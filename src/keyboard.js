@@ -9,7 +9,7 @@ var sb = sb || {};
 		console.log('Key press : ', key);
 		switch (key) {
 		case 68: // d
-			if (lastKey==68) {
+			if (lastKey==68 && /dev.html$/.test(location.pathname)) {
 				key = 0;
 				devMode = !devMode;
 				if (devMode) {

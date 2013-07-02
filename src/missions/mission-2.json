@@ -17,5 +17,7 @@
 	description:
 		"<img src=img/blue-planet-1.png align=right hspace=10>" +
 		"<p>Some planets, the blue ones, are inhabited. You can't move those planets, that would be gross for the inhabitants.</p>" +
-		"<p>In this mission, one planet is movable, the other one isn't.</p>"
+		"<p>In this mission, one planet is movable, the other one isn't.</p>"+
+		"<p>You'll see that it pays to move planets only by very small steps because the impact of a move can be very important.</p>"
+		
 }

@@ -1,36 +1,22 @@
 {
 	guns: [
 		{
-			x:0, y:200, r:-80,
+			x:-100, y:200, r:-180, showPath:true,
 			lines: [
-				[{x:100,y:200},{x:100,y:-200},{x:50,y:-250},{x:-300,y:-250},{x:-375,y:-180},{x:-375,y:0},{x:-600,y:200}]
-			]
-		},{
-			x:-360, y:200, r:-180, showPath: true,
-			lines: [
-				[{x:-360,y:-180}],
-				[{x:-300,y:260}, {x:-200,y:260}],
-				[{x:-300,y:260}, {x:-600,y:260}]
-			]
-		},{
-			x:150, y:200, r:-90, showPath: true,
-			lines: [
-				[{x:150,y:240},{x:-200,y:240}]
+				[{x:0,y:200},{x:50,y:150},{x:50,y:50},{x:0,y:0},{x:-200,y:0},{x:-250,y:50},{x:-250,y:250},]
 			]
 		}
 	],
 	planets : [
-		{r:14, x:-134, y:-123},
-		{r:19, x:-37, y:105},
-		{r:20, x:247, y:-53, fixed:true},
-		{r:28, x:-494, y:30, fixed:true},
-		{r:26, x:-638, y:229, fixed:true},
-		{r:20, x:-104, y:-40},
-		{r:23, x:62, y:-294, fixed:true},
+		{r:14, x:370, y:176},
+		{r:19, x:-80, y:-30},
+		{r:12, x:-118, y:162},
+		{r:19, x:-10, y:122},
 	],
 	stations: [
-		{x:-500, y:-200}
+		{x:-300, y:-205}
 	],
 	description:
-		"<p>If you can't go direcly to the target, you may follow rails leading to another gun.</p>"
+		"<p>Here you'd better hit <kbd>P</kbd> when the bullet is on rails and quietly move the planets.</p>" +
+		"<p>Try to feel how gravity works.</p>"
 }

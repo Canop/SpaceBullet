@@ -1,20 +1,23 @@
 {
 	guns: [
 		{
-			x:-350, y:100, r:-50,
+			x:0, y:200, r:-150, showPath:true,
 			lines: [
-				[{x:-600,y:100},{x:-600,y:-250},{x:100,y:-250}]
+				[{x:-100,y:300}, {x:100,y:300},{x:380,y:150},{x:10,y:150}],
+				[{x:-100,y:300}, {x:100,y:300},{x:380,y:150},{x:380,y:-200},{x:-100,y:-200}],
 			]
-		},
+		}
 	],
 	planets : [
-		{r:35, x:-255, y:-116, fixed:true},
-		{r:14, x:-252, y:19},
-		{r:20, x:47, y:53},
+		{r:14, x:-70, y:176},
+		{r:19, x:-80, y:-30, fixed:true},
+		{r:12, x:-118, y:162},
+		{r:19, x:-10, y:122, fixed:true},
 	],
 	stations: [
-		{x:350, y:0}
+		{x:300, y:45}
 	],
 	description:
-		"<p>Remember last hint? Maybe you didn't really need the pause the bullet using the <kbd>P</kbd> for last mission but now it will certainly be useful.</p>"
+		"<p>Maybe you don't know that : the attraction force is inversely proportionnal to the distance of the planet.</p>" +
+		"<p>And gravity knows no limit, there's no maximal distance for attration.</p>"
 }

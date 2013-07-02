@@ -1,22 +1,22 @@
 {
 	guns: [
 		{
-			x:-100, y: 20, r:-10,
+			x:300, y:0, r:180, showPath:true,
 			lines: [
-				[{x:-200, y:0}, {x:-300, y:-100}, {x:-310, y:-200}, {x:-290, y:-260}],
-				[{x:-220, y:30}, {x:-260, y:50}]
+				[{x:300,y:40},{x:100, y:40},{x:0, y:-140},{x:0, y:-240},{x:200, y:-440},{x:400, y:-450}],
+				[{x:300,y:40},{x:-100, y:40},{x:-200, y:140}]
 			]
-		}
+		},
 	],
 	planets : [
-		{r:24, x:-20, y:-150},
-		{r:15, x:100, y:30},
-		{r:22, x:180, y:180, fixed: true},
-		{r:25, x:-120, y:200}
+		{r:25, x:100, y:-110, fixed:true},
+		{r:20, x:231, y:184},
+		{r:20, x:195, y:-157},
 	],
 	stations: [
-		{x:-400, y:-20}
+		{x:-400, y:0}
 	],
 	description:
-		"<p>This mission is all about dexterity, try not to crash the ship and not to send it in deep space.</p>"
+		"<p>Some guns can compute the path the bullet will follow and they show it to you when you're on their rail network.</p>"
+		 + "<p>When you're lucky enough to find such a gun, you'd better hit <kbd>P</kbd> when you enter their rails and try to move the planets.</p>"
 }

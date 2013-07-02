@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# build the production version of SpaceBullet
+# builds the production version of SpaceBullet
 
 ROOT_PATH=`dirname $0`
 BUILD_PATH="$ROOT_PATH/build"

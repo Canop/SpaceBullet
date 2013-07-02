@@ -1,5 +1,5 @@
 var sb = sb || {};
-window['sb']=sb; // so that minification doesn't prevent the not minified files to find sb
+window['sb']=sb; // so that minification doesn't prevent not minified files to find sb
 (function(){
 	
 	// a shim for the missing console.log in IE
@@ -7,13 +7,14 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 
 	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
 	sb.paused = false;
-	var NB_MISSIONS = 7; // mission-0 isn't counted
+	sb.NB_MISSIONS = 8; // mission-0 isn't counted
 
 	function tick(event) {
 		stage.update(event);
 	}
 	
-	function intro() {
+	sb.intro = function() {
+		if (sb.mission && sb.mission.id) sb.mission.remove();
 		sb.dialog({
 			html :
 				"<img src=img/bullet.svg align=left height=400>" +
@@ -29,7 +30,8 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 					location.href="project.html";
 				},				
 				"Start the game" : function() {
-					sb.startMission(1);
+					if (sb.getFirstNotDone()>1) sb.openGrid();
+					else sb.startMission(1);
 				}
 			}
 		});
@@ -37,7 +39,7 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 
 	sb.startMission = function(id) {
 		if (sb.mission) sb.mission.remove();
-		if (id>NB_MISSIONS) {
+		if (id>sb.NB_MISSIONS) {
 			console.log(id + " > NB_MISSIONS");
 			sb.dialog({
 				html :
@@ -50,7 +52,6 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 				}
 			});			
 		} else {
-			trackEvent('Mission Start', 'Mission '+id);
 			ImgLoader.done(function(){
 				sb.mission = new sb.Mission(id);
 				sb.mission.load();
@@ -71,11 +72,11 @@ window['sb']=sb; // so that minification doesn't prevent the not minified files 
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
 		var matches = location.search.match(/\bm=(\d+)/);
-		if (matches) {
+		if (matches && sb.checkPreviousMissionsAreDone(matches[1])) {
 			sb.startMission(parseInt(matches[1],10));
 		} else {
 			sb.startMission(0);
-			intro();
+			sb.intro();
 		}
 	}
 	
