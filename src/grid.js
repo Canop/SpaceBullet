@@ -11,7 +11,7 @@ var sb = sb || {};
 		$d = $('<div id=grid/>').hide();
 		var fnd = sb.getFirstNotDone();
 		$('<h1>Choose a mission</h1>').appendTo($d);
-		$d.append($('<span>').html('&#9650;')
+		$d.append($('<span>').html("&#9650;")
 			.addClass('home')
 			.click(function(){
 				$d.fadeOut(sb.intro);

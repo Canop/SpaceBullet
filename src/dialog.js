@@ -1,6 +1,8 @@
 var sb = sb || {};
 (function(){
 	
+	sb.homeIcon = "&#9664;";
+	
 	var $d;
 	
 	// opens a dialog
@@ -17,6 +19,7 @@ var sb = sb || {};
 		$d.append($('<div id=dialog_content/>').html(d.html));
 		var $buttons = $('<div id=dialog_buttons/>').appendTo($d);
 		$.each(d.buttons, function(name, func){
+			//~ if (name=="HOME") name="<img src=img/home.png height=18 valign=middle>"; // I'll probably make that cleaner
 			$buttons.append($('<span>').html(name).click(function(){
 				$d.fadeOut(func);
 			}));

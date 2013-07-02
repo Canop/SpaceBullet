@@ -46,9 +46,7 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 					"<p>Damn. No more mission :(</p>" +
 					"<p>I'm sorry, but I just started developping SpaceBullet, come back later for more.</p>",
 				buttons : {
-					"Go to start" : function() {
-						window.location.reload();
-					}
+					"Home": sb.openGrid
 				}
 			});			
 		} else {

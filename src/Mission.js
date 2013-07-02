@@ -102,7 +102,7 @@ var sb = sb || {};
 				"<p class=lose>You lose.</p>" +
 				"<p>You lost the bullet. Travelers died. That's very unfortunate.</p>",
 			buttons: {
-				"&#9650;": sb.openGrid,
+				"Home": sb.openGrid,
 				"Retry": m.start.bind(m)
 			}
 		});
@@ -118,7 +118,7 @@ var sb = sb || {};
 				"<p class=win>You win !</p>" +
 				"<p>All travelers reached their destination.</p>",
 			buttons: {
-				"&#9650;": sb.openGrid,
+				"Home": sb.openGrid,
 				"Retry": m.start.bind(m),
 				"Go to next mission": function(){ sb.startMission(m.id+1) }				
 			}

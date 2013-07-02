@@ -14,7 +14,7 @@ var sb = sb || {};
 				sb.dialog({
 					html: 'hint : if you just want to pause the game, you may hit <kbd>P</kbd> instead.',
 					buttons: {
-						"&#9650;": sb.openGrid,
+						"Home": sb.openGrid,
 						"Retry": sb.mission.start.bind(sb.mission),
 						"Resume": sb.togglePause
 					}
