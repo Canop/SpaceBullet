@@ -123,7 +123,6 @@ var sb = sb || {};
 				"Go to next mission": function(){ sb.startMission(m.id+1) }				
 			}
 		});
-		
 	}
 
 

@@ -1,7 +1,6 @@
 var sb = sb || {};
 (function(){
 
-	var lastKey;
 	var devMode = false;
 
 	window.addEventListener('keyup', function(e) {
@@ -21,9 +20,8 @@ var sb = sb || {};
 				});
 			}
 			break;
-		case 68: // d
-			if (lastKey==68 && /dev.html$/.test(location.pathname)) {
-				key = 0;
+		case 68: // d  -  enter dev mode
+			if (/dev.html$/.test(location.pathname)) {
 				devMode = !devMode;
 				if (devMode) {
 					sb.guns.forEach(function(gun){
@@ -36,11 +34,16 @@ var sb = sb || {};
 				}
 			}
 			break;
-		case 80: // p
+		case 77: // m  -  dumps mission data (to help make new mission files)
+			console.log(JSON.stringify(sb.toMissionData()));
+			break;
+		case 80: // p  -  pause
 			sb.togglePause();
 			break;
+		case 82: // r  -  resets bullet position
+			if (sb.mission) sb.bullet.launch();
+			break;
 		}
-		lastKey = key;
 	});
 	
 })();

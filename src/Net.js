@@ -1,5 +1,7 @@
 var sb = sb || {};
 (function(){
+	
+	// a net contains all the rails leading to a gun
 
 	function Net(gun, lines){
 		this.x = 0; this.y = 0;
@@ -12,7 +14,7 @@ var sb = sb || {};
 	proto.Container_initialize = proto.initialize;
 	proto.initialize = function(){
 		this.Container_initialize();
-		for (var i=0; i<this.lines.length; i++) {
+		for (var i=0; i<this.lines.length; i++) { // let's draw the rails first
 			var railline = this.lines[i];
 			var lastPoint = this.gun;
 			for (var j=0; j<railline.length; j++) {
@@ -21,10 +23,15 @@ var sb = sb || {};
 				var seg = new createjs.Shape();
 				seg.graphics.beginStroke("#ddd").setStrokeStyle(3).moveTo(lastPoint['x'], lastPoint['y']).lineTo(node['x'], node['y']);
 				this.addChild(seg);
-				var circle = new createjs.Shape();
-				circle.graphics.beginFill("#bbb").drawCircle(node['x'], node['y'], 5);
-				this.addChild(circle);
 				lastPoint = node;
+			}
+		}
+		for (var i=0; i<this.lines.length; i++) { // and the (over the rails) the junctions
+			var railline = this.lines[i];
+			for (var j=0; j<railline.length; j++) {
+				var circle = new createjs.Shape();
+				circle.graphics.beginFill("#bbb").drawCircle(railline[j]['x'], railline[j]['y'], 5);
+				this.addChild(circle);
 			}
 		}
 	}

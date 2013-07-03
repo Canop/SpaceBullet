@@ -5,9 +5,9 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 	// a shim for the missing console.log in IE
 	if (!window.console) window.console = {log: function(){}};
 
-	sb.G = 0.29; // cette constante intègre la gravitation et le poids de la fusée
-	sb.paused = false;
-	sb.NB_MISSIONS = 8; // mission-0 isn't counted
+	sb.G = 0.29; // sets the attraction strenght (technically the weight of the bullet is inside)
+	sb.paused = false; // if true, the bullet is paused but other animations or user interactions can go on
+	sb.NB_MISSIONS = 9; // mission-0 isn't counted so it's also the max id
 
 	function tick(event) {
 		stage.update(event);
@@ -22,7 +22,7 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 				"<p>You know what's unsafe with rockets ?</p>" +
 				"<p>Fuel, that's what's unsafe. Rockets can explode at any time because of the fuel they carry.</p>" + 
 				"<p>But the <span class=sbname>SpaceBullet</span> space travel company has the solution !</p>" +
-				"<p>Instead of carrying fuel, our ships are simply put into a big gun, fired, and then diriged using the gravity of nearby planets.</p>" +
+				"<p>Instead of carrying fuel, our ships are simply put into a big gun, fired, and then steered using the gravity of nearby planets.</p>" +
 				"<p>Your task is to move planets around so that SpaceBullet ships reach their destination.</p>",
 			cssClass: "big",
 			buttons : {
