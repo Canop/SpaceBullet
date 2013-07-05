@@ -50,7 +50,6 @@ var sb = sb || {};
 						var pi = sb.roundThings[i];
 						if (pi==p) continue;
 						if ((pi.x-x)*(pi.x-x)+(pi.y-y)*(pi.y-y) <= (pi.radius+p.radius)*(pi.radius+p.radius)) {
-							//~ console.log('collision with another round thing');
 							p.collisionCircle.visible = true;
 							return
 						}
@@ -58,7 +57,6 @@ var sb = sb || {};
 					for (var i=sb.nets.length; i-->0;) {
 						if (sb.nets[i].testHitCircle(x, y, p.radius)) {
 							p.collisionCircle.visible = true;
-							//~ console.log('collision with a rail');
 							return;
 						}
 						/*

@@ -10,13 +10,16 @@ var sb = sb || {};
 		case 27: // esc
 			if (sb.mission && sb.mission.id) {
 				sb.paused = true;
+				var buttons = {
+					"Home": sb.openGrid,
+					"Retry": sb.mission.start.bind(sb.mission),
+					"Resume": sb.togglePause
+				}
+				if (sb.mission.edited) buttons["Back to editor"] = sb.openEditor;
 				sb.dialog({
-					html: 'hint : if you just want to pause the game, you may hit <kbd>P</kbd> instead.',
-					buttons: {
-						"Home": sb.openGrid,
-						"Retry": sb.mission.start.bind(sb.mission),
-						"Resume": sb.togglePause
-					}
+					title: 'Game Paused',
+					html: 'Hint : if you just want to pause the game, you may hit <kbd>P</kbd> instead.',
+					buttons: buttons
 				});
 			}
 			break;

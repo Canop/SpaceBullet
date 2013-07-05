@@ -11,7 +11,7 @@ var sb = sb || {};
 		$d = $('<div id=grid/>').hide();
 		var fnd = sb.getFirstNotDone();
 		$('<h1>Choose a mission</h1>').appendTo($d);
-		$d.append($('<span>').html("&#9650;")
+		$d.append($('<span>').addClass('mission').html("&#9650;")
 			.addClass('home')
 			.click(function(){
 				$d.fadeOut(sb.intro);
@@ -20,7 +20,7 @@ var sb = sb || {};
 		for (var i=1; i<=fnd && i<=sb.NB_MISSIONS; i++) {
 			(function(i) {
 				$d.append($('<span>').text(i)
-					.addClass(i==fnd ? 'not_done' : 'done')
+					.addClass('mission').addClass(i==fnd ? 'not_done' : 'done')
 					.click(function(){
 						$d.fadeOut(function(){
 							sb.startMission(i);
@@ -29,6 +29,12 @@ var sb = sb || {};
 				);
 			})(i);
 		}
+		$('<p>or</p>').appendTo($d).append($('<span class=button>create your own mission</span>')
+			.addClass('button')
+			.click(function(){
+				$d.fadeOut(sb.openEditor);
+			})
+		);
 		$d.appendTo(document.body).fadeIn();
 	}
 	

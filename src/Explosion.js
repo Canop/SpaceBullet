@@ -21,7 +21,7 @@ var sb = sb || {};
 			boum.alpha -= 0.05;
 			boum.rotation ++;
 			if (boum.alpha <=0.05) {
-				sb.stage.removeChild(boum);
+				sb.stage.removeChild(boum); // to check : does that remove the event listener ?
 			}
 		});
 	}

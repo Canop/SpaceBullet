@@ -5,10 +5,9 @@ var ImgLoader = (function(){
 	var callbacks = [];
 	function checkAll() {
 		for (var key in images) {
-			if (!images[key].width) return false;
+			if (!images[key].width) return;
 		}
 		while (callbacks.length) callbacks.shift()();
-		return true;
 	}
 	return {
 		add: function(key, src) {

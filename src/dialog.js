@@ -3,8 +3,6 @@ var sb = sb || {};
 	
 	sb.homeIcon = "&#9664;";
 	
-	var $d;
-	
 	// opens a dialog
 	// Properties of the d object :
 	//  title (optional)
@@ -12,19 +10,25 @@ var sb = sb || {};
 	//  buttons ( map name->func )
 	//  cssClass (optional)
 	sb.dialog = function(d){
-		if ($d) $d.remove();
-		$d = $('<div id=dialog/>').hide();
-		if (d.cssClass) $d.addClass(d.cssClass);
-		$d.append($('<div id=dialog_title/>').text(d.title||''));
-		$d.append($('<div id=dialog_content/>').html(d.html));
-		var $buttons = $('<div id=dialog_buttons/>').appendTo($d);
+		var $d = $('<div class=dialog/>').hide().addClass(d.cssClass||'small');
+		$d.append($('<div class=dialog_title/>').text(d.title||''));
+		$d.append($('<div class=dialog_content/>').html(d.html));
+		var $buttons = $('<div class=dialog_buttons/>').appendTo($d);
+		var close = function(callback){
+			$d.fadeOut(callback).remove();
+		}
 		$.each(d.buttons, function(name, func){
-			//~ if (name=="HOME") name="<img src=img/home.png height=18 valign=middle>"; // I'll probably make that cleaner
-			$buttons.append($('<span>').html(name).click(function(){
-				$d.fadeOut(func);
+			$buttons.append($('<span>').addClass('button').html(name).click(function(){
+				close(func);
 			}));
 		});
 		$d.appendTo(document.body).fadeIn();
+		return {
+			close: close, // removes the dialog
+			hide: function(callback){ $d.fadeOut(callback) }, // just hides it so that it can be reopened (be careful not to let them accumulate)
+			show: function(callback){ $d.fadeIn(callback) }, // shows a previously hidden dialog
+			exists: function() { return !!$d.parent().length } // if false, it won't be possible to show it
+		}
 	}
 	
 })();

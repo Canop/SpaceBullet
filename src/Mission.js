@@ -3,6 +3,8 @@ var sb = sb || {};
 
 	function Mission(id){
 		this.id = id;
+		this.name = "Mission "+name;
+		this.edited = false; // true when the mission is open in editor
 	}
 	var proto = Mission.prototype;
 		
@@ -20,27 +22,31 @@ var sb = sb || {};
 		sb.roundThings.push(station);
 	}
 	
-	proto.load = function(){
-		var m = this;
+	sb.fetchMissionFile = function(id, callback) {
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.onreadystatechange = function() {
-			if (httpRequest.readyState === 4) {
-				if (httpRequest.status === 200) {
-					m.data = eval('('+httpRequest.responseText+')');
-					if (m.data['description']) {
-						sb.dialog({
-							title: "Mission "+m.id,
-							html: m.data['description'],
-							buttons: {"Start": m.start.bind(m)}
-						});
-					} else {
-						m.start();
-					}
-				}
+			if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+				callback(httpRequest.responseText);
 			}
-		};
-		httpRequest.open('GET', 'missions/mission-'+this.id+'.json?time='+(new Date().getTime()));
+		}
+		httpRequest.open('GET', 'missions/mission-'+id+'.json?time='+(new Date().getTime()));
 		httpRequest.send();
+	}
+	
+	proto.load = function(){
+		var m = this;
+		sb.fetchMissionFile(m.id, function(text){
+			m.data = eval('('+text+')');
+			if (m.data['description']) {
+				sb.dialog({
+					title: "Mission "+m.id,
+					html: m.data['description'],
+					buttons: {"Start": m.start.bind(m)}
+				});
+			} else {
+				m.start();
+			}
+		});
 	}
 
 	proto.start = function() {
@@ -96,15 +102,17 @@ var sb = sb || {};
 		var m = this;
 		if (m.data['offgame']) return; // this isn't a gaming mission
 		trackEvent('Mission '+m.id, 'lose');
+		var buttons = {
+			"Home": sb.openGrid,
+			"Retry": m.start.bind(m)
+		}
+		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
 			title: "Mission "+m.id,
 			html:
 				"<p class=lose>You lose.</p>" +
 				"<p>You lost the bullet. Travelers died. That's very unfortunate.</p>",
-			buttons: {
-				"Home": sb.openGrid,
-				"Retry": m.start.bind(m)
-			}
+			buttons: buttons
 		});
 	}
 	proto.win = function(){
@@ -112,16 +120,18 @@ var sb = sb || {};
 		if (m.data['offgame']) return; // this isn't a gaming mission
 		trackEvent('Mission '+m.id, 'win');
 		sb.saveMissionState(m.id, 'done');
+		var buttons = {
+			"Home": sb.openGrid,
+			"Retry": m.start.bind(m)
+		}
+		if (id>0) buttons["Go to next mission"] = function(){ sb.startMission(m.id+1) };
+		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
 			title: "Mission "+m.id,
 			html:
 				"<p class=win>You win !</p>" +
 				"<p>All travelers reached their destination.</p>",
-			buttons: {
-				"Home": sb.openGrid,
-				"Retry": m.start.bind(m),
-				"Go to next mission": function(){ sb.startMission(m.id+1) }				
-			}
+			buttons: buttons
 		});
 	}
 
