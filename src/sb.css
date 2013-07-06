@@ -4,6 +4,9 @@ body {
 	font-family: 'Raleway', sans-serif;
 	font-size: 18px;	
 }
+a {
+	color: #3c9dd0;
+}
 ::selection { background-color:transparent; }
 h1 {
 	margin-bottom: 30px;
@@ -106,11 +109,11 @@ p.win {
 	color: #112;
 }
 
-#file_analysis {
+output {
 	display: block;
 	margin: 10px;	
 }
-#file_analysis.error {
+output.error {
 	color: red;
 }
 #mission_text {

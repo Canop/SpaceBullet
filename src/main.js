@@ -69,13 +69,16 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 		window.addEventListener('resize', onresize);
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
-		var matches = location.search.match(/\bm=(\d+)/);
-		if (matches && sb.checkPreviousMissionsAreDone(matches[1])) {
-			sb.startMission(parseInt(matches[1],10));
-		} else {
-			sb.startMission(0);
-			sb.intro();
-		}
+		
+		sb.openEditor();
+		
+		//~ var matches = location.search.match(/\bm=(\d+)/);
+		//~ if (matches && sb.checkPreviousMissionsAreDone(matches[1])) {
+			//~ sb.startMission(parseInt(matches[1],10));
+		//~ } else {
+			//~ sb.startMission(0);
+			//~ sb.intro();
+		//~ }
 	}
 	
 	sb.togglePause = function() {

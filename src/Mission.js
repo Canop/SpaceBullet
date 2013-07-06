@@ -2,8 +2,8 @@ var sb = sb || {};
 (function(){
 
 	function Mission(id){
-		this.id = id;
-		this.name = "Mission "+name;
+		this.id = id; // mission id is -1 for user submitted missions (for now, maybe later they'll be in user submitted sets)
+		this.name = ''+id;
 		this.edited = false; // true when the mission is open in editor
 	}
 	var proto = Mission.prototype;
@@ -101,14 +101,14 @@ var sb = sb || {};
 	proto.lose = function(){
 		var m = this;
 		if (m.data['offgame']) return; // this isn't a gaming mission
-		trackEvent('Mission '+m.id, 'lose');
+		trackEvent('Mission '+m.name, 'lose');
 		var buttons = {
 			"Home": sb.openGrid,
 			"Retry": m.start.bind(m)
 		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
-			title: "Mission "+m.id,
+			title: "Mission "+m.name,
 			html:
 				"<p class=lose>You lose.</p>" +
 				"<p>You lost the bullet. Travelers died. That's very unfortunate.</p>",
@@ -118,7 +118,7 @@ var sb = sb || {};
 	proto.win = function(){
 		var m = this;
 		if (m.data['offgame']) return; // this isn't a gaming mission
-		trackEvent('Mission '+m.id, 'win');
+		trackEvent('Mission '+m.name, 'win');
 		sb.saveMissionState(m.id, 'done');
 		var buttons = {
 			"Home": sb.openGrid,
@@ -127,7 +127,7 @@ var sb = sb || {};
 		if (id>0) buttons["Go to next mission"] = function(){ sb.startMission(m.id+1) };
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
-			title: "Mission "+m.id,
+			title: "Mission "+m.name,
 			html:
 				"<p class=win>You win !</p>" +
 				"<p>All travelers reached their destination.</p>",
