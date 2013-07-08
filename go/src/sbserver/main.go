@@ -75,7 +75,7 @@ func serveHTTP(w http.ResponseWriter, hr *http.Request) {
 	default:
 		out.Code = "error"
 		out.Text = "Non ho capito la richiesta"
-		log.Println(out.Text)
+		log.Println(out.Text, in.Code)
 	}
 }
 

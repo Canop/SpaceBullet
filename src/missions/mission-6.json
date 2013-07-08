@@ -1,22 +1,22 @@
 {
-	guns: [
+	Guns: [
 		{
-			x:-100, y: 20, r:-10,
-			lines: [
-				[{x:-200, y:0}, {x:-300, y:-100}, {x:-310, y:-200}, {x:-290, y:-260}],
-				[{x:-220, y:30}, {x:-260, y:50}]
+			X:-100, Y: 20, R:-10,
+			Lines: [
+				[{X:-200, Y:0}, {X:-300, Y:-100}, {X:-310, Y:-200}, {X:-290, Y:-260}],
+				[{X:-220, Y:30}, {X:-260, Y:50}]
 			]
 		}
 	],
-	planets : [
-		{r:24, x:-20, y:-150},
-		{r:15, x:100, y:30},
-		{r:22, x:180, y:180, fixed: true},
-		{r:25, x:-120, y:200}
+	Planets : [
+		{R:24, X:-20, Y:-150},
+		{R:15, X:100, Y:30},
+		{R:22, X:180, Y:180, fixed: true},
+		{R:25, X:-120, Y:200}
 	],
-	stations: [
-		{x:-400, y:-20}
+	Stations: [
+		{X:-400, Y:-20}
 	],
-	description:
+	Description:
 		"<p>This mission is all about dexterity, try not to crash the ship and not to send it in deep space.</p>"
 }

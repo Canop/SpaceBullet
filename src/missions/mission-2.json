@@ -1,20 +1,19 @@
 {
-	guns: [
-		{x:250, y: 0, r:180,
-			lines: [
-				[{x:300, y:0}, {x:300, y:-50}, {x:-100, y:-50}, {x:-500, y:-300}, {x:-600, y:-300}, {x:-600, y:100}],
+	Guns: [
+		{X:250, Y: 0, R:180,
+			Lines: [
+				[{X:300, Y:0}, {X:300, Y:-50}, {X:-100, Y:-50}, {X:-500, Y:-300}, {X:-600, Y:-300}, {X:-600, Y:100}],
 			],
 		},
 	],
-	planets : [
-		{r:20, x:-280, y:-30},
-		{r:18, x:-270, y:30, fixed:true},
+	Planets : [
+		{R:20, X:-280, Y:-30},
+		{R:18, X:-270, Y:30, Fixed:true},
 	],
-	
-	stations: [
-		{x:-450, y:-150}
+	Stations: [
+		{X:-450, Y:-150}
 	],
-	description:
+	Description:
 		"<img src=img/blue-planet-1.png align=right hspace=10>" +
 		"<p>Some planets, the blue ones, are inhabited. You can't move those planets, that would be gross for the inhabitants.</p>" +
 		"<p>In this mission, one planet is movable, the other one isn't.</p>"+

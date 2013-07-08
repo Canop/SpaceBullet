@@ -1,22 +1,22 @@
 {
-	guns: [
+	Guns: [
 		{
-			x:-100, y:200, r:-180, showPath:true,
-			lines: [
-				[{x:0,y:200},{x:50,y:150},{x:50,y:50},{x:0,y:0},{x:-200,y:0},{x:-250,y:50},{x:-250,y:250},]
+			X:-100, Y:200, R:-180, ShowPath:true,
+			Lines: [
+				[{X:0,Y:200},{X:50,Y:150},{X:50,Y:50},{X:0,Y:0},{X:-200,Y:0},{X:-250,Y:50},{X:-250,Y:250},]
 			]
 		}
 	],
-	planets : [
-		{r:14, x:370, y:176},
-		{r:19, x:-80, y:-30},
-		{r:12, x:-118, y:162},
-		{r:19, x:-10, y:122},
+	Planets : [
+		{R:14, X:370, Y:176},
+		{R:19, X:-80, Y:-30},
+		{R:12, X:-118, Y:162},
+		{R:19, X:-10, Y:122},
 	],
-	stations: [
-		{x:-300, y:-205}
+	Stations: [
+		{X:-300, Y:-205}
 	],
-	description:
+	Description:
 		"<p>Here you'd better hit <kbd>P</kbd> when the bullet is on rails and quietly move the planets.</p>" +
 		"<p>Try to feel how gravity works.</p>"
 }

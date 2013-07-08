@@ -1,7 +1,7 @@
 var sb = sb || {};
 (function(){
 
-	// the "grid" is the screen where you can see the available missions and start one
+	// the "grid" is the screen where you can see the available standard missions and start one
 		
 	var $d;
 

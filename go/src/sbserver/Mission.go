@@ -1,32 +1,32 @@
 package main
 
 type Position struct {
-	X float32 "x"
-	Y float32 "y"
+	X float32
+	Y float32
 }
 
 type Gun struct {
 	Position
-	R        float32      "r"
-	ShowPath bool         "showPath"
-	Lines    [][]Position "lines"
+	R        float32
+	ShowPath bool
+	Lines    [][]Position
 }
 
 type Planet struct {
 	Position
-	R     float32 "r"
-	Fixed bool    "fixed"
+	R     float32
+	Fixed bool
 }
 
 type Station Position
 
 type Mission struct {
-	Guns        []Gun     "guns"
-	Planets     []Planet  "planets"
-	Stations    []Station "stations"
-	Name        string    "name"
-	Author      string    "author"
-	Description string    "description"
+	Guns        []Gun
+	Planets     []Planet
+	Stations    []Station
+	Name        string
+	Author      string
+	Description string
 }
 
 // returns "" or an error message

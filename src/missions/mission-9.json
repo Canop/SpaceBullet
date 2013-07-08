@@ -1,28 +1,28 @@
 {
-	guns: [
+	Guns: [
 		{
-			x:100, y:100, r:-180, showPath: true,
-			lines: [
-				[{x:150,y:150},{x:170,y:130},{x:140,y:95}]
+			X:100, Y:100, R:-180, ShowPath: true,
+			Lines: [
+				[{X:150,Y:150},{X:170,Y:130},{X:140,Y:95}]
 			]
 		},{
-			x:-100, y:200, r:90, showPath: true,
-			lines: [
-				[{x:-100,y:-220},{x:290,y:-220}]
+			X:-100, Y:200, R:90, ShowPath: true,
+			Lines: [
+				[{X:-100,Y:-220},{X:290,Y:-220}]
 			]
 		},{
-			x:290, y:200, r:0, showPath: true,
-			lines: [
-				[{x:290,y:-200}],
-				[{x:290,y:160},{x:-80,y:160}]
+			X:290, Y:200, R:0, ShowPath: true,
+			Lines: [
+				[{X:290,Y:-200}],
+				[{X:290,Y:160},{X:-80,Y:160}]
 			]
 		}
 
 	],
-	planets : [{"x":241,"y":243,"r":13,"fixed":false},{"x":-147,"y":-238,"r":15,"fixed":false},{"x":67,"y":-62,"r":35,"fixed":true}],
-	stations: [
-		{x:-350, y:-300}
+	Planets : [{"X":241,"Y":243,"R":13,"Fixed":false},{"X":-147,"Y":-238,"R":15,"Fixed":false},{"X":67,"Y":-62,"R":35,"Fixed":true}],
+	Stations: [
+		{X:-350, Y:-300}
 	],
-	description:
+	Description:
 		"<p>SpaceBullet is open source and there's a discussion group. Come and discuss if you like.</p>"
 }

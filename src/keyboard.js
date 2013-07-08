@@ -8,11 +8,11 @@ var sb = sb || {};
 		console.log('Key press : ', key);
 		switch (key) {
 		case 27: // esc
-			if (sb.mission && sb.mission.id) {
+			if (sb.mission && sb.mission.id && sb.mission.played) {
 				sb.paused = true;
 				var buttons = {
 					"Home": sb.openGrid,
-					"Retry": sb.mission.start.bind(sb.mission),
+					"Retry": sb.mission.startGame.bind(sb.mission),
 					"Resume": sb.togglePause
 				}
 				if (sb.mission.edited) buttons["Back to editor"] = sb.openEditor;

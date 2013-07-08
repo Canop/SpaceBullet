@@ -39,22 +39,29 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 
 	sb.startMission = function(id) {
 		if (sb.mission) sb.mission.remove();
-		if (id>sb.NB_MISSIONS) {
-			console.log(id + " > NB_MISSIONS");
-			sb.dialog({
-				html :
-					"<p>Damn. No more mission :(</p>" +
-					"<p>I'm sorry, but I just started developping SpaceBullet, come back later for more.</p>",
-				buttons : {
-					"Home": sb.openGrid
-				}
-			});			
-		} else {
-			ImgLoader.done(function(){
-				sb.mission = new sb.Mission(id);
-				sb.mission.load();
-			});
+		if (id==+id) {
+			if (id>sb.NB_MISSIONS) {
+				sb.dialog({
+					html :
+						"<p>Damn. No more mission :(</p>" +
+						"<p>I'm sorry, but I just started developping SpaceBullet, come back later for more.</p>",
+					buttons : { "Home": sb.openGrid }
+				});	
+				return;
+			}
+			if (id && !sb.checkPreviousMissionsAreDone(id)) {
+				sb.dialog({
+					html :
+						"<p>You must win previous missions before starting this one.</p>",
+					buttons : { "Home": sb.openGrid }
+				});					
+				return;
+			}
 		}
+		ImgLoader.done(function(){
+			sb.mission = new sb.Mission(id);
+			sb.mission.load(function(){sb.mission.start()});
+		});
 	}
 
 	sb.start = function(){
@@ -70,14 +77,13 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 		createjs.Ticker.setFPS(30);
 		createjs.Ticker.addEventListener("tick", tick);
 		
-		
-		//~ var matches = location.search.match(/\bm=(\d+)/);
-		//~ if (matches && sb.checkPreviousMissionsAreDone(matches[1])) {
-			//~ sb.startMission(parseInt(matches[1],10));
-		//~ } else {
-		sb.startMission(0);
-		sb.intro();
-		//~ }
+		var matches = location.search.match(/\bm=([^&]+)/);
+		if (matches) {
+			sb.startMission(matches[1]);
+		} else {
+			sb.startMission(0);
+			sb.intro();
+		}
 	}
 	
 	sb.togglePause = function() {

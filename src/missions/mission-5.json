@@ -1,23 +1,23 @@
 {
-	guns: [
+	Guns: [
 		{
-			x:0, y:200, r:-150, showPath:true,
-			lines: [
-				[{x:-100,y:300}, {x:100,y:300},{x:380,y:150},{x:10,y:150}],
-				[{x:-100,y:300}, {x:100,y:300},{x:380,y:150},{x:380,y:-200},{x:-100,y:-200}],
+			X:0, Y:200, R:-150, ShowPath:true,
+			Lines: [
+				[{X:-100,Y:300}, {X:100,Y:300},{X:380,Y:150},{X:10,Y:150}],
+				[{X:-100,Y:300}, {X:100,Y:300},{X:380,Y:150},{X:380,Y:-200},{X:-100,Y:-200}],
 			]
 		}
 	],
-	planets : [
-		{r:14, x:-70, y:176},
-		{r:19, x:-80, y:-30, fixed:true},
-		{r:12, x:-118, y:162},
-		{r:19, x:-10, y:122, fixed:true},
+	Planets : [
+		{R:14, X:-70, Y:176},
+		{R:19, X:-80, Y:-30, Fixed:true},
+		{R:12, X:-118, Y:162},
+		{R:19, X:-10, Y:122, Fixed:true},
 	],
-	stations: [
-		{x:300, y:45}
+	Stations: [
+		{X:300, Y:45}
 	],
-	description:
-		"<p>Maybe you don't know that : the attraction force is inversely proportionnal to the distance of the planet.</p>" +
+	Description:
+		"<p>Maybe you don't know that : the attraction force is inversely proportionnal to the square of the distance to the planet.</p>" +
 		"<p>And gravity knows no limit, there's no maximal distance for attration.</p>"
 }

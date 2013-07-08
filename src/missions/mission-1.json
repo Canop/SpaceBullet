@@ -1,19 +1,19 @@
 {
-	guns : [
+	Guns : [
 		{
-			x:-150, y: 0, r:0,
-			lines : [
-				[{x:-200, y: 0},{x:-250, y:-50}, {x:-250, y:-200}, {x:-200, y:-250}, {x:250, y:-250}, {x:300, y:-200}, {x:300, y:50}]
+			X:-150, Y: 0, R:0,
+			Lines : [
+				[{X:-200, Y: 0},{X:-250, Y:-50}, {X:-250, Y:-200}, {X:-200, Y:-250}, {X:250, Y:-250}, {X:300, Y:-200}, {X:300, Y:50}]
 			],
 		},
 	],
-	planets : [
-		{r:25, x:50, y:-100}
+	Planets : [
+		{R:25, X:50, Y:-100}
 	],
-	stations : [
-		{x:210, y:-80}
+	Stations : [
+		{X:210, Y:-80}
 	],
-	description:
+	Description:
 		"<img align=right src=img/station.svg height=160>" + 
 		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> ship reach its destination station :</p>" +
 		"<p>Using the mouse, gently move the planet to change the gravity field.</p>" +

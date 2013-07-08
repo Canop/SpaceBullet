@@ -1,10 +1,24 @@
 var sb = sb || {};
 (function(){
 
+	// id can be
+	//   - if shorter than 6 characters : a number > 0, one of the standard missions, in order
+	//   - else, a user submited mission
+	// This scheme might change in the future, for example if I decide not to keep on github the standard missions
+
 	function Mission(id){
-		this.id = id; // mission id is -1 for user submitted missions (for now, maybe later they'll be in user submitted sets)
-		this.name = ''+id;
+		this.id = ''+id; // mission id is -1 for unsaved missions
 		this.edited = false; // true when the mission is open in editor
+		this.std = false; // standard missions (in sequence)
+		this.played = false; // currently played or not
+		if (id==-1) {
+			this.path = null;
+		} else if (this.id.length<6) {
+			this.path = 'missions/mission-'+this.id+'.json?time='+(new Date().getTime());
+			this.std = true;
+		} else {
+			this.path = '/spacebullet-missions/' + id[0] + '/' + id[1] + '/' + id;
+		}
 	}
 	var proto = Mission.prototype;
 		
@@ -22,34 +36,34 @@ var sb = sb || {};
 		sb.roundThings.push(station);
 	}
 	
-	sb.fetchMissionFile = function(id, callback) {
+	proto.load = function(callback){
+		var m = this;
 		var httpRequest = new XMLHttpRequest();
 		httpRequest.onreadystatechange = function() {
 			if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-				callback(httpRequest.responseText);
+				m.data = eval('('+httpRequest.responseText+')');
+				if (callback) callback();
 			}
 		}
-		httpRequest.open('GET', 'missions/mission-'+id+'.json?time='+(new Date().getTime()));
+		httpRequest.open('GET', this.path);
 		httpRequest.send();
-	}
-	
-	proto.load = function(){
-		var m = this;
-		sb.fetchMissionFile(m.id, function(text){
-			m.data = eval('('+text+')');
-			if (m.data['description']) {
-				sb.dialog({
-					title: "Mission "+m.id,
-					html: m.data['description'],
-					buttons: {"Start": m.start.bind(m)}
-				});
-			} else {
-				m.start();
-			}
-		});
 	}
 
 	proto.start = function() {
+		var m = this;
+		var name = m.data['Name'] || m.id;
+		if (m.data['Description']) {
+			sb.dialog({
+				title: "Mission "+name,
+				html: m.data['Description'],
+				buttons: {"Start": m.startGame.bind(m)}
+			});
+		} else {
+			m.startGame();
+		}
+	}
+
+	proto.startGame = function() {
 		// note that the order of stage addition is so for the display order
 		var m = this;
 		sb.paused = false;
@@ -58,22 +72,25 @@ var sb = sb || {};
 		sb.stage.addChild(sb.net);
 		sb.roundThings = [];
 		sb.planets = [];
-		if (data['planets']) {
-			for (var i=data['planets'].length; i-->0;) {
-				var p = data['planets'][i];
-				addPlanet(p['r'], p['x'], p['y'], p['fixed']);
+		if (data['Planets']) {
+			for (var i=data['Planets'].length; i-->0;) {
+				var p = data['Planets'][i];
+				addPlanet(p['R'], p['X'], p['Y'], p['Fixed']);
 			}
 		}
 		sb.nets = [];
 		sb.guns = [];
-		for (var i=0; i<data['guns'].length; i++) {
-			var dg = data['guns'][i];
-			var g = new sb.Gun(dg['x'], dg['y'], dg['showPath']);
-			g.rotation = dg['r'];
-			g.visible = !dg['invisible'];
+		for (var i=0; i<data['Guns'].length; i++) {
+			var dg = data['Guns'][i];
+			var g = new sb.Gun(dg['X'], dg['Y'], dg['ShowPath']);
+			g.rotation = dg['R'];
+			g.visible = !dg['Invisible'];
 			sb.stage.addChild(g.path);
-			if (dg['lines']) {
-				var net = new sb.Net(g, dg['lines']);
+			if (dg['Lines']) {
+				var lines = dg['Lines'].map(function(line){
+					return line.map(function(p){ return {x:p['X'],y:p['Y']} });
+				});
+				var net = new sb.Net(g, lines);
 				sb.nets.push(net);
 				stage.addChild(net);
 			}
@@ -84,27 +101,27 @@ var sb = sb || {};
 		sb.nbBullets = 1;
 		stage.addChild(sb.bullet);
 		sb.stations = [];
-		if (data['stations']) {
-			for (var i=data['stations'].length; i-->0;) {
-				var s = data['stations'][i];
-				addStation(s['x'], s['y']);
-			}
-		}
+		(data['Stations']||[]).forEach(function(s) {
+			addStation(s['X'], s['Y']);
+		});
 		for (var i=0; i<sb.guns.length; i++) stage.addChild(sb.guns[i]);
 		sb.gun = sb.guns[0];
+		m.played = true;
 		sb.bullet.launch();
-		trackEvent('Mission '+m.id, 'start');
+		trackEvent('Mission started', m.id);
 	}
 	proto.remove = function() {
+		this.played = false;
 		sb.stage.removeAllChildren();		
 	}
 	proto.lose = function(){
 		var m = this;
-		if (m.data['offgame']) return; // this isn't a gaming mission
-		trackEvent('Mission '+m.name, 'lose');
+		m.played = false;
+		if (m.data['Offgame']) return; // this isn't a gaming mission
+		trackEvent('Mission lost', m.id);
 		var buttons = {
 			"Home": sb.openGrid,
-			"Retry": m.start.bind(m)
+			"Retry": m.startGame.bind(m)
 		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
@@ -117,14 +134,17 @@ var sb = sb || {};
 	}
 	proto.win = function(){
 		var m = this;
-		if (m.data['offgame']) return; // this isn't a gaming mission
-		trackEvent('Mission '+m.name, 'win');
-		sb.saveMissionState(m.id, 'done');
+		m.played = false;
+		if (m.data['Offgame']) return; // this isn't a gaming mission
+		trackEvent('Mission won', m.id);
 		var buttons = {
 			"Home": sb.openGrid,
-			"Retry": m.start.bind(m)
+			"Retry": m.startGame.bind(m)
 		}
-		if (id>0) buttons["Go to next mission"] = function(){ sb.startMission(m.id+1) };
+		if (m.std) {
+			sb.saveMissionState(m.id, 'done');
+			buttons["Go to next mission"] = function(){ sb.startMission(+m.id+1) };
+		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
 			title: "Mission "+m.name,
@@ -134,7 +154,6 @@ var sb = sb || {};
 			buttons: buttons
 		});
 	}
-
 
 	sb.Mission = Mission;	
 })();

@@ -1,14 +1,10 @@
 var sb = sb || {};
 (function(){
 	
-	var MISSION_SERVER = 'http://localhost:8012/';
-	var NB_MINIMAL_MISSIONS = 10;
+	var MISSION_SERVER = location.origin+':8012/';
+	var NB_MINIMAL_MISSIONS = 8;
 	var m; // loaded mission, if any
 	var dialog;
-
-	sb.missionKeyToPath = function(key) {
-		return '/spacebullet-missions/' + key[0] + '/' + key[1] + '/' + key;
-	}
 
 	sb.openEditor = function(){
 		if (sb.getFirstNotDone()<=NB_MINIMAL_MISSIONS) {
@@ -54,9 +50,9 @@ var sb = sb || {};
 				$r.addClass('error').html("This doesn't look like a correct JSON string.");
 				return;
 			}
-			if (!(data.guns&&data.guns.length)) {
+			if (!(data['Guns']&&data['Guns'].length)) {
 				$r.addClass('error').html('A mission needs at least one gun.');
-			} else if (!(data.stations&&data.stations.length)) {
+			} else if (!(data['Stations']&&data['Stations'].length)) {
 				$r.addClass('error').html('A mission needs at least one destination station.');					
 			} else {
 				m = new sb.Mission(-1);
@@ -67,16 +63,16 @@ var sb = sb || {};
 			}
 		}
 		$('#load_button').click(function(){
-			sb.fetchMissionFile($('#mission_select :selected').text(), function(text) {
-				var data = eval('('+text+')');
-				data.description = "This mission has no description yet";
-				data.name = "untitled";
-				data.author = "anonymous";
-				$('#mission_text').val(JSON.stringify(data,null,'\t'));
+			var m = new sb.Mission($('#mission_select :selected').text());
+			m.load(function() {
+				m.data['Description'] = "This mission has no description yet";
+				m.data['Name'] = "untitled";
+				m.data['Author'] = "anonymous";
+				$('#mission_text').val(JSON.stringify(m.data, null, '\t'));
 				check();
 			});
 		});
-		$('#mission_text').keyup(check);
+		$('#mission_text').on('keyup', check); // using keyup directly as function is broken when using closure compiler
 		var $test_button = $('#test_it').click(function(){
 			if (sb.mission) sb.mission.remove();
 			if (m) {
@@ -91,11 +87,11 @@ var sb = sb || {};
 					if (httpRequest.readyState === 4) {
 						if (httpRequest.status === 200) {
 							var resp = JSON.parse(httpRequest.responseText);
-							if (resp.Code=="ok") {
-								var url = location.origin + location.pathname + '?m=' + resp.Text;
+							if (resp['Code']=="ok") {
+								var url = location.origin + location.pathname + '?m=' + resp['Text'];
 								$('#post_result').removeClass('error').html('Mission saved. Direct URL :<br><a target=_blank href='+url+'>'+url+'</a>');																
 							} else {
-								$('#post_result').addClass('error').html('There was a problem. ' + resp.Text);								
+								$('#post_result').addClass('error').html('There was a problem. ' + resp['Text']);								
 							}
 						} else {
 							$('#post_result').addClass('error').html('There was an error sending your mission to the server.');
@@ -104,10 +100,10 @@ var sb = sb || {};
 				}
 				httpRequest.open('POST', MISSION_SERVER);
 				//~ httpRequest.setRequestHeader("Content-type", "application/x-javascript");
-				httpRequest.send(JSON.stringify({Code:"save", Mission:m.data}));
+				httpRequest.send(JSON.stringify({"Code":"save", "Mission":m.data}));
 			}
 		});
-		$('#file_input').change(function(e){
+		$('#file_input').on('change', function(e){ // using change directly as function is broken when using closure compiler
 			var file = e.target.files[0];
 			if (!file) return; // I don't know if that may happen
 			var reader = new FileReader();

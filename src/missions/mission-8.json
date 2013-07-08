@@ -1,26 +1,26 @@
 {
-	guns: [
+	Guns: [
 		{
-			x:-350, y:100, r:-50, showPath: true,
-			lines: [
-				[{x:-600,y:100},{x:-600,y:-250},{x:100,y:-250}],
-				[{x:-320,y:130},{x:100,y:130},{x:100,y:-150}]
+			X:-350, Y:100, R:-50, ShowPath: true,
+			Lines: [
+				[{X:-600,Y:100},{X:-600,Y:-250},{X:100,Y:-250}],
+				[{X:-320,Y:130},{X:100,Y:130},{X:100,Y:-150}]
 			]
 		},{
-			x:-350, y:180, r:50, showPath: true,
-			lines: [
-				[{x:-320,y:150},{x:120,y:150},{x:120,y:-250}]
+			X:-350, Y:180, R:50, ShowPath: true,
+			Lines: [
+				[{X:-320,Y:150},{X:120,Y:150},{X:120,Y:-250}]
 			]
 		},
 	],
-	planets : [
-		{r:35, x:-255, y:-116, fixed:true},
-		{r:14, x:-252, y:19},
-		{r:20, x:47, y:53},
+	Planets : [
+		{R:35, X:-255, Y:-116, Fixed:true},
+		{R:14, X:-252, Y:19},
+		{R:20, X:47, Y:53},
 	],
-	stations: [
-		{x:250, y:0}
+	Stations: [
+		{X:250, Y:0}
 	],
-	description:
+	Description:
 		"<p>You might like to learn that all planets in this game have the same density so their mass is proportional to the cube of their radius.</p>"
 }
