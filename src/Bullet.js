@@ -10,12 +10,6 @@ var sb = sb || {};
 		this.vx = 0; this.vy = 0;
 		this.ax = 0; this.ay = 0;
 		this.state = IDLE;
-	}
-	var proto = Bullet.prototype = new createjs.Container();
-	
-	proto.Container_initialize = proto.initialize;
-	proto.initialize = function(){
-		this.Container_initialize();
 		this.size = 80;
 		this.radius = this.size/10 - 2; // collision detection
 		var img = ImgLoader.get('bullet');
@@ -23,16 +17,15 @@ var sb = sb || {};
 		bmp.regX = img.width*.3; bmp.regY = img.height/2;
 		bmp.scaleX = bmp.scaleY = this.size / img.height;
 		this.addChild(bmp);
-
 		if (showCollisionRadius) {
 			var circle = new createjs.Shape();
 			circle.graphics.beginFill("red").drawCircle(0, 0, this.radius/this.scaleX);
 			circle.y = this.radius;
 			this.addChild(circle);
 		}
-		
 		this.addEventListener('tick', this.tick.bind(this));
 	}
+	var proto = Bullet.prototype = new createjs.Container();
 	
 	// be fired from a gun
 	proto.launch = function(gun) {

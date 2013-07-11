@@ -2,7 +2,7 @@ var sb = sb || {};
 (function(){
 	
 	var MISSION_SERVER = location.origin+':8012/';
-	var NB_MINIMAL_MISSIONS = 8;
+	var NB_MINIMAL_MISSIONS = 5;
 	var m; // loaded mission, if any
 	var dialog;
 
@@ -40,7 +40,7 @@ var sb = sb || {};
 			}
 		});
 		var $r = $('#file_analysis');
-		$('#mission_select').append(Array.apply(0,Array(NB_MINIMAL_MISSIONS)).map(function(_,i){ return $('<option/>').text(i+1) }));
+		$('#mission_select').append(Array.apply(0,Array(sb.getFirstNotDone())).map(function(_,i){ return $('<option>').text(i||'Choose a mission') }));
 		var check = function(){
 			$test_button.hide(); $share_button.hide();
 			var data;

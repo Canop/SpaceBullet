@@ -9,18 +9,12 @@ var sb = sb || {};
 	var bpindex = 0, dpindex = 0;
 
 	function Planet(r, fixed){
+		this.initialize();
 		this.radius = r;
 		this.density = 1;
 		this.fixed = fixed;
 		this.weight = this.density * r * r * r;
-		this.initialize();
-	}
-	var proto = Planet.prototype = new createjs.Container();
-	
-	proto.Container_initialize = proto.initialize;
-	proto.initialize = function(){
 		var p = this;
-		p.Container_initialize();
 		
 		var img = this.fixed ? ImgLoader.get('blue-planet-'+((bpindex++)%NB_BLUE_PLANET_IMAGES)) : ImgLoader.get('dead-planet-'+((dpindex++)%NB_DEAD_PLANET_IMAGES));
 		var bmp = new createjs.Bitmap(img);
@@ -74,6 +68,8 @@ var sb = sb || {};
 			});
 		}
 	}
+	var proto = Planet.prototype = new createjs.Container();
+
 	
 	sb.Planet = Planet;
 })();

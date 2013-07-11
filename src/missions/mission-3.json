@@ -9,9 +9,7 @@
 		},
 	],
 	Planets : [
-		{R:25, X:100, Y:-110, fixed:true},
-		{R:20, X:231, Y:184},
-		{R:20, X:195, Y:-157},
+		{"X":195,"Y":-157,"R":20,"Fixed":false},{"X":191,"Y":120,"R":20,"Fixed":false},{"X":100,"Y":-110,"R":25,"Fixed":false}
 	],
 	Stations: [
 		{X:-400, Y:0}

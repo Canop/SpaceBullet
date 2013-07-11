@@ -20,6 +20,7 @@
 	<script src="Bullet.js"></script>
 	<script src="Planet.js"></script>
 	<script src="Gun.js"></script>
+	<script src="Door.js"></script>
 	<script src="Explosion.js"></script>
 	<script src="Mission.js"></script>
 	<script src="Net.js"></script>
@@ -30,6 +31,7 @@
 	<script src="storage.js"></script>
 	<script src="grid.js"></script>
 	<script src="dev.js"></script>
+	<script src="scheduler.js"></script>
 	<script src="editor.js"></script>
 	<script src="main.js"></script>
 	<title>SpaceBullet</title>
@@ -40,6 +42,9 @@
 </div>
 <script>
 	sb.start();
+	$(document.body).click(function(e){
+		console.log({X:e.pageX+sb.stage.regX, Y:e.pageY+sb.stage.regY});
+	});
 </script>
 </body>
 </html>

@@ -2,16 +2,10 @@ var sb = sb || {};
 (function(){
 
 	function Path(gun){
+		this.initialize();
+		var path = this;
 		this.gun = gun;
 		this.x = 0; this.y = 0;
-		this.initialize();
-	}
-	var proto = Path.prototype = new createjs.Container();
-	
-	proto.Container_initialize = proto.initialize;
-	proto.initialize = function(){
-		var path = this;
-		this.Container_initialize();
 		this.shape = new createjs.Shape();
 		this.addChild(this.shape);
 		this.alpha = 0.5;
@@ -60,6 +54,7 @@ var sb = sb || {};
 			}		
 		}
 	}
+	var proto = Path.prototype = new createjs.Container();
 	
 	proto.on = function(){
 		this.visible = true;

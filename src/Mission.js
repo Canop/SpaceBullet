@@ -56,7 +56,10 @@ var sb = sb || {};
 			sb.dialog({
 				title: "Mission "+name,
 				html: m.data['Description'],
-				buttons: {"Start": m.startGame.bind(m)}
+				buttons: {
+					"Home": sb.openGrid,
+				 	"Start": m.startGame.bind(m)
+				}
 			});
 		} else {
 			m.startGame();
@@ -66,6 +69,7 @@ var sb = sb || {};
 	proto.startGame = function() {
 		// note that the order of stage addition is so for the display order
 		var m = this;
+		sb.re.clear(); // clears all the rules
 		sb.paused = false;
 		var data = m.data;
 		sb.stage.removeAllChildren();
@@ -80,6 +84,7 @@ var sb = sb || {};
 		}
 		sb.nets = [];
 		sb.guns = [];
+		sb.doors = [];
 		for (var i=0; i<data['Guns'].length; i++) {
 			var dg = data['Guns'][i];
 			var g = new sb.Gun(dg['X'], dg['Y'], dg['ShowPath']);
@@ -88,7 +93,7 @@ var sb = sb || {};
 			sb.stage.addChild(g.path);
 			if (dg['Lines']) {
 				var lines = dg['Lines'].map(function(line){
-					return line.map(function(p){ return {x:p['X'],y:p['Y']} });
+					return line.map(function(p){ return {x:p['X'],y:p['Y'],rules:p['Rules']} }); // note : p['Rules'] will be duplicated in Net
 				});
 				var net = new sb.Net(g, lines);
 				sb.nets.push(net);
@@ -105,6 +110,10 @@ var sb = sb || {};
 			addStation(s['X'], s['Y']);
 		});
 		for (var i=0; i<sb.guns.length; i++) stage.addChild(sb.guns[i]);
+		for (var i=0; i<sb.doors.length; i++) {
+			stage.addChild(sb.doors[i]);
+			sb.doors[i].setState("closed");
+		}
 		sb.gun = sb.guns[0];
 		m.played = true;
 		sb.bullet.launch();
@@ -125,7 +134,7 @@ var sb = sb || {};
 		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
-			title: "Mission "+m.name,
+			title: "Mission "+m.id,
 			html:
 				"<p class=lose>You lose.</p>" +
 				"<p>You lost the bullet. Travelers died. That's very unfortunate.</p>",
@@ -147,7 +156,7 @@ var sb = sb || {};
 		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
-			title: "Mission "+m.name,
+			title: "Mission "+m.id,
 			html:
 				"<p class=win>You win !</p>" +
 				"<p>All travelers reached their destination.</p>",

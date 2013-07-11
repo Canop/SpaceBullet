@@ -5,13 +5,7 @@ var sb = sb || {};
 		this.initialize();
 		this.x = x; this.y = y;
 		this.scale = 1;
-	}
-	var proto = Explosion.prototype = new createjs.Container();
-	
-	proto.Container_initialize = proto.initialize;
-	proto.initialize = function(){
 		var boum = this;
-		this.Container_initialize();
 		var star = new createjs.Shape();
 		star.graphics.beginFill("#ff0000").beginStroke("#FF0").setStrokeStyle(5).drawPolyStar(0,0,20,5,0.6).closePath();
 		boum.addChild(star);
@@ -25,7 +19,8 @@ var sb = sb || {};
 			}
 		});
 	}
-
+	var proto = Explosion.prototype = new createjs.Container();
+	
 	sb.Explosion = Explosion;	
 })();
 

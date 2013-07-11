@@ -1,0 +1,59 @@
+{
+	Guns: [
+		{
+			X: 150, Y: 00, R:0, ShowPath: true,
+			Lines: [
+				[
+				{X:150, Y:50}, {X:340, Y:50}, {X:340, Y:-330}, {X:-60, Y:-330}, {X:-60, Y:-230}
+				]
+			]
+		},{
+			X: -250, Y: 150, R:-90, ShowPath: true,
+			Lines: [
+				[
+				{X:-120, Y:150}, {X:-80, Y:0}, {X:-80, Y:-50}, {X:-80, Y:-330, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:4000}
+				]}
+				],[
+				{X:-290, Y:150}, {X:-400, Y:150, Rules:[
+					{On:"BulletLeavesNet", Action:"open"}
+				]},{X:-420, Y:150},{X:-420, Y:-50}, 
+				],[
+				{X:-80, Y:150}, {X:300, Y:70, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:8000},{On:"BulletEntersNet", Action:"close"}
+				]},{X:340, Y:70},{X:340, Y:240},{X:-280, Y:240}
+				]
+			]
+		},{
+			X: 370, Y: -150, R:0, ShowPath: true,
+			Lines: [
+				[
+				{X:370, Y:-350}, {X:-100, Y:-350}, {X:-100, Y:0}
+				],
+				[
+				{X:370, Y:-110},{X:370, Y:50, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:1000},{On:"BulletEntersNet", Action:"close", Delay:1000}]},
+				{X:370, Y:260},{X:-280, Y:260},{X:-420, Y:260, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:8000}]},{X:-440, Y:260},{X:-440, Y:230}
+				],
+			]
+		},{
+			X: -440, Y: 200, R:0, ShowPath: true,
+			Lines: [
+				[
+				{X:-440, Y:-350}, {X:-120, Y:-350}, {X:-120, Y:50}
+				]
+			]
+		},
+	],
+	Planets : [
+		{"X":-353,"Y":-273,"R":21,"Fixed":false},
+		{"X":139,"Y":-272,"R":19,"Fixed":false},
+		{"X":-303,"Y":-172,"R":18,"Fixed":false},
+		{"X":152.5,"Y":-151.5,"R":26,"Fixed":true}
+	],
+	Stations: [
+		{X: -356.5, Y: 313.5}
+	],
+	Description: "<p>Remember that not all doors behave in the same way.</p>"
+		+ "<p>Some of them never close for example.</p>"
+	
+}

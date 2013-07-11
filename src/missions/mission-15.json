@@ -1,0 +1,54 @@
+{
+	Guns: [
+		{
+			X: 0, Y: 100, R:-90, ShowPath: true,
+			Lines: [
+				[
+				{X:50, Y:100}, {X:260, Y:100, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:4000},
+					{On:"BulletEntersNet", Action:"close"}
+				]}, {X:280, Y:100}, {X:500, Y:100, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:60000},
+					{On:"BulletEntersNet", Action:"close"}
+				]}, {X:550, Y:200}, {X:500, Y:240}, {X:-100, Y:240}, {X:-160, Y:200}
+				],
+				[
+				{X:-50, Y:100}, {X:-260, Y:100, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:2000},
+					{On:"BulletEntersNet", Action:"close"}
+				]}, {X:-280, Y:100}, {X:-500, Y:100, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:8000},
+					{On:"BulletEntersNet", Action:"close"}
+				]}, {X:-550, Y:200}
+				]
+			]
+		},
+		{
+			X: 350, Y: 180, R:-45, ShowPath: true,
+			Lines: [
+				[{X:50, Y:180},{X:-50, Y:130},{X:-300, Y:130}],
+				[{X:350, Y:225}]
+			]
+		},
+		{
+			X: -350, Y: 180, R:-135, ShowPath: true,
+			Lines: [
+				[
+				{X:-50, Y:180},{X:50, Y:130},{X:300, Y:130},
+				]
+			]
+		}
+	],
+	Planets : [
+		{"X":-36,"Y":-64,"R":29,"Fixed":true},
+		{"X":239,"Y":15,"R":14,"Fixed":false},
+		{"X":129.5,"Y":42.5,"R":26,"Fixed":true},
+		{"X":15,"Y":207,"R":18,"Fixed":false}
+	],
+	Stations: [
+		{X: 464, Y: 173}
+	],
+	Description : "<p>You can make your own missions and share them.</p>"
+		+ "<p>I won't pretend it's easy to make a complex one, though, especially if you have little experience in real rocket driving.</p>"
+	
+}

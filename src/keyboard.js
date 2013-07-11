@@ -9,11 +9,11 @@ var sb = sb || {};
 		switch (key) {
 		case 27: // esc
 			if (sb.mission && sb.mission.id && sb.mission.played) {
-				sb.paused = true;
+				sb.pause(true);
 				var buttons = {
 					"Home": sb.openGrid,
 					"Retry": sb.mission.startGame.bind(sb.mission),
-					"Resume": sb.togglePause
+					"Resume": function(){sb.pause(false)}
 				}
 				if (sb.mission.edited) buttons["Back to editor"] = sb.openEditor;
 				sb.dialog({
@@ -41,10 +41,7 @@ var sb = sb || {};
 			console.log(JSON.stringify(sb.toMissionData()));
 			break;
 		case 80: // p  -  pause
-			sb.togglePause();
-			break;
-		case 82: // r  -  resets bullet position
-			if (sb.mission) sb.bullet.launch();
+			sb.pause(!sb.paused);
 			break;
 		}
 	});

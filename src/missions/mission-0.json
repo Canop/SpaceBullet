@@ -1,7 +1,7 @@
 {
 	Offgame: true,
 	Guns : [
-		{X:-100, Y: 20, R:-10, invisible: true},
+		{X:-100, Y: 20, R:-10, Invisible: true},
 	],
 	Planets : [
 		{R:24, X:-20, Y:-150, Fixed:true},

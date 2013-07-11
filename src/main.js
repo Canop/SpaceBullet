@@ -6,8 +6,8 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 	if (!window.console) window.console = {log: function(){}};
 
 	sb.G = 0.29; // sets the attraction strenght (technically the weight of the bullet is inside)
-	sb.paused = false; // if true, the bullet is paused but other animations or user interactions can go on
-	sb.NB_MISSIONS = 10; // mission-0 isn't counted so it's also the max id
+	sb.paused = false; // if true, the bullet and sb.re timers are paused but other animations or user interactions can go on
+	sb.NB_MISSIONS = 15; // mission-0 isn't counted so it's also the max id
 
 	function tick(event) {
 		stage.update(event);
@@ -86,8 +86,9 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 		}
 	}
 	
-	sb.togglePause = function() {
-		sb.paused = !sb.paused;
+	sb.pause = function(bool) {
+		sb.paused = bool;
+		sb.re.pause(bool);
 	}
 	
 })();

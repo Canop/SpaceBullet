@@ -1,0 +1,30 @@
+{
+	Guns: [
+		{
+			X: 200, Y: -200, R:120, ShowPath: true,
+			Lines: [
+				[
+				{X:200, Y:-300}, {X:140, Y:-300}
+				],
+				[
+				{X:250, Y:-200}, {X:410, Y:300}, {X:-200,Y:300}, 
+				{X:-40, Y:-200}, {X:10, Y:-200}, {X:80, Y:-300, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:1500},
+					{On:"BulletEntersNet", Action:"close"}
+				]}, {X:120, Y:-300}
+				]
+			]
+		}
+	],
+	Planets : [
+		{"X":256.5,"Y":261.5,"R":20,"Fixed":false},
+		{"X":-253,"Y":-173,"R":13,"Fixed":true},
+		{"X":123,"Y":116,"R":26,"Fixed":false}
+		],
+	Stations: [
+		{X: 0, Y: -262}
+	],
+	Description: "Some rails can be crossed : the door may turn green and then let bullet and planets pass. " +
+		"But they're not always open. You must discover the logic of the door and not all of them have the same one."
+	
+}
