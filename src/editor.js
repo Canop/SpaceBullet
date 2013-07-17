@@ -7,6 +7,7 @@ var sb = sb || {};
 	var dialog;
 
 	sb.openEditor = function(){
+		sb.pause(false);
 		if (sb.getFirstNotDone()<=NB_MINIMAL_MISSIONS) {
 			sb.dialog({
 				title : 'Mission "Editor"',

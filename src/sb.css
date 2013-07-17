@@ -121,3 +121,41 @@ output.error {
 	width: 99%;
 	height: 300px;
 }
+kbd:before {
+	content: "[";
+}
+kbd:after {
+	content: "]";
+}
+#menu {
+	z-index: 12;
+	position: fixed;
+	top:10px; left:5px;
+}
+#menu_content {
+	max-width: 200;
+}
+.menu_item {
+	font-size: 16px;
+	display:block;
+	cursor: pointer;
+	padding: 4px;
+}
+.menu_item:hover {
+	background-color: #054061;
+	border-radius: 5px;
+}
+
+#pause {
+	position:fixed;
+	z-index:100;
+	top:0;
+	left:0;
+	right:0;
+	text-align:center;
+	font-size: 15px;
+	font-weight: bold;
+	opacity: 0.2;
+	color: lightblue;
+	pointer-events: none;
+}

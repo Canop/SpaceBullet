@@ -11,6 +11,7 @@ var sb = sb || {};
 		this.edited = false; // true when the mission is open in editor
 		this.std = false; // standard missions (in sequence)
 		this.played = false; // currently played or not
+		this.playable = true; // most missions (exceptions are "screensaver" one)
 		if (id==-1) {
 			this.path = null;
 		} else if (this.id.length<6) {
@@ -42,6 +43,7 @@ var sb = sb || {};
 		httpRequest.onreadystatechange = function() {
 			if (httpRequest.readyState === 4 && httpRequest.status === 200) {
 				m.data = eval('('+httpRequest.responseText+')');
+				m.playable = m.data['Playable']!==false;
 				if (callback) callback();
 			}
 		}
@@ -57,8 +59,8 @@ var sb = sb || {};
 				title: "Mission "+name,
 				html: m.data['Description'],
 				buttons: {
-					"Home": sb.openGrid,
-				 	"Start": m.startGame.bind(m)
+					"Missions": 'M',
+				 	"Start": 'S'
 				}
 			});
 		} else {
@@ -70,7 +72,7 @@ var sb = sb || {};
 		// note that the order of stage addition is so for the display order
 		var m = this;
 		sb.re.clear(); // clears all the rules
-		sb.paused = false;
+		sb.pause(false);
 		var data = m.data;
 		sb.stage.removeAllChildren();
 		sb.stage.addChild(sb.net);
@@ -117,6 +119,7 @@ var sb = sb || {};
 		sb.gun = sb.guns[0];
 		m.played = true;
 		sb.bullet.launch();
+		if (m.playable) sb.menu.show();
 		trackEvent('Mission started', m.id);
 	}
 	proto.remove = function() {
@@ -126,11 +129,13 @@ var sb = sb || {};
 	proto.lose = function(){
 		var m = this;
 		m.played = false;
-		if (m.data['Offgame']) return; // this isn't a gaming mission
+		sb.menu.hide();
+		sb.pause(false);
+		if (!m.playable) return;
 		trackEvent('Mission lost', m.id);
 		var buttons = {
-			"Home": sb.openGrid,
-			"Retry": m.startGame.bind(m)
+			"Missions": 'M',
+			"Retry": 'R'
 		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({
@@ -141,18 +146,20 @@ var sb = sb || {};
 			buttons: buttons
 		});
 	}
-	proto.win = function(){
+	proto.win = function(){ // todo : factoriser avec lose 
 		var m = this;
 		m.played = false;
-		if (m.data['Offgame']) return; // this isn't a gaming mission
+		sb.menu.hide();
+		sb.pause(false);
+		if (!m.playable) return;
 		trackEvent('Mission won', m.id);
 		var buttons = {
-			"Home": sb.openGrid,
-			"Retry": m.startGame.bind(m)
+			"Missions": 'M',
+			"Retry": 'R'
 		}
 		if (m.std) {
 			sb.saveMissionState(m.id, 'done');
-			buttons["Go to next mission"] = function(){ sb.startMission(+m.id+1) };
+			buttons["Next mission"] = 'N';
 		}
 		if (m.edited) buttons["Back to editor"] = sb.openEditor;
 		sb.dialog({

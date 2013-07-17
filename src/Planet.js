@@ -30,34 +30,34 @@ var sb = sb || {};
 		this.addChild(this.collisionCircle);
 
 		if (!p.fixed) {
-			var sq_max_step = (1.8*p.radius)*(1.8*p.radius);
+			var max_step = (1.2*p.radius);
 			p.addEventListener("mousedown", function(evt) {
 				var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
 				evt.addEventListener("mousemove",function(ev) {
-					var x = ev.stageX+offset.x;
-					var y = ev.stageY+offset.y;
-					if ((x-p.x)*(x-p.x)+(y-p.y)*(y-p.y)>sq_max_step) { // too big step, might be some kind of crossing
-						p.collisionCircle.visible = true;
-						return;
-					}
-					for (var i=sb.roundThings.length; i-->0;) {
-						var pi = sb.roundThings[i];
-						if (pi==p) continue;
-						if ((pi.x-x)*(pi.x-x)+(pi.y-y)*(pi.y-y) <= (pi.radius+p.radius)*(pi.radius+p.radius)) {
-							p.collisionCircle.visible = true;
-							return
+					var fx = ev.stageX+offset.x;
+					var fy = ev.stageY+offset.y;
+					var dx = fx - p.x;
+					var dy = fy - p.y;
+					var norm = Math.sqrt(dx*dx+dy*dy)
+					var n = Math.ceil(norm/max_step)
+					dx /= n; dy /= n;
+					var x=p.x, y=p.y;
+					for (; n-->0;) {
+						x += dx; y += dy;
+						for (var i=sb.roundThings.length; i-->0;) {
+							var pi = sb.roundThings[i];
+							if (pi==p) continue;
+							if ((pi.x-x)*(pi.x-x)+(pi.y-y)*(pi.y-y) <= (pi.radius+p.radius)*(pi.radius+p.radius)) {
+								p.collisionCircle.visible = true;
+								return
+							}
 						}
-					}
-					for (var i=sb.nets.length; i-->0;) {
-						if (sb.nets[i].testHitCircle(x, y, p.radius)) {
-							p.collisionCircle.visible = true;
-							return;
+						for (var i=sb.nets.length; i-->0;) {
+							if (sb.nets[i].testHitCircle(x, y, p.radius)) {
+								p.collisionCircle.visible = true;
+								return;
+							}
 						}
-						/*
-						if (sb.nets[i].testCrossSeg(p.x, p.y, x, y)) {
-							console.log('rail crossing');
-							return;
-						}*/
 					}
 					p.collisionCircle.visible = false;
 					p.x = x; p.y = y;

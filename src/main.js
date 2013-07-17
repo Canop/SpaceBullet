@@ -2,6 +2,8 @@ var sb = sb || {};
 window['sb']=sb; // so that minification doesn't prevent not minified files to find sb
 (function(){
 	
+	sb.isDev = /dev.html$/.test(location.pathname); // more debug options and more logs if the page is dev.html
+
 	// a shim for the missing console.log in IE
 	if (!window.console) window.console = {log: function(){}};
 
@@ -9,32 +11,10 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 	sb.paused = false; // if true, the bullet and sb.re timers are paused but other animations or user interactions can go on
 	sb.NB_MISSIONS = 15; // mission-0 isn't counted so it's also the max id
 
+	var $pauseDiv;
+
 	function tick(event) {
 		stage.update(event);
-	}
-	
-	sb.intro = function() {
-		if (sb.mission && sb.mission.id) sb.mission.remove(); // because rails under the intro make the text less readable
-		sb.dialog({
-			html :
-				"<img src=img/bullet.svg align=left height=400>" +
-				"<h1>Welcome to SpaceBullet !</h1>" + 
-				"<p>You know what's unsafe with rockets ?</p>" +
-				"<p>Fuel, that's what's unsafe. Rockets can explode at any time because of the fuel they carry.</p>" + 
-				"<p>But the <span class=sbname>SpaceBullet</span> space travel company has the solution !</p>" +
-				"<p>Instead of carrying fuel, our ships are simply put into a big gun, fired, and then steered using the gravity of nearby planets.</p>" +
-				"<p>Your task is to move planets around so that SpaceBullet ships reach their destination.</p>",
-			cssClass: "big",
-			buttons : {
-				"Go to project page" : function() {
-					location.href="project.html";
-				},				
-				"Start the game" : function() {
-					if (sb.getFirstNotDone()>1) sb.openGrid();
-					else sb.startMission(1);
-				}
-			}
-		});
 	}
 
 	sb.startMission = function(id) {
@@ -84,11 +64,16 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 			sb.startMission(0);
 			sb.intro();
 		}
+		sb.menu.init();
 	}
 	
 	sb.pause = function(bool) {
 		sb.paused = bool;
 		sb.re.pause(bool);
+		if (!$pauseDiv) {
+			$pauseDiv = $('<div id=pause><h1>Game Paused</h1><p>You can still move the planets</p></div>').hide().appendTo(document.body);
+		}
+		$pauseDiv.toggle(bool)
 	}
 	
 })();

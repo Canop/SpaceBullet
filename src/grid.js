@@ -14,7 +14,7 @@ var sb = sb || {};
 		$d.append($('<span>').addClass('mission').html("&#9650;")
 			.addClass('home')
 			.click(function(){
-				$d.fadeOut(sb.intro);
+				$d.fadeOut(function(){sb.intro()});
 			})
 		);
 		for (var i=1; i<=fnd && i<=sb.NB_MISSIONS; i++) {

@@ -17,6 +17,5 @@
 		"<img align=right src=img/station.svg height=160>" + 
 		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> ship reaches its destination station :</p>" +
 		"<p>Using the mouse, gently move the planet to change the gravity field.</p>" +
-		"<p>You may stop the bullet at any time using the <kbd>P</kbd> key. You can still move the planets when in pause.</p>" +
-		"<p>Hitting <kbd>esc</kbd> opens a menu.</p>"
+		"<p>You may stop the bullet at any time using the <kbd>P</kbd> key. You can still move the planets when in pause.</p>"
 }

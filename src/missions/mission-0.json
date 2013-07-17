@@ -1,5 +1,5 @@
 {
-	Offgame: true,
+	Playable: false,
 	Guns : [
 		{X:-100, Y: 20, R:-10, Invisible: true},
 	],
