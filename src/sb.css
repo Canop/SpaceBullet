@@ -155,7 +155,7 @@ kbd:after {
 	text-align:center;
 	font-size: 15px;
 	font-weight: bold;
-	opacity: 0.2;
+	opacity: 0.25;
 	color: lightblue;
 	pointer-events: none;
 }

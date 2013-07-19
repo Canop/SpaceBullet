@@ -35,6 +35,7 @@ var sb = sb || {};
 					}
 					ax += p.weight*dx/(d*d2); ay += p.weight*dy/(d*d2);
 				}
+				// TODO check we don't encounter a station too
 				ax *= sb.G; ay *= sb.G;
 				vx += ax; vy += ay;
 				v = Math.sqrt(vx*vx+vy*vy);
@@ -58,14 +59,13 @@ var sb = sb || {};
 	
 	proto.on = function(){
 		this.visible = true;
-		this.addEventListener('tick', this.tick);
+		sb.re.register(this);
 	}
 	proto.off = function(){
 		this.visible = false;
-		this.removeEventListener('tick', this.tick);
+		sb.re.forget(this);
 	}
 
-	
 	sb.Path = Path;	
 })();
 

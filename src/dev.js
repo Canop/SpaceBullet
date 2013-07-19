@@ -14,6 +14,10 @@ var sb = sb || {};
 		return md;
 	}
 
+	sb.ondevclick = function(e){
+		console.log({X:e.pageX+sb.stage.regX, Y:e.pageY+sb.stage.regY});
+	};
+
 })();
 
 

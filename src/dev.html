@@ -10,6 +10,7 @@
 	<script src="lib/jquery-2.0.2.min.js"></script>
 	<script src="lib/easeljs-0.6.1.min.js"></script>
 	<script src="lib/ImgLoader.js"></script>
+	<script src="lib/vis.js"></script>
 	<link rel="stylesheet" type="text/css" href="sb.css"/>
 	<script>
 	  function trackEvent(category, action) {
@@ -43,9 +44,6 @@
 </div>
 <script>
 	sb.start();
-	$(document.body).click(function(e){
-		console.log({X:e.pageX+sb.stage.regX, Y:e.pageY+sb.stage.regY});
-	});
 </script>
 </body>
 </html>

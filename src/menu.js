@@ -25,24 +25,30 @@ var sb = sb || {};
 
 	sb.menu.funcs = {};
 	
+	$(document.body).click(function(e){
+		console.log({X:e.pageX+sb.stage.regX, Y:e.pageY+sb.stage.regY});
+	});
+	
 	// must be called once, after the DOM is ready
 	sb.menu.init = function() {
-		if (sb.isDev) {
-			sb.menu.funcs['D'] = function(){
-				devMode = !devMode;
-				if (devMode) {
+		sb.menu.funcs['D'] = function(){
+			devMode = !devMode;
+			if (devMode) {
+				if (sb.isDev) {
 					sb.guns.forEach(function(gun){
 						gun.path.on();
 					});
-				} else {
-					sb.guns.forEach(function(gun){
-						gun.path.off();
-					});
 				}
+				$(document.body).on('click', sb.ondevclick);
+			} else {
+				sb.guns.forEach(function(gun){
+					gun.path.off();
+				});
+				$(document.body).off('click', sb.ondevclick);
 			}
-			sb.menu.funcs['J'] = function(){
-				console.log(JSON.stringify(sb.toMissionData()));
-			}
+		}
+		sb.menu.funcs['J'] = function(){
+			console.log(JSON.stringify(sb.toMissionData()));
 		}
 		sb.menu.funcs['S'] = function() {
 			if (sb.mission && sb.mission.playable && !sb.mission.played) {
@@ -61,7 +67,9 @@ var sb = sb || {};
 			$('<span class=menu_item>'+name+' <kbd>'+key+'</kbd>').click(func).appendTo($to);
 		}
 		$menu = $('<div id=menu/>').hide().appendTo(document.body);
-		add($menu, 'Menu', 'esc', sb.menu.toggle);
+		add($menu, 'Menu', 'esc', function(){
+			if (sb.mission && sb.mission.playable && sb.mission.played) sb.menu.toggle();
+		});
 		$menu_content = $('<div id=menu_content/>').hide().appendTo($menu);
 		add($menu_content, '(Un)pause', 'P', function(){
 			if (sb.mission && sb.mission.playable && sb.mission.played) sb.pause(!sb.paused);

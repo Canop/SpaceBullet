@@ -3,7 +3,8 @@ var sb = sb || {};
 
 	// Manages
 	//  - rules that can be triggered by in game events
-	//  - timers (which are paused when the game is paused)
+	//  - timer based tasks (which are paused when the game is paused and are synchronized
+	//                       with the ticks to avoid desynchronization when CPU is missing)
 
 	// For now a rule can have the following fields :
 	//  - on : the triggering event
@@ -15,16 +16,21 @@ var sb = sb || {};
 	// Currently supported events as triggers :
 	//    - BulletLeavesNet
 	//    - BulletEntersNet
-
+	
+	var tickables = [];
 	var rules = [];
 	var tasks = [];
 	var pauseTime; // start of pause
 	var paused = false;
+	var FPS = 30;
 	
+	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+
 	sb.re = {}; // rules engine
 	
 	sb.re.clear = function(){
 		rules = [];
+		tickables = [];
 		for (var i=0; i<tasks.length; i++) clearTimeout(tasks[i].timer);
 		tasks = [];
 		paused = false;
@@ -43,56 +49,62 @@ var sb = sb || {};
 	
 	// returns a tasks which can be canceled
 	sb.re.schedule = function(func, delay) {
-		var now = +new Date();
-		var task = {f:func, due:delay+now};
+		var now = Date.now();
+		var task = {f:func, ticks : delay*FPS/1000};
 		tasks.push(task);
 		task.cancel = function() {
-			if (task.done) {
-				console.log('task alredy done, nothing to cancel');
-				return;
-			}
+			if (task.done) return;
 			var i = tasks.indexOf(task);
 			if (~i) tasks.splice(tasks.indexOf(task),1);
-			else console.log('forgotten task cancellation required : useless');
-			clearTimeout(task.timer);
 		}
-		task.finish = function(){
-			if (task.done) {
-				console.log('internal scheduler bug : task already done'); // will be removed once I'm sure the scheduler isn't buggy
-				return;
-			}
-			var i = tasks.indexOf(task);
-			if (~i) {
-				tasks.splice(tasks.indexOf(task),1);
-			} else {
-				console.log('forgotten task -> action prevented');
-				return;
-			}
-			func();
-			task.done = true;
-		}
-		task.timer = setTimeout(task.finish, delay);
 		return task;
 	}
+		
+	// registers an object which wants to be ticked
+	sb.re.register = function(tickable) {
+		tickables.push(tickable);
+	}
+	// removes a temporary object from the tickables
+	sb.re.forget = function(tickable) {
+		var i = tickables.indexOf(tickable);
+		if (i>=0) tickables.splice(i, 1);
+	}
 	
-	// pauses or resumes all tasks
-	sb.re.pause = function(bool) {
-		if (bool == paused) return;
-		var now = +new Date();
-		if (bool) { // pause
-			pauseTime = now;
+	sb.re.tick = function() {
+		if (!sb.paused) {
 			for (var i=0; i<tasks.length; i++) {
-				clearTimeout(tasks[i].timer);
-			}
-		} else { // resume
-			for (var i=0; i<tasks.length; i++) {
-				tasks[i].due += now-pauseTime;
-				tasks[i].timer = setTimeout(tasks[i].finish, tasks[i].due-now);
+				var task = tasks[i];
+				if (task.ticks--==0) {
+					tasks.splice(tasks.indexOf(task),1);
+					task.f();
+					task.done = true;
+				}
 			}
 		}
-		paused = bool;
-	} 
+		for (var i=tickables.length; i-->0;) tickables[i].tick();
+		sb.stage.update();
+	}
 	
+	sb.re.start = function() {
+		var interval;
+		// I can't use requestAnimationFrame because this would make slight difference in computations of
+		//  the bullet position and it's chaotic. I need the followed path to be reproductible.
+		function start() {
+			if (interval) return;
+			interval = setInterval(sb.re.tick, 1000/FPS);
+		}
+		vis(function(){
+			if (vis()) {
+				start();
+			} else {
+				if (sb.mission && sb.mission.playable) {
+					sb.pause(true);
+					clearInterval(interval);
+					interval = 0;
+				}
+			}
+		});
+		start();
+	}
+
 })();
-
-

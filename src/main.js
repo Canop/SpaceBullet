@@ -13,10 +13,6 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 
 	var $pauseDiv;
 
-	function tick(event) {
-		stage.update(event);
-	}
-
 	sb.startMission = function(id) {
 		if (sb.mission) sb.mission.remove();
 		if (id==+id) {
@@ -54,8 +50,7 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 		}
 		onresize();
 		window.addEventListener('resize', onresize);
-		createjs.Ticker.setFPS(30);
-		createjs.Ticker.addEventListener("tick", tick);
+		sb.re.start();
 		
 		var matches = location.search.match(/\bm=([^&]+)/);
 		if (matches) {
@@ -69,7 +64,6 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 	
 	sb.pause = function(bool) {
 		sb.paused = bool;
-		sb.re.pause(bool);
 		if (!$pauseDiv) {
 			$pauseDiv = $('<div id=pause><h1>Game Paused</h1><p>You can still move the planets</p></div>').hide().appendTo(document.body);
 		}

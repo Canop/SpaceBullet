@@ -23,7 +23,7 @@ var sb = sb || {};
 			circle.y = this.radius;
 			this.addChild(circle);
 		}
-		this.addEventListener('tick', this.tick.bind(this));
+		sb.re.register(this)
 	}
 	var proto = Bullet.prototype = new createjs.Container();
 	
@@ -117,7 +117,7 @@ var sb = sb || {};
 		if (sb.nbBullets==0) sb.mission.lose();
 	}
 	
-	proto.tick = function(e) {
+	proto.tick = function() {
 		if (sb.paused) return;
 		switch (this.state) {
 		case FLYING :

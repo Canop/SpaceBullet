@@ -11,6 +11,7 @@ rm -r $BUILD_PATH
 mkdir $BUILD_PATH
 
 cat $SRC_PATH/lib/ImgLoader.js > $BUILD_PATH/sb.concat.js
+cat $SRC_PATH/lib/vis.js >> $BUILD_PATH/sb.concat.js
 cat $SRC_PATH/*.js >> $BUILD_PATH/sb.concat.js
 
 

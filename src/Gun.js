@@ -21,13 +21,6 @@ var sb = sb || {};
 		if (this.showPath) this.path.off();
 	}
 
-	proto.tick = function(e) {
-		if (this.bmp.scaleX > this.stdscale) {
-			var ds = Math.min(0.02, this.bmp.scaleX-this.stdscale);
-			this.bmp.scaleX -= ds; this.bmp.scaleY -= ds;
-		}
-	}
-	
 	proto.bulletEntersNet = function() {
 		sb.re.happen("BulletEntersNet", this);
 		if (this.showPath) this.path.on();
