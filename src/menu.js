@@ -3,6 +3,7 @@ var sb = sb || {};
 
 	var $menu, $menu_content;
 	var visible = false, open=false, devMode=false;
+	var gameWasPausedAtMenuOpening;
 
 	sb.menu = {};
 	sb.menu.hide = function(){
@@ -15,12 +16,13 @@ var sb = sb || {};
 	}	
 	sb.menu.toggle = function() {
 		open = !open;
-		sb.pause(open);
+		if (open) {
+			gameWasPausedAtMenuOpening = sb.paused;
+			sb.pause(true);
+		} else {
+			if (!gameWasPausedAtMenuOpening) sb.pause(false);
+		}
 		$menu_content.toggle();		
-	}
-	sb.menu.close = function() {
-		open = false;
-		$menu_content.hide();
 	}
 
 	sb.menu.funcs = {};

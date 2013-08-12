@@ -22,12 +22,14 @@ var sb = sb || {};
 		this.b.segment.visible = !this.a.open;
 	}
 	
-	proto.act = function(action, delay) {
+	proto.act = function(action, delay) { // action : "open", "close"
 		var door = this;
+		if (door.state=="open" && action=="open") return;
+		if (door.state=="close" && action=="closed") return;
 		if (door.timer) door.timer.cancel();
 		var f = function(){ door.setState(action=="close"?"closed":"open") };
 		if (delay) {
-			door.setState("orange");
+			door.setState(action=="close"?"closing":"opening");
 			door.timer = sb.re.schedule(f, delay);
 		} else {
 			f();

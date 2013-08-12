@@ -34,9 +34,9 @@
 		#lc {
 			float: left;
 			width: 180px;
-			text-align: left;
+			text-align: center;
 		}
-		#lc a {
+		#lc a.button {
 			display: block;
 			text-align: center;
 			margin: 5px;
@@ -49,8 +49,17 @@
 		#lc a:hover {
 			opacity: 1;
 		}
-		#lc img {
+		#lc a.button img {
 			margin-left: 30px;
+		}
+		#lc img.bullet {
+			margin-left: 25px;
+		}
+		#lc a.button img {
+			margin-left: 30px;
+		}
+		#lc a.chromexp img {
+			margin-top: 10px;
 		}
 		#rc {
 			float: right;
@@ -73,11 +82,12 @@
 <div id=page>
 	<h1>The SpaceBullet Project</h1>
 	<div id=lc>
-		<img src=img/bullet.svg width=200>
+		<img class=bullet src=img/bullet.svg width=200>
 		<a class=button href=index.html>Play</a>
 		<a class=button href=http://dystroy.org/>dystroy.org</a>
 		<a class=button href=https://groups.google.com/forum/#!forum/spacebullet/>Google Group</a>
 		<a class=button href=https://github.com/Canop/SpaceBullet>GitHub repository</a>
+		<a class=chromexp href="http://www.chromeexperiments.com/detail/spacebullet/"><img src="img/chrome-experiment.png" alt="See SpaceBullet on ChromeExperiments.com" /></a>
 	</div>
 	<div id=rc>
 		<h2>A free game in progress</h2>

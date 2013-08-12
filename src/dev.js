@@ -10,7 +10,7 @@ var sb = sb || {};
 	// This is for now very incomplete.
 	sb.toMissionData = function(){
 		var md = {};
-		md.planets = (sb.planets||[]).map(function(p){ return {X:p.x, Y:p.y, R:p.radius, Fixed:p.fixed} });
+		md.Planets = (sb.planets||[]).map(function(p){ return {X:p.x, Y:p.y, R:p.radius, Fixed:p.fixed} });
 		return md;
 	}
 

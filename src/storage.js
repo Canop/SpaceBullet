@@ -27,13 +27,13 @@ var sb = sb || {};
 		if (!id) return false;
 		if (id<2) return true;
 		for (var i=1; i<id; i++) {
-			if (sb.getMissionState(i)!='done') return false;
+			if (sb.getMissionState(i)!=='done') return false;
 		}
 		return true;
 	}
 	sb.getFirstNotDone = function(id) {
 		for (var i=1; ; i++) {
-			if (sb.getMissionState(i)!='done') return i;
+			if (sb.getMissionState(i)!=='done') return i;
 		}
 	}
 })();

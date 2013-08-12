@@ -1,0 +1,43 @@
+{
+	Guns: [
+		{
+			X: 0, Y: -260, R:0, ShowPath: true,
+			Lines: [
+				[
+					{X:0,Y:-15},
+					{X:0,Y:15,Rules:[{On:"BulletLeavesNet", Action:"open", Delay:100},{On:"BulletEntersNet", Action:"close"}]},
+					{X:0,Y:350},
+					{X:500,Y:350},
+					{X:500,Y:-350},
+					{X:0,Y:-350},					
+				],
+				[
+					{X:0,Y:-330},					
+				]
+			]
+		},{
+			X: 460, Y: 0, R:180, ShowPath: false,
+			Lines: [
+				[
+					{X:520,Y:0},
+					{X:520,Y:370},
+					{X:-20,Y:370},
+					{X: -54.5, Y: 183},
+					{X: -90.5, Y: 104.5},{X: -138.5, Y: 62.5},					{X: -199.5, Y: 36},
+					{X: -268.5, Y: 20},
+					{X: -336.5, Y: 20}
+				]
+			]
+		},
+	],
+	Planets: [
+		{"X":200,"Y":-100,"R":20,"Fixed":false},
+		{"X":300,"Y":-100,"R":20,"Fixed":false},
+		{"X":200,"Y":100,"R":20,"Fixed":false},
+		{"X":300,"Y":100,"R":20,"Fixed":false},
+	],
+	Stations: [
+		{X: -500, Y: 0}
+	],
+	Description: "I need people to give me ideas for other missions, or to make them. Contact me !"
+}

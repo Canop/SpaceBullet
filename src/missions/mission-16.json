@@ -1,0 +1,59 @@
+{
+	Guns: [
+		{
+			X: 0, Y: 0, R:-90, ShowPath: true,
+			Lines: [
+				[
+					{X:90,Y:0},
+					{X:150,Y:0, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:1000},{On:"BulletEntersNet", Action:"close"}]},
+					{X:400,Y:100},
+					{X:400,Y:400},
+					{X:10,Y:400},
+				],
+				[
+					{X:-90,Y:0},
+					{X:-150,Y:0, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:1000},{On:"BulletEntersNet", Action:"close"}]},
+					{X:-400,Y:100},
+					{X:-400,Y:400},
+					{X:-10,Y:400},
+				]
+			]
+		},
+		{
+			X: 0, Y: 200, R:-90, ShowPath: true,
+			Lines: [
+				[
+					{X:60,Y:200},
+					{X:180,Y:200, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:5000}]},
+					{X:380,Y:250},
+				],
+				[
+					{X:-60,Y:200},
+					{X:-180,Y:200, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:5000}]},
+					{X:-380,Y:250},
+				],
+			]
+		},
+		{
+			X: 0, Y: -250, R:90, ShowPath: true,
+			Lines: [
+				[
+					{X:90,Y:-250},
+					{X:350,Y:-150},
+				],
+				[
+					{X:-90,Y:-250},
+					{X:-350,Y:-150},
+				],
+			]
+		},
+	],
+	Planets: [
+		{"X":38,"Y":-181,"R":13,"Fixed":true},{"X":-81,"Y":-120,"R":11,"Fixed":true},
+		{"X":-131,"Y":327,"R":21,"Fixed":false},{"X":278,"Y":312,"R":14,"Fixed":false},{"X":-335.5,"Y":313.5,"R":24,"Fixed":false},{"X":-235,"Y":272,"R":19,"Fixed":false}
+	],
+	Stations: [
+		{X: 0, Y: -350}
+	],
+	Description: "Going so far isn't easy. Congrats."
+}

@@ -9,7 +9,7 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 
 	sb.G = 0.29; // sets the attraction strenght (technically the weight of the bullet is inside)
 	sb.paused = false; // if true, the bullet and sb.re timers are paused but other animations or user interactions can go on
-	sb.NB_MISSIONS = 15; // mission-0 isn't counted so it's also the max id
+	sb.NB_MISSIONS = 18; // mission-0 isn't counted so it's also the max id
 
 	var $pauseDiv;
 

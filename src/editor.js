@@ -88,7 +88,7 @@ var sb = sb || {};
 					if (httpRequest.readyState === 4) {
 						if (httpRequest.status === 200) {
 							var resp = JSON.parse(httpRequest.responseText);
-							if (resp['Code']=="ok") {
+							if (resp['Code']==="ok") {
 								var url = location.origin + location.pathname + '?m=' + resp['Text'];
 								$('#post_result').removeClass('error').html('Mission saved. Direct URL :<br><a target=_blank href='+url+'>'+url+'</a>');																
 							} else {

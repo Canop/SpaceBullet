@@ -49,7 +49,7 @@ var sb = sb || {};
         px -= x1;
         py -= y1;
         var ccw = px * y2 - py * x2;
-        if (ccw == 0) {
+        if (ccw === 0) {
             // The point is colinear, classify based on which side of
             // the segment the point falls on.  We can calculate a
             // relative value using the projection of px,py onto the
