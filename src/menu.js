@@ -93,6 +93,8 @@ var sb = sb || {};
 			sb.intro();
 		});
 		window.addEventListener('keyup', function(e) {
+			var tag = e.srcElement.tagName;
+			if (tag=="TEXTAREA" || tag=="INPUT") return;
 			var key = e.keyCode;
 			if (sb.isDev) console.log('Key press : ', key);
 			var fun = sb.menu.funcs[key==27 ? 'esc' : String.fromCharCode(key)];
