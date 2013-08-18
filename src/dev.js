@@ -15,7 +15,7 @@ var sb = sb || {};
 	}
 
 	sb.ondevclick = function(e){
-		console.log({X:e.pageX+sb.stage.regX, Y:e.pageY+sb.stage.regY});
+		console.log({X:(e.pageX-sb.w/2)/sb.scale, Y:(e.pageY-sb.h/2)/sb.scale});
 	};
 
 })();

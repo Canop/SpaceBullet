@@ -7,9 +7,11 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 	// a shim for the missing console.log in IE
 	if (!window.console) window.console = {log: function(){}};
 
+
 	sb.G = 0.29; // sets the attraction strenght (technically the weight of the bullet is inside)
+	sb.scale = 1; // can be changed by missions
 	sb.paused = false; // if true, the bullet and sb.re timers are paused but other animations or user interactions can go on
-	sb.NB_MISSIONS = 18; // mission-0 isn't counted so it's also the max id
+	sb.NB_MISSIONS = 19; // mission-0 isn't counted so it's also the max id
 
 	var $pauseDiv;
 
@@ -40,16 +42,17 @@ window['sb']=sb; // so that minification doesn't prevent not minified files to f
 		});
 	}
 
+	sb.resize = function() {
+		sb.w = sb.canvas.width = sb.canvas.clientWidth;
+		sb.h = sb.canvas.height = sb.canvas.clientHeight;		
+		sb.stage.scaleX = sb.stage.scaleY = sb.scale;
+		stage.regX = -sb.w/(sb.scale*2); stage.regY = -sb.h/(sb.scale*2); 
+	}
+
 	sb.start = function(){
-		var canvas = document.getElementById('main_canvas');
+		sb.canvas = document.getElementById('main_canvas');
 		sb.stage = stage = new createjs.Stage("main_canvas");
-		var onresize = function(){
-			sb.w = canvas.width = canvas.clientWidth;
-			sb.h = canvas.height = canvas.clientHeight;
-			stage.regX = -sb.w/2; stage.regY = -sb.h/2; 
-		}
-		onresize();
-		window.addEventListener('resize', onresize);
+		window.addEventListener('resize', sb.resize);
 		sb.re.start();
 		
 		var matches = location.search.match(/\bm=([^&]+)/);

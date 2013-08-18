@@ -32,14 +32,14 @@ var sb = sb || {};
 		if (!p.fixed) {
 			var max_step = (1.2*p.radius);
 			p.addEventListener("mousedown", function(evt) {
-				var offset = {x:evt.target.x-evt.stageX, y:evt.target.y-evt.stageY};
+				var offset = {x:evt.target.x-evt.stageX/sb.scale, y:evt.target.y-evt.stageY/sb.scale};
 				evt.addEventListener("mousemove",function(ev) {
-					var fx = ev.stageX+offset.x;
-					var fy = ev.stageY+offset.y;
+					var fx = ev.stageX/sb.scale+offset.x;
+					var fy = ev.stageY/sb.scale+offset.y;
 					var dx = fx - p.x;
 					var dy = fy - p.y;
-					var norm = Math.sqrt(dx*dx+dy*dy)
-					var n = Math.ceil(norm/max_step)
+					var norm = Math.sqrt(dx*dx+dy*dy);
+					var n = Math.ceil(norm/max_step);
 					dx /= n; dy /= n;
 					var x=p.x, y=p.y;
 					for (; n-->0;) {

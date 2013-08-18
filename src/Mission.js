@@ -75,6 +75,8 @@ var sb = sb || {};
 		sb.pause(false);
 		var data = m.data;
 		sb.stage.removeAllChildren();
+		sb.scale = data['Scale'] || 1;
+		sb.resize();
 		sb.stage.addChild(sb.net);
 		sb.roundThings = [];
 		sb.planets = [];

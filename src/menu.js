@@ -27,9 +27,6 @@ var sb = sb || {};
 
 	sb.menu.funcs = {};
 	
-	$(document.body).click(function(e){
-		console.log({X:e.pageX+sb.stage.regX, Y:e.pageY+sb.stage.regY});
-	});
 	
 	// must be called once, after the DOM is ready
 	sb.menu.init = function() {
