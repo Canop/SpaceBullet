@@ -49,7 +49,7 @@ func serveHTTP(w http.ResponseWriter, hr *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")                                               // TODO be more precise !
 	w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept") // vérifier X-Requested-With
 	w.Header().Set("Access-Control-Request-Method", "POST")
-	w.Header().Set("content-type", "application/x-javascript")
+	w.Header().Set("content-type", "application/json")
 	in := new(Message)
 	out := new(Message)
 	defer answer(w, out)
