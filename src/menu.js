@@ -90,7 +90,7 @@ var sb = sb || {};
 			sb.intro();
 		});
 		window.addEventListener('keyup', function(e) {
-			var tag = e.srcElement.tagName;
+			var tag = e.target.tagName;
 			if (tag=="TEXTAREA" || tag=="INPUT") return;
 			var key = e.keyCode;
 			if (sb.isDev) console.log('Key press : ', key);

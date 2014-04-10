@@ -31,6 +31,7 @@ var sb = sb || {};
 
 		if (!p.fixed) {
 			var max_step = (1.2*p.radius);
+			
 			p.addEventListener("mousedown", function(evt) {
 				var offset = {x:evt.target.x-evt.stageX/sb.scale, y:evt.target.y-evt.stageY/sb.scale};
 				evt.addEventListener("mousemove",function(ev) {

@@ -13,8 +13,8 @@ var ImgLoader = (function(){
 		add: function(key, src) {
 			var img = new Image();
 			img.onload = checkAll;
-			img.src = src;
 			images[key] = img;
+			img.src = src;
 		},
 		get: function(key) {
 			return images[key];
