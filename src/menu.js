@@ -13,7 +13,7 @@ var sb = sb || {};
 	sb.menu.show = function(){ // shows the opener, not the open menu
 		visible = true;
 		$menu.show();
-	}	
+	}
 	sb.menu.toggle = function() {
 		open = !open;
 		if (open) {
@@ -22,12 +22,12 @@ var sb = sb || {};
 		} else {
 			if (!gameWasPausedAtMenuOpening) sb.pause(false);
 		}
-		$menu_content.toggle();		
+		$menu_content.toggle();
 	}
 
 	sb.menu.funcs = {};
-	
-	
+
+
 	// must be called once, after the DOM is ready
 	sb.menu.init = function() {
 		sb.menu.funcs['D'] = function(){
@@ -74,8 +74,10 @@ var sb = sb || {};
 			if (sb.mission && sb.mission.playable && sb.mission.played) sb.pause(!sb.paused);
 		});
 		add($menu_content, 'Restart mission', 'R', function(){
-			sb.dialog.closeAll();
-			if (sb.mission) sb.mission.startGame();
+			if (sb.mission && sb.mission.playable && sb.mission.played) {
+				sb.mission.startGame();
+				sb.dialog.closeAll();
+			}		
 		});
 		add($menu_content, 'Missions', 'M', function(){
 			sb.menu.hide();
