@@ -27,7 +27,7 @@ h1 {
 }
 .dialog.small {
 	margin:auto;
-	margin-top: 10%; 
+	margin-top: 10%;
 	width: 500px;
 }
 .dialog.big {
@@ -112,7 +112,7 @@ p.win {
 
 output {
 	display: block;
-	margin: 10px;	
+	margin: 10px;
 }
 output.error {
 	color: red;
@@ -147,7 +147,7 @@ kbd:after {
 	border-radius: 5px;
 }
 
-#pause {
+#auto-pause, #pause, #brag {
 	position:fixed;
 	z-index:100;
 	top:0;
@@ -158,5 +158,24 @@ kbd:after {
 	font-weight: bold;
 	opacity: 0.25;
 	color: lightblue;
+}
+#brag {
+	opacity: 0.5;
+}
+#auto-pause, #pause {
+	opacity: 0.25;
 	pointer-events: none;
+}
+
+.warning {
+	position:fixed;
+	z-index:90;
+	bottom:30px;
+	left:0;
+	right:0;
+	text-align:center;
+	font-size: 15px;
+	font-weight: bold;
+	opacity: 0.65;
+	color: red;
 }

@@ -1,28 +1,32 @@
 {
 	Guns: [
 		{
-			X: 150, Y:-200, R:180, ShowPath: false,
+			X:0, Y:100, R:45, ShowPath:true,
 			Lines: [
-				[{X:150,Y:-300},{X:-150,Y:-300},{X:-150,Y:-250},{X:-150,Y:-150, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:8000},
-					{On:"BulletEntersNet", Action:"close"}
-				]},{X:-150,Y:150}],
-				[{X:150,Y:160}]
+				[{X:60,Y:45},{X:60,Y:-45},{X:0,Y:-100},{X:-60,Y:-45},{X:-60,Y:45},{X:-26,Y:69}],
 			]
-		},{
-			X: -150, Y:200, R:-60, ShowPath: true,
+		},
+		{
+			X:0, Y:220, R:45, ShowPath:true,
 			Lines: [
-				[{X:-400,Y:200},{X:-400,Y:-350},{X:400,Y:-350},{X:400,Y:200},{X:150,Y:200}]
+				[{X:145,Y:90},{X:145,Y:-90},{X:95,Y:-140}]
 			]
-		}
-
+		},
+		{
+			X:0, Y:-220, R:225, ShowPath:true,
+			Lines: [
+				[{X:65,Y:-170}],
+				[{X:-145,Y:-90},{X:-145,Y:90},{X:-34,Y:185}]
+			]
+		},
 	],
 	Planets : [
-		{"X":-457,"Y":-87,"R":21,"Fixed":false},
-		{"X":289,"Y":115,"R":14,"Fixed":false}
+		{"X":20,"Y":40,"R":24,"Fixed":false},
+		{"X":-20,"Y":40,"R":17,"Fixed":false},
 	],
 	Stations: [
-		{X:-200, Y:-200}
+		{X:-400, Y:-20}
 	],
-	Description: "Most missions can be solved in more than one way. Try to see how."
+	Description:
+		"<p>Remember about the AutoPause (key <kbd>A</kbd>).</p>"
 }

@@ -6,11 +6,11 @@ var sb = sb || {};
 	// Existing mission states :
 	// null, "done"
 	// (this will change)
-	
+
 	// each time this is changed, the local storage must be cleaned.
 	// In the future a more subtle solution might be chosen.
-	var ArmageddonKey = "hexapodes huileux";
-	
+	var ArmageddonKey = "pentapodes tout secs";
+
 	sb.saveMissionState = function (id, state) {
 		localStorage['missions.'+id+'.state'] = state;
 	}

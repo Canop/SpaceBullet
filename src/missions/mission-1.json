@@ -1,7 +1,7 @@
 {
 	Guns : [
 		{
-			X:-150, Y: 0, R:0,
+			X:-150, Y: 0, R:0, ShowPath: true,
 			Lines : [
 				[{X:-200, Y: 0},{X:-250, Y:-50}, {X:-250, Y:-200}, {X:-200, Y:-250}, {X:250, Y:-250}, {X:300, Y:-200}, {X:300, Y:50}]
 			],
@@ -14,8 +14,8 @@
 		{X:210, Y:-80}
 	],
 	Description:
-		"<img align=right src=img/station.svg height=160>" + 
-		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> ship reaches its destination station :</p>" +
-		"<p>Using the mouse, gently move the planet to change the gravity field.</p>" +
-		"<p>You may stop the bullet at any time using the <kbd>P</kbd> key. You can still move the planets when in pause.</p>"
+		"<img align=right src=img/station.svg height=160>" +
+		"<p>Your goal is to ensure the <span class=sbname>SpaceBullet</span> ship reaches its destination station.</p>" +
+		"<p>Stop the bullet when its on a rail using the <kbd>P</kbd> key.</p>" +
+		"<p>Then, using the mouse, gently move the planet to change the gravity field.</p>"
 }

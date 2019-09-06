@@ -1,26 +1,48 @@
 {
 	Guns: [
 		{
-			X:-350, Y:100, R:-50, ShowPath: true,
+			X: 0, Y: 50, R:270, ShowPath: true,
 			Lines: [
-				[{X:-600,Y:100},{X:-600,Y:-250},{X:100,Y:-250}],
-				[{X:-320,Y:130},{X:100,Y:130},{X:100,Y:-150}]
-			]
-		},{
-			X:-350, Y:180, R:50, ShowPath: true,
-			Lines: [
-				[{X:-320,Y:150},{X:120,Y:150},{X:120,Y:-250}]
+				[
+				{X:300, Y:200}, {X:300, Y:-120},
+				{X:300, Y:-280, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:3000},
+					{On:"BulletEntersNet", Action:"close"}
+				]},
+				{X:300, Y:-300},
+				{X:80, Y:-300},
+				{X:-80, Y:-300, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:2000},
+					{On:"BulletEntersNet", Action:"close"}
+				]},
+				{X:-300, Y:-300},
+				{X:-300, Y:-280},
+				{X:-300, Y:-120, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:1000},
+					{On:"BulletEntersNet", Action:"close"}
+				]},
+				{X:-300, Y:-100},
+				{X:-80, Y:-100},
+				{X:80, Y:-100, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:2000},
+					{On:"BulletEntersNet", Action:"close"}
+				]},
+				{X:300, Y:-100},
+				]
 			]
 		},
+		{
+			X: -264, Y: 220, R:0, ShowPath: true,
+			Lines: [
+				[{X:-264,Y:-27}]
+			]
+		}
 	],
-	Planets : [
-		{R:35, X:-255, Y:-116, Fixed:true},
-		{R:14, X:-252, Y:19},
-		{R:20, X:47, Y:53},
-	],
+	"Planets":[{"X":396.5,"Y":-261.5,"R":20,"Fixed":false},{"X":-40,"Y":-172,"R":13,"Fixed":false},{"X":-72,"Y":10,"R":21,"Fixed":true}],
 	Stations: [
-		{X:250, Y:0}
+		{X: 40, Y: -200}
 	],
-	Description:
-		"<p>You might like to learn that all planets in this game have the same density so their mass is proportional to the cube of their radius.</p>"
+	Description: "<p>Missions are harder and harder. I'd like to know when you manage to solve them. Please come and brag on Miaou.</p>"
+	
 }
+

@@ -16,18 +16,18 @@ var sb = sb || {};
 	// Currently supported events as triggers :
 	//    - BulletLeavesNet
 	//    - BulletEntersNet
-	
+
 	var tickables = [];
 	var rules = [];
 	var tasks = [];
 	var pauseTime; // start of pause
 	var paused = false;
 	var FPS = 30;
-	
+
 	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
 
 	sb.re = {}; // rules engine
-	
+
 	sb.re.clear = function(){
 		rules = [];
 		tickables = [];
@@ -35,18 +35,18 @@ var sb = sb || {};
 		tasks = [];
 		paused = false;
 	}
-	
+
 	sb.re.addRule = function(rule) {
 		rules.push(rule);
 	}
-	
+
 	sb.re.happen = function(event, target) {
 		for (var i=0; i<rules.length; i++) {
 			var r = rules[i];
 			if (r.on==event && r.target==target) r.receiver.act(r.action, r.delay);
 		}
 	}
-	
+
 	// returns a tasks which can be canceled
 	sb.re.schedule = function(func, delay) {
 		var now = Date.now();
@@ -59,7 +59,7 @@ var sb = sb || {};
 		}
 		return task;
 	}
-		
+
 	// registers an object which wants to be ticked
 	sb.re.register = function(tickable) {
 		tickables.push(tickable);
@@ -69,7 +69,7 @@ var sb = sb || {};
 		var i = tickables.indexOf(tickable);
 		if (i>=0) tickables.splice(i, 1);
 	}
-	
+
 	sb.re.tick = function() {
 		if (!sb.paused) {
 			for (var i=0; i<tasks.length; i++) {
@@ -84,7 +84,7 @@ var sb = sb || {};
 		for (var i=tickables.length; i-->0;) tickables[i].tick();
 		sb.stage.update();
 	}
-	
+
 	sb.re.start = function() {
 		var interval;
 		// I can't use requestAnimationFrame because this would make slight difference in computations of
@@ -97,7 +97,7 @@ var sb = sb || {};
 			if (vis()) {
 				start();
 			} else {
-				if (sb.mission && sb.mission.playable) {
+				if (sb.mission && sb.mission.playable && !sb.bragging) {
 					sb.pause(true);
 					clearInterval(interval);
 					interval = 0;

@@ -3,7 +3,7 @@
 
 var sb = sb || {};
 (function(){
-	
+
 	// extracts the state of the application (that could have been modified in
 	//  many ways including direct console manipulations) to build a mission data
 	//  object similar to what can be find in the mission-x.json files.

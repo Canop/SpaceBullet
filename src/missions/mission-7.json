@@ -1,22 +1,16 @@
 {
 	Guns: [
 		{
-			X:-100, Y:200, R:-180, ShowPath:true,
+			X:-200, Y:100, R:270, ShowPath:true,
 			Lines: [
-				[{X:0,Y:200},{X:50,Y:150},{X:50,Y:50},{X:0,Y:0},{X:-200,Y:0},{X:-250,Y:50},{X:-250,Y:250},]
+				[{X:100,Y:150},{X:100,Y:50},{X:-200, Y:0},{X:-250,Y:-85}]
 			]
-		}
+		},
 	],
-	Planets : [
-		{R:14, X:370, Y:176},
-		{R:19, X:-80, Y:-30},
-		{R:12, X:-118, Y:162},
-		{R:19, X:-10, Y:122},
-	],
+	"Planets":[{"X":-92,"Y":163,"R":20,"Fixed":false},{"X":-157,"Y":83,"R":15,"Fixed":false},{"X":220,"Y":-150,"R":19,"Fixed":true},{"X":300,"Y":240,"R":18,"Fixed":true}],
 	Stations: [
-		{X:-300, Y:-205}
+		{X:350, Y:-150}
 	],
 	Description:
-		"<p>Here you'd better hit <kbd>P</kbd> when the bullet is on rails and quietly move the planets.</p>" +
-		"<p>Try to feel how gravity works.</p>"
+		"<p>The path to follow might sometimes be not direct, but the SpaceBullet company isn't affraid of long travels (after all, they mean more meals to sell).</p>"
 }

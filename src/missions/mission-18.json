@@ -1,74 +1,22 @@
 {
 	Guns: [
 		{
-			X: 0, Y: 0, R:90, ShowPath: true,
+			X:-350, Y:100, R:-50, ShowPath: true,
 			Lines: [
-				[
-					{X:-100,Y:0},
-					{X:-100,Y:20},
-					{X:-100,Y:250,Rules:[{On:"BulletLeavesNet", Action:"open", Delay:15000}]},
-				],
-				[
-					{X:-160,Y:0},
-					{X:-160,Y:20},
-					{X:-160,Y:250,Rules:[{On:"BulletLeavesNet", Action:"open", Delay:10000},{On:"BulletEntersNet", Action:"close"}]},
-				],
-				[
-					{X:350,Y:0},
-					{X:350,Y:34},
-					{X:350,Y:68,Rules:[{On:"BulletLeavesNet", Action:"open", Delay:1000}]},
-					{X:350,Y:100},
-					{X:180,Y:270},
-					{X:140,Y:270},
-				]
+				[{X:-600,Y:100},{X:-600,Y:-250},{X:55,Y:-250}],
+				[{X:-320,Y:130},{X:55,Y:130},{X:55,Y:-100}]
 			]
 		},{
-			X: -300, Y: -50, R:-90, ShowPath: true,
+			X:-350, Y:180, R:50, ShowPath: true,
 			Lines: [
-				[
-					{X:-450,Y:-50},
-					{X:-450,Y:270},
-					{X:110,Y:270},
-				],
-				[
-					{X:-450,Y:-50},
-					{X:-450,Y:-320},
-					{X:80,Y:-320},
-				],
-				[
-					{X:-100,Y:-50},
-					{X:-100,Y:-300,Rules:[{On:"BulletLeavesNet", Action:"open"},{On:"BulletLeavesNet", Action:"close", Delay:3000}]},
-				],
-				[
-					{X:-160,Y:-50},
-					{X:-160,Y:-300,Rules:[{On:"BulletLeavesNet", Action:"open", Delay:3000},{On:"BulletEntersNet", Action:"close"}]},
-				]
-			]
-		},{
-			X: 100, Y: -50, R:-90, ShowPath: true,
-			Lines: [
-				[
-					{X:20,Y:-50},
-				],
-				[
-					{X:350,Y:-50},
-					{X:350,Y:-70},
-					{X:350,Y:-130,Rules:[{On:"BulletLeavesNet", Action:"open", Delay:1000}]},
-					{X:350,Y:-150},
-					{X:180,Y:-320},
-					{X:110,Y:-320},
-				]
+				[{X:-320,Y:150},{X:70,Y:150},{X:70,Y:-250}]
 			]
 		},
 	],
-	Planets: [
-		{"X":200,"Y":-100,"R":20,"Fixed":false},
-		{"X":300,"Y":-100,"R":20,"Fixed":false},
-		{"X":200,"Y":100,"R":20,"Fixed":false},
-		{"X":300,"Y":100,"R":20,"Fixed":false},
-	],
+	"Planets":[{"X":-237,"Y":49,"R":20,"Fixed":false},{"X":-261,"Y":102,"R":16,"Fixed":false},{"X":-255,"Y":-116,"R":35,"Fixed":true}],
 	Stations: [
-		{X: -300, Y: 120}
+		{X:250, Y:0}
 	],
-	Description: "This mission can be completed in more than one way. But I don't think there's an easy one."
+	Description:
+		"<p>You might like to learn that all planets in this game have the same density so their mass is proportional to the cube of their radius.</p>"
 }

@@ -1,0 +1,32 @@
+{
+	Guns: [
+		{
+			X: 200, Y: 200, R:-90, ShowPath: true,
+			Lines: [
+				[
+					{X:390,Y:200},{X:390,Y:-100},{X:260,Y:-100},{X:140,Y:-100, Rules:[
+						{On:"BulletLeavesNet", Action:"open", Delay:4000},
+						{On:"BulletEntersNet", Action:"close"}
+					]},{X:10,Y:-100},{X:10,Y:-40}],
+				[
+					{X:0,Y:200},{X:0,Y:300},{X:410,Y:300},{X:410,Y:-200},{X:260,Y:-200},{X:140,Y:-200, Rules:[
+						{On:"BulletLeavesNet", Action:"open", Delay:5000},
+						{On:"BulletEntersNet", Action:"close"}
+					]},{X:-10,Y:-200},{X:-10,Y:-40},]
+			]
+		}
+
+	],
+	Planets : [
+		{"X":95,"Y":258,"R":26,"Fixed":false}
+		,{"X":-253,"Y":-173,"R":13,"Fixed":false}
+		,{"X":-407,"Y":-87,"R":21,"Fixed":false},
+		{"X":-228,"Y":-49,"R":24,"Fixed":false},
+		{"X":-289,"Y":115,"R":14,"Fixed":false}
+	],
+	Stations: [
+		{X:205, Y:-150}
+	],
+	Description:
+		"You can play with many planets here. That's the good thing with uninhabited areas of the galaxy."
+}

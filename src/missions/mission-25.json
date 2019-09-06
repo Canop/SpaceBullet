@@ -1,0 +1,37 @@
+{
+	Guns: [
+		{
+			X:10, Y:0, R:0, ShowPath: true,
+			Lines: [
+				[{X:-80,Y:0}],
+			]
+		},
+		{
+			X:300, Y:200, R:160, ShowPath:true,
+			Lines: [
+				[{X:360,Y:140},{X:375,Y:10},{X:280,Y:-100}],
+				[{X:365,Y:150},{X:450,Y:90},]
+			]
+		},
+		{
+			X:-550, Y:255, R:80, ShowPath:true,
+			Lines: [
+				[{X:-550,Y:-300},{X:200,Y:-300},{X:200, Y:-150, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:1000},
+					{On:"BulletLeavesNet", Action:"open", Delay:3000},
+				]},{X:200,Y:-150},{X:-450,Y:-150},{X:-450,Y:175},{X:-534,Y:216}],
+			]
+		},
+		{
+			X:-250, Y:175, R:-10, ShowPath:true,
+			Lines: [
+				[{X:-400,Y:175},{X:-400,Y:-120},{X:200,Y:-120}],
+			]
+		}
+	],
+	"Planets":[{"X":-496,"Y":125,"R":23,"Fixed":false},{"X":-500,"Y":-187,"R":17,"Fixed":false},{"X":-511,"Y":-58,"R":21,"Fixed":false}],
+	Stations: [
+		{X:500, Y:-200}
+	],
+	Description: "<p>Lucky you: you were just assigned an easy relaxing mission!</p>"
+}

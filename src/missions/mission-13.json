@@ -1,32 +1,22 @@
 {
 	Guns: [
 		{
-			X: 200, Y: 200, R:-90, ShowPath: true,
+			X:-100, Y:200, R:-180, ShowPath:true,
 			Lines: [
-				[
-					{X:390,Y:200},{X:390,Y:-100},{X:260,Y:-100},{X:140,Y:-100, Rules:[
-						{On:"BulletLeavesNet", Action:"open", Delay:4000},
-						{On:"BulletEntersNet", Action:"close"}
-					]},{X:10,Y:-100},{X:10,Y:-40}],
-				[
-					{X:0,Y:200},{X:0,Y:300},{X:410,Y:300},{X:410,Y:-200},{X:260,Y:-200},{X:140,Y:-200, Rules:[
-						{On:"BulletLeavesNet", Action:"open", Delay:5000},
-						{On:"BulletEntersNet", Action:"close"}
-					]},{X:-10,Y:-200},{X:-10,Y:-40},]
+				[{X:0,Y:200},{X:50,Y:150},{X:50,Y:50},{X:0,Y:0},{X:-200,Y:0},{X:-250,Y:50},{X:-250,Y:250},]
 			]
 		}
-
 	],
 	Planets : [
-		{"X":95,"Y":258,"R":26,"Fixed":false}
-		,{"X":-253,"Y":-173,"R":13,"Fixed":false}
-		,{"X":-407,"Y":-87,"R":21,"Fixed":false},
-		{"X":-228,"Y":-49,"R":24,"Fixed":false},
-		{"X":-289,"Y":115,"R":14,"Fixed":false}
+		{R:14, X:370, Y:176},
+		{R:19, X:-80, Y:-30},
+		{R:12, X:-118, Y:162},
+		{R:19, X:-10, Y:122},
 	],
 	Stations: [
-		{X:205, Y:-150}
+		{X:-300, Y:-205}
 	],
 	Description:
-		"You can play with many planets here. That's the good thing with uninhabited areas of the galaxy."
+		"<p><i>“The universe is not required to be in perfect harmony with human ambition.”</i></p>"+
+		"<p>– Carl Sagan</p>"
 }

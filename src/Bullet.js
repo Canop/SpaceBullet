@@ -1,7 +1,7 @@
 var sb = sb || {};
 (function(){
 	ImgLoader.add('bullet', 'img/bullet.svg');
-	
+
 	var IDLE = 0, FLYING = 1, DOCKED = 2, ONRAIL = 3, DEAD = 4;
 	var showCollisionRadius = false;
 
@@ -26,7 +26,7 @@ var sb = sb || {};
 		sb.re.register(this)
 	}
 	var proto = Bullet.prototype = new createjs.Container();
-	
+
 	// be fired from a gun
 	proto.launch = function(gun) {
 		gun = gun || sb.gun;
@@ -38,7 +38,7 @@ var sb = sb || {};
 		this.dest = null;
 		gun.fire();
 	}
-	
+
 	// calcule l'accéleration en fonction des masses, vérifie aussi la non collision
 	proto.updateFlyAcceleration = function() {
 		this.ax = 0; this.ay = 0;
@@ -59,7 +59,7 @@ var sb = sb || {};
 		this.ax *= sb.G; this.ay *= sb.G;
 	}
 	proto.updateFlySpeed = function() {
-		this.vx += this.ax; this.vy += this.ay;		
+		this.vx += this.ax; this.vy += this.ay;
 		this.v = Math.sqrt(this.vx*this.vx+this.vy*this.vy);
 	}
 	proto.updateFlyPos = function() {
@@ -94,7 +94,7 @@ var sb = sb || {};
 			if (this.dest.dest) {
 				this.dest = this.dest.dest;
 			} else { // means that this.dest is a gun
-				this.launch(this.dest);				
+				this.launch(this.dest);
 				return;
 			}
 		}
@@ -102,28 +102,28 @@ var sb = sb || {};
 		this.vx = this.v * dx / d; this.vy = this.v * dy / d;
 		this.x += this.vx; this.y += this.vy;
 	}
-	
+
 	proto.reach = function(station) {
 		this.state = DOCKED;
 		this.rotation = station.rotation;
 		this.x = station.x; this.y = station.y;
 		sb.mission.win();
 	}
-	
+
 	proto.die = function() {
 		this.state = DEAD;
 		sb.stage.removeChild(this);
 		sb.nbBullets--;
 		if (sb.nbBullets==0) sb.mission.lose();
 	}
-	
+
 	proto.tick = function() {
 		if (sb.paused) return;
 		switch (this.state) {
 		case FLYING :
 			this.updateFlyAcceleration();
 			this.updateFlySpeed();
-			this.updateFlyPos();			
+			this.updateFlyPos();
 			this.updateDirection();
 			break;
 		case ONRAIL :
@@ -133,12 +133,12 @@ var sb = sb || {};
 		default :
 		}
 	}
-	
+
 	proto.isFlying = function() {
 		return this.state == FLYING;
 	}
 
-	sb.Bullet = Bullet;	
+	sb.Bullet = Bullet;
 })();
 
 

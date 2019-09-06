@@ -1,20 +1,24 @@
 {
 	Guns: [
 		{
-			X:300, Y:0, R:180, ShowPath:true,
+			X:340, Y:90, R:180, ShowPath:true,
 			Lines: [
-				[{X:300,Y:40},{X:100, Y:40},{X:0, Y:-140},{X:0, Y:-240},{X:200, Y:-440},{X:400, Y:-450}],
-				[{X:300,Y:40},{X:-100, Y:40},{X:-200, Y:140}]
+				[{X:360,Y:40}, {X:-100, Y:10}],
+			]
+		},
+		{
+			X:-300, Y:-90, R:0, ShowPath:true,
+			Lines: [
+				[{X:-350,Y:40}, {X:80, Y:-40}],
 			]
 		},
 	],
 	Planets : [
-		{"X":195,"Y":-157,"R":20,"Fixed":false},{"X":191,"Y":120,"R":20,"Fixed":false},{"X":100,"Y":-110,"R":25,"Fixed":false}
+		{"X":192,"Y":-16,"R":19,"Fixed":false}
 	],
 	Stations: [
-		{X:-400, Y:0}
+		{X:425, Y:30}
 	],
 	Description:
-		"<p>Some guns can compute the path the bullet will follow and they show it to you when you're on their rail network.</p>"
-		 + "<p>When you're lucky enough to find such a gun, you'd better hit <kbd>P</kbd> when you enter their rails and try to move the planets.</p>"
+		"<p>Don't forget to use the <kbd>P</kbd> key and to look at the red path when moving the planet.</p>"
 }

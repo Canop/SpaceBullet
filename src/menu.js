@@ -23,6 +23,7 @@ var sb = sb || {};
 			if (!gameWasPausedAtMenuOpening) sb.pause(false);
 		}
 		$menu_content.toggle();
+		sb.brag(false);
 	}
 
 	sb.menu.funcs = {};
@@ -30,6 +31,11 @@ var sb = sb || {};
 
 	// must be called once, after the DOM is ready
 	sb.menu.init = function() {
+		sb.menu.funcs['B'] = function(){ // brag
+			if (!sb.mission.won) return;
+			if (sb.bragging) return;
+			sb.brag(true);
+		}
 		sb.menu.funcs['D'] = function(){
 			devMode = !devMode;
 			if (devMode) {
@@ -51,12 +57,16 @@ var sb = sb || {};
 		}
 		sb.menu.funcs['S'] = function() {
 			if (sb.mission && sb.mission.playable && !sb.mission.played) {
+				sb.pause(false);
+				sb.brag(false);
 				sb.dialog.closeAll();
 				sb.mission.startGame();
 			}
 		}
 		sb.menu.funcs['N'] = function() {
 			if (sb.mission && sb.mission.std) {
+				sb.pause(false);
+				sb.brag(false);
 				sb.dialog.closeAll();
 				sb.startMission(+sb.mission.id+1);
 			}
@@ -67,26 +77,44 @@ var sb = sb || {};
 		}
 		$menu = $('<div id=menu/>').hide().appendTo(document.body);
 		add($menu, 'Menu', 'esc', function(){
+			if (sb.bragging) {
+				sb.pause(false);
+				sb.brag(false);
+				sb.dialog.closeAll();
+				sb.startMission(+sb.mission.id+1);
+				return;
+			}
 			if (sb.mission && sb.mission.playable && sb.mission.played) sb.menu.toggle();
 		});
 		$menu_content = $('<div id=menu_content/>').hide().appendTo($menu);
+		add($menu_content, 'Auto-Pause', 'A', function(){
+			sb.pause(false);
+			if (sb.bragging) return;
+			sb.autoPause(!sb.autoPauseOn);
+		});
 		add($menu_content, '(Un)pause', 'P', function(){
-			if (sb.mission && sb.mission.playable && sb.mission.played) sb.pause(!sb.paused);
+			sb.autoPause(false);
+			if (sb.bragging) return;
+			if (sb.mission && sb.mission.playable && sb.mission.played) {
+				sb.pause(!sb.paused);
+			}
 		});
 		add($menu_content, 'Restart mission', 'R', function(){
-			if (sb.mission && sb.mission.playable && sb.mission.played) {
+			if (sb.mission && sb.mission.playable) {
 				sb.mission.startGame();
 				sb.dialog.closeAll();
-			}		
+			}
 		});
 		add($menu_content, 'Missions', 'M', function(){
 			sb.menu.hide();
+			sb.brag(false);
 			sb.pause(false);
 			sb.dialog.closeAll();
 			sb.openGrid();
 		});
 		add($menu_content, 'Home', 'H', function(){
 			sb.menu.hide();
+			sb.brag(false);
 			sb.pause(false);
 			sb.dialog.closeAll();
 			sb.intro();

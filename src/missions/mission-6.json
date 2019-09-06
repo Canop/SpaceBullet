@@ -1,22 +1,28 @@
 {
 	Guns: [
 		{
-			X:-100, Y: 20, R:-10,
+			X:350, Y:0, R:180, ShowPath:true,
 			Lines: [
-				[{X:-200, Y:0}, {X:-300, Y:-100}, {X:-310, Y:-200}, {X:-290, Y:-260}],
-				[{X:-220, Y:30}, {X:-260, Y:50}]
+				[{X:400,Y:50}, {X:400,Y:140}, {X:-100,Y:140},{X:-110,Y:10}],
+				[{X:400,Y:-50}, {X:400,Y:-140}, {X:-100,Y:-140}],
 			]
-		}
+		},
+		{
+			X:-250, Y:-100, R:90, ShowPath:true,
+			Lines: [
+				[{X:-220,Y:-140}, {X:-120,Y:-140}, {X:-90,Y:-10}],
+			]
+		},
 	],
 	Planets : [
-		{R:24, X:-20, Y:-150},
-		{R:15, X:100, Y:30},
-		{R:22, X:180, Y:180, fixed: true},
-		{R:25, X:-120, Y:200}
+		{"X":192,"Y":-86,"R":22,"Fixed":false},
+		{"X":250,"Y":100,"R":23,"Fixed":true},
+		{"X":52,"Y":-60,"R":25,"Fixed":false},
+		{"X":-30,"Y":50,"R":24,"Fixed":false},
 	],
 	Stations: [
 		{X:-400, Y:-20}
 	],
 	Description:
-		"<p>This mission is all about dexterity, try not to crash the ship and not to send it in deep space.</p>"
+		"<p>Let's escape out of this box.</p>"
 }

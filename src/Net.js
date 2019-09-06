@@ -1,6 +1,6 @@
 var sb = sb || {};
 (function(){
-	
+
 	// a net contains all the rails leading to a gun
 
 	function Net(gun, lines){
@@ -43,7 +43,7 @@ var sb = sb || {};
 		}
 	}
 	var proto = Net.prototype = new createjs.Container();
-	
+
 	// tests if the passed circle hits the rail network.
 	// returns the upstream node in the hit segment if so.
 	proto.testHitCircle = function(x, y, r) {
@@ -59,7 +59,7 @@ var sb = sb || {};
 			}
 		}
 	}
-	
+
 	// returns true if the passed segment crosses a (not open) rail of the network
 	proto.testCrossSeg = function(x1, y1, x2, y2) {
 		for (var i=0; i<this.lines.length; i++) {
@@ -75,8 +75,8 @@ var sb = sb || {};
 		}
 		return false;
 	}
-	
-	sb.Net = Net;	
+
+	sb.Net = Net;
 })();
 
 

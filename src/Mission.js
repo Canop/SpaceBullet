@@ -12,17 +12,19 @@ var sb = sb || {};
 		this.std = false; // standard missions (in sequence)
 		this.played = false; // currently played or not
 		this.playable = true; // most missions (exceptions are "screensaver" one)
+		this.won = false; // means just won (not previously)
 		if (id==-1) {
 			this.path = null;
 		} else if (this.id.length<6) {
 			this.path = 'missions/mission-'+this.id+'.json?time='+(new Date().getTime());
 			this.std = true;
 		} else {
+			// this is obsolete right now, as the backend is off
 			this.path = '/spacebullet-missions/' + id[0] + '/' + id[1] + '/' + id;
 		}
 	}
 	var proto = Mission.prototype;
-		
+
 	function addPlanet(r, x, y, fixed) {
 		var planet = new sb.Planet(r, !!fixed);
 		planet.x = x; planet.y = y;
@@ -36,7 +38,7 @@ var sb = sb || {};
 		sb.stations.push(station);
 		sb.roundThings.push(station);
 	}
-	
+
 	proto.load = function(callback){
 		var m = this;
 		var httpRequest = new XMLHttpRequest();
@@ -97,7 +99,9 @@ var sb = sb || {};
 			sb.stage.addChild(g.path);
 			if (dg['Lines']) {
 				var lines = dg['Lines'].map(function(line){
-					return line.map(function(p){ return {x:p['X'],y:p['Y'],rules:p['Rules']} }); // note : p['Rules'] will be duplicated in Net
+					return line.map(function(p){
+						return {x:p['X'],y:p['Y'],rules:p['Rules']}
+					}); // note : p['Rules'] will be duplicated in Net
 				});
 				var net = new sb.Net(g, lines);
 				sb.nets.push(net);
@@ -122,19 +126,18 @@ var sb = sb || {};
 		m.played = true;
 		sb.bullet.launch();
 		if (m.playable) sb.menu.show();
-		trackEvent('Mission started', m.id);
 	}
 	proto.remove = function() {
 		this.played = false;
-		sb.stage.removeAllChildren();		
+		sb.stage.removeAllChildren();
 	}
 	proto.lose = function(){
 		var m = this;
 		m.played = false;
 		sb.menu.hide();
+		sb.brag(false);
 		sb.pause(false);
 		if (!m.playable) return;
-		trackEvent('Mission lost', m.id);
 		var buttons = {
 			"Missions": 'M',
 			"Retry": 'R'
@@ -148,16 +151,19 @@ var sb = sb || {};
 			buttons: buttons
 		});
 	}
-	proto.win = function(){ // todo : factoriser avec lose 
+	proto.win = function(){ // todo : factoriser avec lose
 		var m = this;
 		m.played = false;
 		sb.menu.hide();
+		sb.brag(false);
 		sb.pause(false);
 		if (!m.playable) return;
-		trackEvent('Mission won', m.id);
+		sb.mission.won = true;
 		var buttons = {
-			"Missions": 'M',
-			"Retry": 'R'
+			"Missions": 'M'
+		}
+		if (sb.mission.id>=6) {
+			buttons["Brag"] = "B";
 		}
 		if (m.std) {
 			sb.saveMissionState(m.id, 'done');
@@ -173,7 +179,7 @@ var sb = sb || {};
 		});
 	}
 
-	sb.Mission = Mission;	
+	sb.Mission = Mission;
 })();
 
 

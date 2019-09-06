@@ -1,0 +1,83 @@
+{
+	Guns: [
+		{
+			X:-390, Y:-26, R:-5, ShowPath: false,
+			Lines: [
+				[
+					{X:-425,Y:-45},
+					{X:-560,Y:-320, Rules:[
+						{On:"BulletEntersNet", Action:"open"},
+					]},
+				],
+				[
+					{X:-425,Y:25},
+					{X:-660,Y:245, Rules:[
+						{On:"BulletEntersNet", Action:"open"},
+					]},
+				],
+			]
+		},
+		{
+			X:-200, Y:-20, R:5,
+			Lines: [
+				[
+					{X:-250,Y:-20},
+					{X:-260,Y:-40},
+					{X:-270,Y:0},
+					{X:-280,Y:-50},
+					{X:-290,Y:10},
+					{X:-300,Y:-60},
+				]
+			]
+		},
+		{
+			X:200, Y:150, R:95, ShowPath: true,
+			Lines: [
+				[
+					{X:190,Y:19},
+					{X:83,Y:-100},
+					{X:480,Y:-300, Rules:[
+					{On:"BulletEntersNet", Action:"open"},
+					{On:"BulletLeavesNet", Action:"close", Delay:300},
+				]},
+				{X:556,Y:-180},
+				],
+				[
+					{X:100,Y:69},
+				]
+			]
+		},
+		{
+			X:-200, Y:100, R:88, ShowPath: true,
+			Lines: [
+				[
+					{X:-180,Y:30},
+					{X:100,Y:69, Rules:[
+					{On:"BulletEntersNet", Action:"open"},
+					{On:"BulletLeavesNet", Action:"close", Delay:3000},
+				]},
+					{X:95,Y:240},
+					{X:-650,Y:200},
+					{X:-600,Y:-280},
+					{X:0,Y:-260},
+					{X:86,Y:-67},
+				]
+			]
+		},
+		{
+			X:-200, Y:-100, R:188, ShowPath: true,
+			Lines: [
+				[
+					{X:86,Y:-67},
+				]
+			]
+		},
+	],
+	"Planets":[{"X":322,"Y":90,"R":25,"Fixed":false},{"X":-450,"Y":5,"R":9,"Fixed":true},{"X":286,"Y":-126,"R":25,"Fixed":false}],
+	Stations : [
+		{X:-550, Y:-30}
+	],
+	Description:
+		"<p>Too bad the gun fires in the wrong direction.</p>"
+
+}

@@ -1,28 +1,23 @@
 {
 	Guns: [
 		{
-			X:100, Y:100, R:-180, ShowPath: true,
+			X:0, Y:200, R:-150, ShowPath:true,
 			Lines: [
-				[{X:150,Y:150},{X:170,Y:130},{X:140,Y:95}]
-			]
-		},{
-			X:-100, Y:200, R:90, ShowPath: true,
-			Lines: [
-				[{X:-100,Y:-220},{X:290,Y:-220}]
-			]
-		},{
-			X:290, Y:200, R:0, ShowPath: true,
-			Lines: [
-				[{X:290,Y:-200}],
-				[{X:290,Y:160},{X:-80,Y:160}]
+				[{X:-100,Y:300}, {X:100,Y:300},{X:380,Y:150},{X:10,Y:150}],
+				[{X:-100,Y:300}, {X:100,Y:300},{X:380,Y:150},{X:380,Y:-200},{X:-100,Y:-200}],
 			]
 		}
-
 	],
-	Planets : [{"X":241,"Y":243,"R":13,"Fixed":false},{"X":-147,"Y":-238,"R":15,"Fixed":false},{"X":67,"Y":-62,"R":35,"Fixed":true}],
+	Planets : [
+		{R:14, X:-70, Y:176},
+		{R:19, X:-80, Y:-30, Fixed:true},
+		{R:12, X:-118, Y:162},
+		{R:19, X:-10, Y:122, Fixed:true},
+	],
 	Stations: [
-		{X:-350, Y:-300}
+		{X:300, Y:45}
 	],
 	Description:
-		"<p>SpaceBullet is open source and there's a discussion group. Come and discuss if you like.</p>"
+		"<p>Maybe you don't know that : the attraction force is inversely proportionnal to the square of the distance to the planet.</p>" +
+		"<p>And gravity knows no limit, there's no maximal distance for attration.</p>"
 }

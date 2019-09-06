@@ -1,36 +1,37 @@
 {
 	Guns: [
 		{
-			X:0, Y:200, R:-80,
+			X:-100, Y: 20, R:-10, ShowPath: true,
 			Lines: [
-				[{X:100,Y:200},{X:100,Y:-200},{X:50,Y:-250},{X:-300,Y:-250},{X:-375,Y:-180},{X:-375,Y:0},{X:-600,Y:200}]
+				[{X:-200, Y:0}, {X:-300, Y:-100}, {X:-310, Y:-200}, {X:-290, Y:-260}],
+				[
+					{X:-220, Y:30},
+					{X:-200, Y:130},
+					{X:-30, Y:140},
+					{X:300, Y:150,Rules:[{On:"BulletEntersNet", Action:"toggle", Delay:0}]},
+					{X:320, Y:150},
+					{X:330, Y:100},
+					{X:330, Y:-180,Rules:[{On:"BulletEntersNet", Action:"toggle", Delay:0}]},
+					{X:330, Y:-250},
+				]
 			]
-		},{
-			X:-360, Y:200, R:-180, ShowPath: true,
+		},
+		{
+			X:330, Y:183, R:110, ShowPath: true,
 			Lines: [
-				[{X:-360,Y:-180}],
-				[{X:-300,Y:260}, {X:-200,Y:260}],
-				[{X:-300,Y:260}, {X:-600,Y:260}]
-			]
-		},{
-			X:150, Y:200, R:-90, ShowPath: true,
-			Lines: [
-				[{X:150,Y:240},{X:-200,Y:240}]
+				[{X:600, Y:-250}, {X:345, Y:-250}]
 			]
 		}
 	],
 	Planets : [
-		{R:14, X:-134, Y:-123},
-		{R:19, X:-37, Y:105},
-		{R:20, X:247, Y:-53, Fixed:true},
-		{R:28, X:-494, Y:30, Fixed:true},
-		{R:26, X:-638, Y:229, Fixed:true},
-		{R:20, X:-104, Y:-40},
-		{R:23, X:62, Y:-294, Fixed:true},
+		{R:24, X:-20, Y:-150},
+		{R:15, X:100, Y:30},
+		{R:22, X:180, Y:180, fixed: true},
+		{R:25, X:-120, Y:200}
 	],
 	Stations: [
-		{X:-500, Y:-200}
+		{X:400, Y:-130}
 	],
-	Description:
-		"<p>If you can't go direcly to the target, you may follow rails leading to another gun.</p>"
+	Description: "<p>Some rails can be crossed : the door may turn green and then let bullet and planets pass. " +
+		"But they're not always open. You must discover the logic of the door and not all of them have the same one.<p>"
 }

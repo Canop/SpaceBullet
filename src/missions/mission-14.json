@@ -1,59 +1,36 @@
 {
 	Guns: [
 		{
-			X: 150, Y: 00, R:0, ShowPath: true,
+			X:0, Y:200, R:-80,
 			Lines: [
-				[
-				{X:150, Y:50}, {X:340, Y:50}, {X:340, Y:-330}, {X:-60, Y:-330}, {X:-60, Y:-230}
-				]
+				[{X:100,Y:200},{X:100,Y:-200},{X:50,Y:-250},{X:-300,Y:-250},{X:-375,Y:-180},{X:-375,Y:0},{X:-600,Y:200}]
 			]
 		},{
-			X: -250, Y: 150, R:-90, ShowPath: true,
+			X:-360, Y:200, R:-180, ShowPath: true,
 			Lines: [
-				[
-				{X:-120, Y:150}, {X:-80, Y:0}, {X:-80, Y:-50}, {X:-80, Y:-330, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:4000}
-				]}
-				],[
-				{X:-290, Y:150}, {X:-400, Y:150, Rules:[
-					{On:"BulletLeavesNet", Action:"open"}
-				]},{X:-420, Y:150},{X:-420, Y:-50}, 
-				],[
-				{X:-80, Y:150}, {X:300, Y:70, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:8000},{On:"BulletEntersNet", Action:"close"}
-				]},{X:340, Y:70},{X:340, Y:240},{X:-280, Y:240}
-				]
+				[{X:-360,Y:-180}],
+				[{X:-300,Y:260}, {X:-200,Y:260}],
+				[{X:-300,Y:260}, {X:-600,Y:260}]
 			]
 		},{
-			X: 370, Y: -150, R:0, ShowPath: true,
+			X:150, Y:200, R:-90, ShowPath: true,
 			Lines: [
-				[
-				{X:370, Y:-350}, {X:-100, Y:-350}, {X:-100, Y:0}
-				],
-				[
-				{X:370, Y:-110},{X:370, Y:50, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:1000},{On:"BulletEntersNet", Action:"close", Delay:1000}]},
-				{X:370, Y:260},{X:-280, Y:260},{X:-420, Y:260, Rules:[{On:"BulletLeavesNet", Action:"open", Delay:8000}]},{X:-440, Y:260},{X:-440, Y:230}
-				],
+				[{X:150,Y:240},{X:-200,Y:240}]
 			]
-		},{
-			X: -440, Y: 200, R:0, ShowPath: true,
-			Lines: [
-				[
-				{X:-440, Y:-350}, {X:-120, Y:-350}, {X:-120, Y:50}
-				]
-			]
-		},
+		}
 	],
 	Planets : [
-		{"X":-353,"Y":-273,"R":21,"Fixed":false},
-		{"X":139,"Y":-272,"R":19,"Fixed":false},
-		{"X":-303,"Y":-172,"R":18,"Fixed":false},
-		{"X":152.5,"Y":-151.5,"R":26,"Fixed":true}
+		{R:14, X:-134, Y:-123},
+		{R:19, X:-37, Y:105},
+		{R:20, X:247, Y:-53, Fixed:true},
+		{R:28, X:-494, Y:30, Fixed:true},
+		{R:26, X:-638, Y:229, Fixed:true},
+		{R:20, X:-104, Y:-40},
+		{R:23, X:62, Y:-294, Fixed:true},
 	],
 	Stations: [
-		{X: -356.5, Y: 313.5}
+		{X:-500, Y:-200}
 	],
-	Description: "<p>Remember that not all doors behave in the same way.</p>"
-		+ "<p>Some of them never close for example.</p>"
-	
+	Description:
+		"<p>If you can't go direcly to the target, you may follow rails leading to another gun.</p>"
 }

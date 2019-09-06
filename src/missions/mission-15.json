@@ -1,54 +1,71 @@
 {
 	Guns: [
 		{
-			X: 0, Y: 100, R:-90, ShowPath: true,
+			X: 0, Y: 150, R:220, ShowPath: true,
 			Lines: [
 				[
-				{X:50, Y:100}, {X:260, Y:100, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:4000},
-					{On:"BulletEntersNet", Action:"close"}
-				]}, {X:280, Y:100}, {X:500, Y:100, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:60000},
-					{On:"BulletEntersNet", Action:"close"}
-				]}, {X:550, Y:200}, {X:500, Y:240}, {X:-100, Y:240}, {X:-160, Y:200}
+				{X:100,Y:200},
+				{X:200,Y:330},
+				]
+			]
+		},
+		{
+			X: -300, Y:240, R:20, ShowPath: false,
+			Lines: [
+				[
+				{X:-410, Y:-30},
+				{X:-310, Y:-40},
+				{X:-210, Y:-50, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:1000},
+				]},
+				{X:-110, Y:-60},
+				{X:-10, Y:-70, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:2000},
+				]},
+				{X:100, Y:-110},
 				],
 				[
-				{X:-50, Y:100}, {X:-260, Y:100, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:2000},
-					{On:"BulletEntersNet", Action:"close"}
-				]}, {X:-280, Y:100}, {X:-500, Y:100, Rules:[
-					{On:"BulletLeavesNet", Action:"open", Delay:8000},
-					{On:"BulletEntersNet", Action:"close"}
-				]}, {X:-550, Y:200}
+				{X:-400,Y:330},
+				{X:200,Y:330},
 				]
 			]
 		},
 		{
-			X: 350, Y: 180, R:-45, ShowPath: true,
-			Lines: [
-				[{X:50, Y:180},{X:-50, Y:130},{X:-300, Y:130}],
-				[{X:350, Y:225}]
-			]
-		},
-		{
-			X: -350, Y: 180, R:-135, ShowPath: true,
+			X: 200, Y:120, R:110, ShowPath: false,
 			Lines: [
 				[
-				{X:-50, Y:180},{X:50, Y:130},{X:300, Y:130},
+				{X:200,Y:-100},
+				{X:100,Y:-110},
+				{X:0, Y:-120, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:1000},
+				]},
+				{X:-100,Y:-130},
+				{X:-220,Y:-130},
+				{X:-320,Y:-120, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:4000},
+				]},
+				{X:-520,Y:-100},
+				{X:-620,Y:-80, Rules:[
+					{On:"BulletLeavesNet", Action:"open", Delay:8000},
+				]},
+				{X:-800,Y:-320},
 				]
 			]
-		}
+		},
+		{
+			X:-350, Y:-200, R:190, ShowPath: true,
+			Lines: [
+				[
+				{X:200,Y:-200},
+				]
+			]
+		},
 	],
-	Planets : [
-		{"X":-36,"Y":-64,"R":29,"Fixed":true},
-		{"X":239,"Y":15,"R":14,"Fixed":false},
-		{"X":129.5,"Y":42.5,"R":26,"Fixed":true},
-		{"X":15,"Y":207,"R":18,"Fixed":false}
-	],
+	"Planets":[{"X":73.5,"Y":-21.5,"R":19,"Fixed":true},{"X":-81,"Y":59,"R":15,"Fixed":false},{"X":92,"Y":129,"R":13,"Fixed":false},{"X":7,"Y":72,"R":21,"Fixed":false}],
 	Stations: [
-		{X: 464, Y: 173}
+		{X:-600,Y:100}
 	],
-	Description : "<p>You can make your own missions and share them.</p>"
-		+ "<p>I won't pretend it's easy to make a complex one, though, especially if you have little experience in real rocket driving.</p>"
+	Description: "<p><i>“Astronauts are inherently insane.”</i></p><p>Andy Weir.</p></p>"
 	
 }
+

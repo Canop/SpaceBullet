@@ -11,7 +11,7 @@ var sb = sb || {};
 		this.addChild(this.shape);
 	}
 	var proto = Door.prototype = new createjs.Container();
-	
+
 	proto.setState = function(state) { // "closed", "open", "opening", "closing"
 		this.state = state;
 		var color = "orange";
@@ -21,11 +21,15 @@ var sb = sb || {};
 		this.a.open = (state=="open"||state=="closing");
 		this.b.segment.visible = !this.a.open;
 	}
-	
-	proto.act = function(action, delay) { // action : "open", "close"
+
+	proto.act = function(action, delay) { // action : "open", "close", "toggle"
 		var door = this;
-		if (door.state=="open" && action=="open") return;
-		if (door.state=="close" && action=="closed") return;
+		if (action=="toggle") {
+			action = door.state=="open" ? "close" : "open";
+		} else {
+			if (door.state=="open" && action=="open") return;
+			if (door.state=="close" && action=="closed") return;
+		}
 		if (door.timer) door.timer.cancel();
 		var f = function(){ door.setState(action=="close"?"closed":"open") };
 		if (delay) {
@@ -36,8 +40,8 @@ var sb = sb || {};
 			door.timer = null;
 		}
 	}
-		
-	sb.Door = Door;	
+
+	sb.Door = Door;
 })();
 
 

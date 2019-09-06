@@ -1,10 +1,10 @@
 var sb = sb || {};
 (function(){
-	
+
 	sb.homeIcon = "&#9664;";
-	
+
 	var dialogs = [];
-	
+
 	// opens a dialog
 	// Properties of the options object :
 	//  title (optional)
@@ -38,11 +38,11 @@ var sb = sb || {};
 		dialogs.push(d);
 		return d;
 	}
-	
+
 	sb.dialog.closeAll = function(){
 		while (dialogs.length) dialogs.pop().close();
 	}
-	
+
 })();
 
 

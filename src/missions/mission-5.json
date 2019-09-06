@@ -1,23 +1,25 @@
 {
 	Guns: [
 		{
-			X:0, Y:200, R:-150, ShowPath:true,
+			X:0, Y:200, R:270, ShowPath:false,
 			Lines: [
-				[{X:-100,Y:300}, {X:100,Y:300},{X:380,Y:150},{X:10,Y:150}],
-				[{X:-100,Y:300}, {X:100,Y:300},{X:380,Y:150},{X:380,Y:-200},{X:-100,Y:-200}],
+				[{X:-200,Y:222},{X:-260,Y:-200}]
 			]
-		}
+		},
+		{
+			X:70, Y:250, R:0, ShowPath:true,
+			Lines: [
+				[{X:50,Y:-130}]
+			]
+		},
 	],
 	Planets : [
-		{R:14, X:-70, Y:176},
-		{R:19, X:-80, Y:-30, Fixed:true},
-		{R:12, X:-118, Y:162},
-		{R:19, X:-10, Y:122, Fixed:true},
+		{"X":-300,"Y":40,"R":28,"Fixed":true},
+		{"X":-90,"Y":250,"R":21,"Fixed":false},
 	],
 	Stations: [
-		{X:300, Y:45}
+		{X:-350, Y:150}
 	],
 	Description:
-		"<p>Maybe you don't know that : the attraction force is inversely proportionnal to the square of the distance to the planet.</p>" +
-		"<p>And gravity knows no limit, there's no maximal distance for attration.</p>"
+		"<p>Some guns don't compute the path the bullet will follow. In this case, you see no red path.</p>"
 }
